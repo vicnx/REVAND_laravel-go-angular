@@ -23,6 +23,7 @@ func AwardList(c *gin.Context) {
 	var award []Awards
 	err := GetAllAwards(&award)
 	if err != nil {
+		c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
 		c.JSON(http.StatusOK, award)
@@ -34,6 +35,7 @@ func AwardByID(c *gin.Context) {
 	var award Awards
 	err := GetAwardByID(&award, id)
 	if err != nil {
+		c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
 		c.JSON(http.StatusOK, award)
@@ -51,6 +53,7 @@ func AwardUpdate(c *gin.Context) {
 		c.BindJSON(&award) // recoge los nuevos datos del cliente y los guarda en &award
 		err = UpdateAward(&award) // guardamos los nuevos datos
 		if err != nil {
+			c.JSON(http.StatusOK, "Not found")
 			c.AbortWithStatus(http.StatusNotFound)
 		} else {
 			c.JSON(http.StatusOK, award)
@@ -63,7 +66,7 @@ func AwardCreate(c *gin.Context) {
 	c.BindJSON(&award)
 	err := CreateAward(&award)
 	if err != nil {
-		fmt.Println(err.Error())
+		c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
 		c.JSON(http.StatusOK, award)
@@ -75,6 +78,7 @@ func AwardDelete(c *gin.Context) {
 	id := c.Params.ByName("id")
 	err := DeleteAward(&award,id)
 	if err != nil {
+		c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
 		c.JSON(http.StatusOK, gin.H{"id: " + id: "is deleted"})
@@ -85,6 +89,7 @@ func AwardDeleteAll(c *gin.Context) {
 	var award Awards
 	err := DeleteAllAwards(&award)
 	if err != nil {
+		c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
 		c.JSON(http.StatusOK, "Truncate award")

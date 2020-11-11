@@ -2,7 +2,7 @@ package awards
 import (
 	"fmt"
 	_ "github.com/jinzhu/gorm"
-	"github.com/vicnx/app_Go_Laravel_Angular/common"
+	"github.com/revand/App_Go_Larave_Angular_TEST/backend/go/common"
 	_ "strconv"
 )
 
@@ -41,7 +41,6 @@ func DeleteAllAwards(data interface{}) error {
 	err := db.Exec(`TRUNCATE TABLE awards`).Error
 	return err
 }
-
 
 
 //get award by ID

@@ -1,13 +1,12 @@
 package main
-
 import (
 	"fmt"
 
 	"gopkg.in/gin-gonic/gin.v1"
 
 	"github.com/jinzhu/gorm"
-	"github.com/vicnx/app_Go_Laravel_Angular/awards"
-	"github.com/vicnx/app_Go_Laravel_Angular/common"
+	"github.com/revand/App_Go_Larave_Angular_TEST/backend/go/awards"
+	"github.com/revand/App_Go_Larave_Angular_TEST/backend/go/common"
 
 )
 

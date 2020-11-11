@@ -3,7 +3,7 @@ package awards
 import (
 	_ "fmt"
 	_ "github.com/jinzhu/gorm"
-	_ "github.com/vicnx/app_Go_Laravel_Angular/common"
+	_ "github.com/revand/App_Go_Larave_Angular_TEST/backend/go/common"
 	_ "strconv"
 )
 

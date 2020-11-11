@@ -1,0 +1,4 @@
+sudo npm install -g @angular/cli
+ng --version
+
+npm install

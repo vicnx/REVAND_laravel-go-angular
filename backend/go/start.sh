@@ -7,7 +7,7 @@ echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH'
 echo 'export GOPATH=/home/xente/Servidor20_21/go_projects/'
 echo 'export PATH=$PATH:/home/xente/Servidor20_21/go_projects/bin'
 
-## mkdir -p $GOPATH/src/github.com/vicnx/ && cd "$_"
+## mkdir -p $GOPATH/src/github.com/revand/ && cd "$_"
 ## git clone (repo)
 
 
