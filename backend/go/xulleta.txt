@@ -1,4 +1,0 @@
-export GOROOT=/usr/local/go
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-export GOPATH=/home/xente/Servidor20_21/go_projects/
-export PATH=$PATH:/home/xente/Servidor20_21/go_projects/bin

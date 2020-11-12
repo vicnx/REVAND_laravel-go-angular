@@ -1,0 +1,57 @@
+----- primera vez xd -------
+wget https://dl.google.com/go/go1.13.3.linux-amd64.tar.gz
+sudo tar -xvf go1.13.3.linux-amd64.tar.gz
+sudo mv go /usr/local
+export GOROOT=/usr/local/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+go version
+go env
+
+export GOROOT=/usr/local/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+export GOPATH=/home/xente/Servidor20_21/go_projects/
+export PATH=$PATH:/home/xente/Servidor20_21/go_projects/bin
+mkdir -p $GOPATH/src/github.com/revand/ && cd "$_"
+CLONAMOS EL REPO
+
+----BACKeND GO ----
+cd /backend/go
+go get -u github.com/gin-gonic/gin
+go get -u github.com/kardianos/govendor
+govendor sync
+go get -u github.com/pilu/fresh
+go get github.com/go-sql-driver/mysql
+START GO: fresh
+
+--- INSTALL MYSQL---
+wget -c https://dev.mysql.com/get/mysql-apt-config_0.8.11-1_all.deb
+sudo dpkg -i mysql-apt-config_0.8.11-1_all.deb
+PASOS: bionic, OK
+sudo apt-get update
+sudo apt-get install mysql-server
+sudo mysql_secure_installation
+PASS: 12345678
+sudo service mysql start
+sudo mysql -u root -p
+	CREATE USER 'vicnx'@'localhost' IDENTIFIED BY '12345678';
+	GRANT ALL PRIVILEGES ON * . * TO 'vicnx'@'localhost';
+	FLUSH PRIVILEGES;
+
+
+
+-----WORKBENCH-----
+sudo apt install mysql-workbench
+
+------CREATE DB ----
+sudo mysql -u vicnx -p
+	create database app_go;
+	show databases;
+	use app_go;
+
+
+------ FRONTEND ------
+cd frontend/angular
+sudo npm install -g @angular/cli
+npm install
+
+
