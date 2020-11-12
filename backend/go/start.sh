@@ -1,6 +1,8 @@
 #!/bin/bash
 
 ## FOR INIT RUN: eval "$(./start.sh)"
+# GO: fresh
+#Angular: sudo ng serve --open
 
 echo 'export GOROOT=/usr/local/go'
 echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH'

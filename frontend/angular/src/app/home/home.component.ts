@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { AwardsService } from '../core/' 
-console.log(AwardsService);
-
-// import { ArticleListConfig, TagsService, UserService } from '../core';
+import { AwardsService } from '../core/';
+import { Award } from '../core/' 
 
 @Component({
   selector: 'app-home-page',
@@ -11,19 +9,14 @@ console.log(AwardsService);
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  @Input() awards;
   constructor(
     private router: Router,
-    private awardsService: AwardsService,
   ) {}
+  test = "all";
 
-  awards: Array<string> = [];
   ngOnInit() {
     console.log("ng home init");
-
-    this.awardsService.query().subscribe(awards => {
-      console.log(awards);
-      // this.awards = [];
-      // this.tagsLoaded = true;
-    });
+    // this.test = "test";
   }
 }

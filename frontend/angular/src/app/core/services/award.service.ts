@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpParams } from '@angular/common/http';
+// import { HttpParams } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApiService } from './api.service';
@@ -10,13 +11,18 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class AwardsService {
     constructor(
+        private http: HttpClient,
         private apiService: ApiService
     ) { }
 
-    query(): Observable<{ awards: Award[] }> {
-        return this.apiService
-            .get('/awards/').pipe(map(data => data.award));
+    query(): Observable<Award[]> {
+        console.log(this.apiService.get('/awards/'));
+        return this.apiService.get('/awards/');
     }
+
+    // getAwards(): Observable<Award[]> {
+    //     return this.http.get<Award[]>(`http://localhost:3000/api/awards`);
+    // }
 
     get(id): Observable<Award> {
         return this.apiService.get('/awards/' + id).pipe(map(data => data.award));

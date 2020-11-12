@@ -1,0 +1,19 @@
+<!-- <div *ngFor="let award of all">header {{award.name}}</div> -->
+
+<header class="main-header">
+    <a href="#" class="main-header__logo" routerLink="/"><i class="logo_web"></i></a>
+    <div class="main-header__search">
+        <div class="app-search">
+            <div class="app-search__input">
+                <input type="text" placeholder="Search">
+            </div>
+        </div>
+    </div>
+    <div class="main-header__options">
+        <button class="main-header__options__btnLogin" routerLink="/admin-panel">Admin Panel</button>
+        <button class="main-header__options__btnLogin">Log in or Register</button>
+        <a class="main-header__options__btnUpload">
+            <span>Upload Product</span>
+        </a>
+    </div>
+</header>
