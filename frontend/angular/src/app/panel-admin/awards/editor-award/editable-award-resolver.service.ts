@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { Award, AwardsService} from '../core';
+import { Award, AwardsService} from '../../../core';
 import { catchError ,  map } from 'rxjs/operators';
 
 @Injectable()

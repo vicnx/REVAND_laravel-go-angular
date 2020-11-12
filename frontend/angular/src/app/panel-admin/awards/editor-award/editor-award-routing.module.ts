@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EditorComponent } from './editor.component';
+import { EditorAwardComponent } from './editor-award.component';
 import { EditableAwardResolver } from './editable-award-resolver.service';
 // import { AuthGuard } from '../core';
-import { SharedModule } from '../shared';
+// import { SharedModule } from '../shared';
 
 const routes: Routes = [
   {
     path: '',
-    component: EditorComponent,
+    component: EditorAwardComponent,
     // canActivate: [AuthGuard]
   },
   {
     path: ':slug',
-    component: EditorComponent,
+    component: EditorAwardComponent,
     // canActivate: [AuthGuard],
     resolve: {
       award: EditableAwardResolver

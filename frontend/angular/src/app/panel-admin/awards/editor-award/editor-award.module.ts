@@ -1,15 +1,15 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { EditorComponent } from './editor.component';
+import { EditorAwardComponent } from './editor-award.component';
 import { EditableAwardResolver } from './editable-award-resolver.service';
 // import { AuthGuard } from '../core';
-import { SharedModule } from '../shared';
-import { EditorRoutingModule } from './editor-routing.module';
+import { SharedModule } from '../../../shared';
+import { EditorRoutingModule } from './editor-award-routing.module';
 
 @NgModule({
   imports: [SharedModule, EditorRoutingModule],
-  declarations: [EditorComponent],
+  declarations: [EditorAwardComponent],
   providers: [EditableAwardResolver]
 })
-export class EditorModule {}
+export class EditorAwardModule {}

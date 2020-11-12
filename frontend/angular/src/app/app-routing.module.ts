@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule,PreloadAllModules } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: 'editor',
-    loadChildren: () => import('./editor/editor.module').then(m => m.EditorModule)
-    // loadChildren: './editor/editor.module#EditorModule'
-  },
+  // {
+  //   path: 'editor',
+  //   loadChildren: () => import('./editor/editor.module').then(m => m.EditorModule)
+  //   // loadChildren: './editor/editor.module#EditorModule'
+  // },
   {
     path: 'admin-panel',
     loadChildren: () => import('./panel-admin/admin.module').then(m => m.AdminModule)

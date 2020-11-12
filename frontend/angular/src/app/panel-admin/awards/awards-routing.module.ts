@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminComponent } from './admin.component';
-import {AwardsModule} from './awards/awards.module'
+import { AwardsComponent } from './awards.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AdminComponent,
+    component: AwardsComponent,
     // canActivate: [AuthGuard]
   },
   {
-    path:'awards',
-    loadChildren: () => import('./awards/awards.module').then(m => m.AwardsModule)
+    path:'editor',
+    loadChildren: () => import('./editor-award/editor-award.module').then(m => m.EditorAwardModule)
   }
 ];
 
@@ -19,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AdminRoutingModule {}
+export class AwardRoutingModule {}

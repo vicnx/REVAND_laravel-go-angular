@@ -64,12 +64,15 @@ func AwardUpdate(c *gin.Context) {
 func AwardCreate(c *gin.Context) {
 	var award Awards
 	c.BindJSON(&award)
+	fmt.Println(c.BindJSON(&award))
 	err := CreateAward(&award)
 	if err != nil {
 		c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
+		fmt.Println("else")
 		c.JSON(http.StatusOK, award)
+		return
 	}
 }
 

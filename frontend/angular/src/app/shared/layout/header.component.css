@@ -86,7 +86,7 @@
     opacity: 1;
     visibility: visible;
     transition: visibility 0s 350ms,opacity 350ms linear;
-    width: 510px;
+    width: 540px;
     height: 65px;
     background-size: 510px 65px;
 }
