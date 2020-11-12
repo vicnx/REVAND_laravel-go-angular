@@ -5,7 +5,7 @@ import (
 	// "errors"
 	// "github.com/yomogan/6_gin_gonic_thinkster/common"
 	// "github.com/yomogan/6_gin_gonic_thinkster/users"
-	"gopkg.in/gin-gonic/gin.v1"
+	"github.com/gin-gonic/gin"
 	"net/http"
 	// "strconv"
 )
@@ -27,6 +27,7 @@ func AwardList(c *gin.Context) {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
 		c.JSON(http.StatusOK, award)
+		
 	}
 }
 
@@ -38,7 +39,9 @@ func AwardByID(c *gin.Context) {
 		c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
-		c.JSON(http.StatusOK, award)
+		c.JSON(http.StatusOK, gin.H{"award": award})
+		// c.JSON(http.StatusOK, award)
+		return
 	}
 }
 
@@ -56,22 +59,24 @@ func AwardUpdate(c *gin.Context) {
 			c.JSON(http.StatusOK, "Not found")
 			c.AbortWithStatus(http.StatusNotFound)
 		} else {
-			c.JSON(http.StatusOK, award)
+			c.JSON(http.StatusOK, gin.H{"award": award})
+			return
 		}
 	}
 }
 
 func AwardCreate(c *gin.Context) {
 	var award Awards
-	c.BindJSON(&award)
-	fmt.Println(c.BindJSON(&award))
+	c.BindJSON(&award);
+	// c.ShouldBindJSON(&award)
+	// fmt.Println(c.BindJSON(&award))
 	err := CreateAward(&award)
 	if err != nil {
-		c.JSON(http.StatusOK, "Not found")
+		// c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
-		fmt.Println("else")
-		c.JSON(http.StatusOK, award)
+		// fmt.Println("else")
+		c.JSON(http.StatusOK, gin.H{"award": award})
 		return
 	}
 }
@@ -81,7 +86,7 @@ func AwardDelete(c *gin.Context) {
 	id := c.Params.ByName("id")
 	err := DeleteAward(&award,id)
 	if err != nil {
-		c.JSON(http.StatusOK, "Not found")
+		// c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
 		c.JSON(http.StatusOK, gin.H{"id: " + id: "is deleted"})
@@ -93,7 +98,7 @@ func AwardDeleteAll(c *gin.Context) {
 	err := DeleteAllAwards(&award)
 	if err != nil {
 		c.JSON(http.StatusOK, "Not found")
-		c.AbortWithStatus(http.StatusNotFound)
+		// c.AbortWithStatus(http.StatusNotFound)
 	} else {
 		c.JSON(http.StatusOK, "Truncate award")
 	}

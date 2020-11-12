@@ -2,7 +2,7 @@ package main
 import (
 	"fmt"
 
-	"gopkg.in/gin-gonic/gin.v1"
+	"github.com/gin-gonic/gin"
 
 	"github.com/jinzhu/gorm"
 	"github.com/revand/App_Go_Larave_Angular_TEST/backend/go/awards"
