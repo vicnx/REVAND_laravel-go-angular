@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AwardsService } from '../core/' 
+console.log(AwardsService);
 
 // import { ArticleListConfig, TagsService, UserService } from '../core';
 
@@ -11,8 +13,17 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
+    private awardsService: AwardsService,
   ) {}
+
+  awards: Array<string> = [];
   ngOnInit() {
     console.log("ng home init");
+
+    this.awardsService.query().subscribe(awards => {
+      console.log(awards);
+      // this.awards = [];
+      // this.tagsLoaded = true;
+    });
   }
 }
