@@ -15,3 +15,9 @@ a {
 html *, input {
     font-family: Wallie,Helvetica;
 }
+
+button{
+    outline: none;
+    border: none;
+    
+}

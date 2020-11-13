@@ -1,6 +1,13 @@
-<div *ngFor="let award of allAwards">
-    ID: {{award.id}}
-    Name: {{award.name}}
-    Desc: {{award.description}}
-    Image: {{award.image}}
+<div class="award__list">
+    <div class="award">
+        <div class="award__left">
+            Award
+        </div>
+        <div class="award__right">
+            <div class="award__right__options">
+                Award Options
+            </div>
+        </div>
+    </div>
+    <app-award-preview *ngFor="let x of allAwards" [award]="x" (refresh_list)=" runQuery()"></app-award-preview>
 </div>

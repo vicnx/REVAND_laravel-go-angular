@@ -1,8 +1,8 @@
 import { Identifiers } from '@angular/compiler';
 
 export interface Award {
-    Id: Identifiers;
-    Name: String;
-    Description: String;
-    Image: String;
+    id: Identifiers;
+    name: String;
+    description: String;
+    image: String;
 }
