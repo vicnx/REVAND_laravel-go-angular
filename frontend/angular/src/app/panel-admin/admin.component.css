@@ -6,15 +6,33 @@
 }
 
 .admin-page-sidebar{
-    width: 90px;
+    /* width: 90px;
     height: 100%;
     background-color: #253238;
     box-sizing: border-box;
     padding-top: 16px;
     top:0;
-    left:0;
+    left:0; */
+    width: 100px;
+    height: calc(100vh - 66px);
+    display: flex;
+    flex-direction: column;
+    background-color: #253238;
+    box-sizing: border-box;
+    padding-top: 16px;
+    /* position: absolute; */
 }
 
 .admin-page-content{
+    width: 100%;
+    /* position: relative; */
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: flex-end; */
+    padding: 20px 20px 0px 20px;
+    overflow-y: scroll;
+}
 
+app-awards-page{
+    width: 100%; 
 }

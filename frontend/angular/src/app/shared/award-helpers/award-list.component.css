@@ -1,8 +1,8 @@
 .award__list{
-    width: 70%;
+    width: 100%;
     min-height: 800px;
-    max-height: 800px;
-    border: 1px solid black;
+    /* max-height: 800px; */
+    /* border: 1px solid black; */
     box-sizing: border-box;
     padding: 15px;
     display: flex;

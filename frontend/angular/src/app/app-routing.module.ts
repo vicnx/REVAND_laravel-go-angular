@@ -12,6 +12,7 @@ const routes: Routes = [
     loadChildren: () => import('./panel-admin/admin.module').then(m => m.AdminModule)
     // loadChildren: './editor/editor.module#EditorModule'
   },
+  
   // {
   //   path: 'award',
   //   loadChildren: () => import('./panel-admin/awards/award/award.module').then(m => m.AwardModule)

@@ -1,12 +1,14 @@
-<div class="award" [routerLink]="['/admin-panel/awards/',award.id]">
-    <div class="award__left">
+<div class="award">
+    <div class="award__left" [routerLink]="['/admin-panel/awards/',award.id]">
         <img src="{{award.image}}" alt="{{award.name}}" onerror='this.src="https://cdn2.iconfinder.com/data/icons/documents-and-files-v-2/100/doc-03-512.png";'/>
         <span>{{award.id}}</span>&nbsp;&nbsp;&nbsp;
         <span>{{award.name}}</span>
     </div>
     <div class="award__right">
-        <span>{{award.description}}</span>
         <div class="award__right__options">
+            <button class="award-option--edit" [ngClass]="{disabled: isDeleting}" (click)="editAward()">
+                <i class="ion-trash-a"></i> Edit Award
+            </button>
             <button class="award-option--delete" [ngClass]="{disabled: isDeleting}" (click)="deleteAward()">
                 <i class="ion-trash-a"></i> Delete Award
             </button>

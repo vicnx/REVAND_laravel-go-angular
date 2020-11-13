@@ -19,10 +19,7 @@ func Migrate(db *gorm.DB) {
 	// db.AutoMigrate(&articles.CommentModel{})
 }
 
-// func awards(c *gin.Context){
-// 	c.JSON(200, gin.H{"message":"Homepage"})
-// 	fmt.Println(c)
-// }
+
 
 func main() {
 	//Conection db

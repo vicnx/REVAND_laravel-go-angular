@@ -7,6 +7,7 @@ import { AdminComponent } from './admin.component';
 import { SharedModule } from '../shared';
 import { AdminRoutingModule } from './admin-routing.module';
 import { SidebarAdminComponent } from './sidebar/sidebar.component';
+import { AwardResolver } from './awards/award/award-resolver.service';
 
 @NgModule({
   declarations: [AdminComponent,SidebarAdminComponent],
@@ -14,6 +15,7 @@ import { SidebarAdminComponent } from './sidebar/sidebar.component';
     SharedModule, 
     AdminRoutingModule
   ],
+  providers:[AwardResolver]
 
 })
 export class AdminModule {}

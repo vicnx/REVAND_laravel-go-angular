@@ -7,10 +7,10 @@ import { AwardComponent } from './award/award.component';
 const routes: Routes = [
   {
     path: '', component: AwardsComponent, children: [
-      {
-        path:'editor',
-        loadChildren: () => import('./editor-award/editor-award.module').then(m => m.EditorAwardModule)
-      },
+      // {
+      //   path:'editor',
+      //   loadChildren: () => import('./editor-award/editor-award.module').then(m => m.EditorAwardModule)
+      // }, 
       {
         path: ':id',
         component: AwardComponent,
@@ -23,8 +23,9 @@ const routes: Routes = [
       //   path: '', redirectTo: 'editor', pathMatch: 'full'
       // },
       // { path: '**', component:  Page404balanceComponent}
-    ]
-  }
+    ],
+    
+  },
   // {
   //   path: '',
   //   component: AwardsComponent,

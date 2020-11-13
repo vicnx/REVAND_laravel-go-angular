@@ -1,4 +1,4 @@
-.admin-sidebar{
+/* .admin-sidebar{
     width: 100px;
     height: calc(100vh - 66px);
     display: flex;
@@ -8,7 +8,7 @@
     padding-top: 16px;
     position: absolute;
     
-}
+} */
 
 .admin-sidebar__option{
     width: 100%;
