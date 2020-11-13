@@ -9,6 +9,8 @@ import { HeaderComponent,SharedModule } from './shared';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 
+// import { FontAwesomeModule } from '@fortawesome/angular-fontawesome' 
+
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],

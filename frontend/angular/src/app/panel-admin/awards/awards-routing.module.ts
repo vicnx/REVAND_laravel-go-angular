@@ -6,22 +6,42 @@ import { AwardComponent } from './award/award.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: AwardsComponent,
-    // canActivate: [AuthGuard]
-  },
-  {
-    path:'editor',
-    loadChildren: () => import('./editor-award/editor-award.module').then(m => m.EditorAwardModule)
-  },
-   {
-    path: ':id',
-    component: AwardComponent,
-    resolve: {
-      award: AwardResolver
-    }
-    // loadChildren: './award/award.module#AwardModule'
+    path: '', component: AwardsComponent, children: [
+      {
+        path:'editor',
+        loadChildren: () => import('./editor-award/editor-award.module').then(m => m.EditorAwardModule)
+      },
+      {
+        path: ':id',
+        component: AwardComponent,
+        resolve: {
+          award: AwardResolver
+        }
+        // loadChildren: './award/award.module#AwardModule'
+      },
+      // {
+      //   path: '', redirectTo: 'editor', pathMatch: 'full'
+      // },
+      // { path: '**', component:  Page404balanceComponent}
+    ]
   }
+  // {
+  //   path: '',
+  //   component: AwardsComponent,
+  //   // canActivate: [AuthGuard]
+  // },
+  // {
+  //   path:'editor',
+  //   loadChildren: () => import('./editor-award/editor-award.module').then(m => m.EditorAwardModule)
+  // },
+  //  {
+  //   path: ':id',
+  //   component: AwardComponent,
+  //   resolve: {
+  //     award: AwardResolver
+  //   }
+  //   // loadChildren: './award/award.module#AwardModule'
+  // }
 ];
 
 @NgModule({

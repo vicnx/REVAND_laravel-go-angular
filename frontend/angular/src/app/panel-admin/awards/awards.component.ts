@@ -11,6 +11,7 @@ import { Award, AwardsService } from '../../core';
 })
 export class AwardsComponent implements OnInit {
   constructor() {
+    console.log("AWARDS.COMPONENT");
   }
   test = "all";
 

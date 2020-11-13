@@ -1,0 +1,59 @@
+.admin-sidebar{
+    width: 100px;
+    height: calc(100vh - 66px);
+    display: flex;
+    flex-direction: column;
+    background-color: #253238;
+    box-sizing: border-box;
+    padding-top: 16px;
+    position: absolute;
+    
+}
+
+.admin-sidebar__option{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.1s;
+    
+}
+
+.admin-sidebar__option--circle{
+    margin: 0 auto 12px;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(53,72,81,.5);
+    transition: width .75s,height .75s;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-sidebar__option i{
+    color: hsla(0,0%,100%,.5);
+    font-size: 22px;
+}
+
+.admin-sidebar__option span{
+    color: hsla(0,0%,100%,.5);
+    font-size: 13px;
+    font-family: Wallie,Helvetica;
+    font-weight: bold;
+}
+
+.admin-sidebar__option:hover div{
+    background-color: rgba(67, 89, 99, 0.5);
+}
+
+.admin-sidebar__option:hover div i{
+    color: white;
+}
+
+.admin-sidebar__option:hover span{
+    color: white;
+}

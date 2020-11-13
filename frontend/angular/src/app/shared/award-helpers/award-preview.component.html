@@ -1,4 +1,4 @@
-<div class="award">
+<div class="award" [routerLink]="['/admin-panel/awards/',award.id]">
     <div class="award__left">
         <img src="{{award.image}}" alt="{{award.name}}" onerror='this.src="https://cdn2.iconfinder.com/data/icons/documents-and-files-v-2/100/doc-03-512.png";'/>
         <span>{{award.id}}</span>&nbsp;&nbsp;&nbsp;

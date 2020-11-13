@@ -1,38 +1,20 @@
-.admin{
+.admin-page-section{
+    width: 100%;
+    height: calc(100vh - 66px);
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.admin__options{
-    width: 500px;
-    background-color: #13c1ac;
-    height: 400px;
-    display: flex;
-    box-sizing: border-box;
     flex-direction: row;
-    flex-wrap: wrap;
-    padding:40px ;
 }
-.admin__options__boton--editor{
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    font-size: .875rem;
-    border-radius: 20px;
-    margin-left: 8px;
-    margin-right: 12px;
-    padding: 0 20px;
-    height: 42px;
-    background-color: #fff;
-    border: 1px solid #13c1ac;
-    /* border: 1px solid #bb13c1; */
-    color: #13c1ac;
-    cursor: pointer;
+
+.admin-page-sidebar{
+    width: 90px;
+    height: 100%;
+    background-color: #253238;
+    box-sizing: border-box;
+    padding-top: 16px;
+    top:0;
+    left:0;
+}
+
+.admin-page-content{
+
 }

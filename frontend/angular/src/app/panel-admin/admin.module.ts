@@ -6,10 +6,14 @@ import { AdminComponent } from './admin.component';
 // import { AuthGuard } from '../core';
 import { SharedModule } from '../shared';
 import { AdminRoutingModule } from './admin-routing.module';
+import { SidebarAdminComponent } from './sidebar/sidebar.component';
 
 @NgModule({
-  imports: [SharedModule, AdminRoutingModule],
-  declarations: [AdminComponent],
-  // providers: [EditableAwardResolver]
+  declarations: [AdminComponent,SidebarAdminComponent],
+  imports: [
+    SharedModule, 
+    AdminRoutingModule
+  ],
+
 })
 export class AdminModule {}
