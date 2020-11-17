@@ -43,3 +43,8 @@ php artisan migrate:rollback
 (BORRAR EN CASO DE SER NECESARIO EL FICHERO DE /database/migrations/fichero.php)
 composer dump-autoload
 php artisan migrate
+
+
+-----Laravel create controller, auth etc ------
+
+https://stackoverflow.com/questions/34545641/php-artisan-makeauth-command-is-not-defined
