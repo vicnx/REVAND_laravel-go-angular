@@ -1,0 +1,23 @@
+<form [formGroup]="awardForm">
+    <div class="award award--edit">
+        <div class="award__left">
+            <div class="award__editor__field">
+                <label for="name_award">Name:</label>
+                <input type="text" name="name" formControlName="name" id="name_award">
+            </div>
+            <div class="award__editor__field">
+                <label for="description_award">Description:</label>
+                <input type="text" name="description" formControlName="description" id="description_award">
+            </div>
+            <div class="award__editor__field">
+                <label for="image_award">Image:</label>
+                <input type="text" name="image" formControlName="image" id="image_award">
+            </div>
+        </div>
+        <div class="award__right">
+            <button class="award-option--create" (click)="submitForm()">
+                <i class="ion-trash-a"></i> Create Award
+            </button>
+        </div>
+    </div>
+</form>

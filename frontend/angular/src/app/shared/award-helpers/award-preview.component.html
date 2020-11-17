@@ -6,7 +6,7 @@
     </div>
     <div class="award__right">
         <div class="award__right__options">
-            <button class="award-option--edit" [ngClass]="{disabled: isDeleting}" (click)="editAward()">
+            <button class="award-option--edit" [ngClass]="{disabled: isDeleting}" (click)="test($event)">
                 <i class="ion-trash-a"></i> Edit Award
             </button>
             <button class="award-option--delete" [ngClass]="{disabled: isDeleting}" (click)="deleteAward()">

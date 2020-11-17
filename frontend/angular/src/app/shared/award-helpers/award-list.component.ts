@@ -2,6 +2,7 @@ import { Component,OnInit, Input } from '@angular/core';
 import { Award, AwardsService } from '../../core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+
 @Component({
     selector: 'app-award-list',
     styleUrls: ['award-list.component.css'],
@@ -34,6 +35,10 @@ export class AwardListComponent{
     refresh(){
         this.runQuery()
         // Updated timezone will be available here as timezone.
+    }
+
+    func(){
+        console.log("DENTRO DEL LIST COMPONENT F");
     }
 
     // //delete award

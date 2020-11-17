@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
-import { AwardListComponent,AwardPreviewComponent } from './award-helpers';
+import { AwardListComponent,AwardPreviewComponent,AwardEditorComponent } from './award-helpers';
 // import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
 // import { ListErrorsComponent } from './list-errors.component';
 // import { ShowAuthedDirective } from './show-authed.directive'; 
@@ -19,11 +19,13 @@ import { AwardListComponent,AwardPreviewComponent } from './award-helpers';
   ],
   declarations: [
     AwardListComponent,
-    AwardPreviewComponent
+    AwardPreviewComponent,
+    AwardEditorComponent
   ],
   exports: [
     AwardListComponent,
     AwardPreviewComponent,
+    AwardEditorComponent,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
