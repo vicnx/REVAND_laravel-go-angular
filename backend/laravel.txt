@@ -41,7 +41,7 @@ php artisan serve  (INICIAR LARAVEL)
 -----DESHACER MIGRATIONS LARAVEL ------
 php artisan migrate:rollback
 (BORRAR EN CASO DE SER NECESARIO EL FICHERO DE /database/migrations/fichero.php)
-composer dump-autoload
+composer dump-autoload (Cada vez que añádimos modelo o cambiamos rutas)
 php artisan migrate
 
 

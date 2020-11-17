@@ -17,3 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::post('/subscription', 'SubscriptionController@create');
+
+// Route::get('/subscription', 'SubscriptionController@show');
+
+
+
+Route::group(['namespace' => 'Api'], function () {
+
+    Route::resource('/subscription','SubscriptionController');
+
+});
