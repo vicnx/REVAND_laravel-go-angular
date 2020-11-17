@@ -6,8 +6,8 @@
 
 echo 'export GOROOT=/usr/local/go'
 echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH'
-echo 'export GOPATH=/home/$USER/servidor20_21/go_projects/'
-echo 'export PATH=$PATH:/home/$USER/servidor20_21/go_projects/bin'
+echo 'export GOPATH=/home/$USER/Servidor20_21/go_projects/'
+echo 'export PATH=$PATH:/home/$USER/Servidor20_21/go_projects/bin'
 
 ## mkdir -p $GOPATH/src/github.com/revand/ && cd "$_"
 ## git clone (repo)

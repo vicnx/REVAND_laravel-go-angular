@@ -35,7 +35,7 @@ func BuildDBConfig() *DBConfig {
 		Port:     3306,
 		User:     "vicnx",																												
 		Password: "12345678",
-		DBName:   "app_go",
+		DBName:   "revand",
 	}
 	// fmt.Println(&dbConfig)
 	return &dbConfig

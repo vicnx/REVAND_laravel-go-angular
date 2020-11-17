@@ -1,0 +1,45 @@
+------------PHP!-------------
+sudo apt-get install php-gd php-xml php7.2-mbstring
+sudo apt-get install php7.2-xml
+sudo apt-get install php7.2-mysql
+sudo apt install php7.2-cli
+php -v (7.2.24)
+
+-----------APACHE2-----------
+sudo apt install apache2
+
+-----------COMPOSER!------------ 
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+composer -v (2.0.7)
+
+------LARAVEL NEW PROJECT --------
+composer create-project laravel/laravel 1_helloworld --prefer-dist
+sudo chmod 777 -R 1_helloworld
+cd 1_helloworld
+php artisan key:generate
+sudo service apache2 start
+sudo service mysql start
+php artisan serve  (INICIAR LARAVEL)
+
+
+------INSTALAR DEPENDENCIAS (AL CLONAR)-------
+    composer install (de composer.json)
+    composer update laravel/framework (SI DA ERROR EN DEPENDENCIAS)
+    php artisan key:generate
+    php artisan route:list
+    sudo service apache2 start
+    sudo service mysql start
+    php artisan serve  (INICIAR LARAVEL)
+    cp .env.example .env
+    php artisan migrate 
+    REVISAR config/database.php
+    REVISAR .env (esta en gitignore)
+    php artisan migrate
+
+
+-----DESHACER MIGRATIONS LARAVEL ------
+php artisan migrate:rollback
+(BORRAR EN CASO DE SER NECESARIO EL FICHERO DE /database/migrations/fichero.php)
+composer dump-autoload
+php artisan migrate
