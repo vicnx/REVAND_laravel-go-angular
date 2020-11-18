@@ -32,6 +32,6 @@
         </div>
     </div> -->
 
-    <app-editor-award (item)="func()"></app-editor-award>
+    <app-editor-award (item)="func()" (refresh_list)="runQuery()"></app-editor-award>
     <app-award-preview *ngFor="let x of allAwards" [award]="x" (refresh_list)="runQuery()"></app-award-preview>
 </div>

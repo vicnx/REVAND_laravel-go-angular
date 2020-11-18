@@ -22,6 +22,7 @@ export class ApiService {
       .pipe(catchError(this.formatErrors));
   }
 
+
   put(path: string, body: Object = {}): Observable<any> {
     return this.http.put(
       `${environment.api_url}${path}`,
@@ -39,6 +40,29 @@ export class ApiService {
   delete(path): Observable<any> {
     return this.http.delete(
       `${environment.api_url}${path}`
+    ).pipe(catchError(this.formatErrors));
+  }
+
+  //-----------------------------laravel---------------------------
+  getlaravel(path: string, params: HttpParams = new HttpParams()): Observable<any> {
+    return this.http.get(`${environment.api_url_laravel}${path}`, { params })
+      .pipe(catchError(this.formatErrors));
+  }
+  putlaravel(path: string, body: Object = {}): Observable<any> {
+    return this.http.put(
+      `${environment.api_url_laravel}${path}`,
+      JSON.stringify(body)
+    ).pipe(catchError(this.formatErrors));
+  }
+  postlaravel(path: string, body: Object = {}): Observable<any> {
+    return this.http.post(
+      `${environment.api_url_laravel}${path}`,
+      JSON.stringify(body)
+    ).pipe(catchError(this.formatErrors));
+  }
+  deletelaravel(path): Observable<any> {
+    return this.http.delete(
+      `${environment.api_url_laravel}${path}`
     ).pipe(catchError(this.formatErrors));
   }
 }

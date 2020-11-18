@@ -52,7 +52,16 @@ export class AwardEditorComponent implements OnInit {
     console.log(this.award);
 
     this.awardsService.save(this.award).subscribe(
-      award => this.refresh_list.next(),
+      award =>{
+        //si se ha áñadido con exito envia un refresh al padre (para que actualize la lista)
+        this.refresh_list.next(),
+        //para limpiar los campos al añadir
+        this.awardForm = this.fb.group({
+          name: '',
+          description: '',
+          image: ''
+        });
+      },
       err => {
         this.errors = err;
         this.isSubmitting = false;

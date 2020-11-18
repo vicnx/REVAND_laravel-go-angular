@@ -1,0 +1,18 @@
+<div class="subscription">
+    <div class="subscription__left">
+        <!-- <img src="{{subscription.image}}" alt="{{subscription.name}}" onerror='this.src="https://cdn2.iconfinder.com/data/icons/documents-and-files-v-2/100/doc-03-512.png";'/> -->
+        <span>{{subscription.id}}</span>&nbsp;&nbsp;&nbsp;
+        <span>{{subscription.name}}</span>&nbsp;&nbsp;&nbsp;
+        <span class="subscription__left__text--price">{{subscription.price}}</span>&nbsp;&nbsp;&nbsp;
+    </div>
+    <div class="subscription__right">
+        <div class="subscription__right__options">
+            <!-- <button class="subscription-option--edit" [ngClass]="{disabled: isDeleting}" (click)="test($event)">
+                <i class="ion-trash-a"></i> Edit Sub
+            </button> -->
+            <button class="subscription-option--delete" [ngClass]="{disabled: isDeleting}" (click)="deleteSub()">
+                <i class="ion-trash-a"></i> Delete Sub
+            </button>
+        </div>
+    </div>
+</div>

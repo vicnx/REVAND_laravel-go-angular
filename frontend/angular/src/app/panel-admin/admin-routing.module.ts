@@ -29,6 +29,25 @@ const routes: Routes = [
           },
         ] 
       },
+      { path: 'subscriptions', 
+      children: [
+        // {
+        //   path:'editor',
+        //   loadChildren: () => import('./awards/editor-award/editor-award.module').then(m => m.EditorAwardModule)
+        // }, 
+        {
+          path: '', loadChildren: () => import(`./subscriptions/subscriptions.module`).then(m => m.SubscriptionsModule), pathMatch: 'full'
+        },
+        // {
+        //   path: ':id',
+        //   component: AwardComponent,
+        //   resolve: {
+        //     award: AwardResolver
+        //   }
+        //   // loadChildren: './award/award.module#AwardModule'
+        // },
+      ] 
+    },
       // {
       //   path: '', redirectTo: 'awards', pathMatch: 'full'
       // },

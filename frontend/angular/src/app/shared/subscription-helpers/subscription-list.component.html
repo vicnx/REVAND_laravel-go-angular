@@ -1,0 +1,37 @@
+<div class="subscription__list">
+    <div class="subscription">
+        <div class="subscription__left">
+            subscription
+        </div>
+        <div class="subscription__right">
+            <div class="subscription__right__options">
+                subscription Options
+            </div>
+        </div>
+    </div>
+    <br>
+    <!-- <div class="subscription subscription--edit">
+        <div class="subscription__left">
+            <div class="subscription__editor__field">
+                <label for="name_subscription">Name:</label>
+                <input type="text" name="name_subscription" id="name_subscription">
+            </div>
+            <div class="subscription__editor__field">
+                <label for="description_subscription">Description:</label>
+                <input type="text" name="description_subscription" id="description_subscription">
+            </div>
+            <div class="subscription__editor__field">
+                <label for="image_subscription">Image:</label>
+                <input type="text" name="image_subscription" id="image_subscription">
+            </div>
+        </div>
+        <div class="subscription__right">
+            <button class="subscription-option--delete">
+                <i class="ion-trash-a"></i> Create subscription
+            </button>
+        </div>
+    </div> -->
+    
+    <app-editor-subscription (item)="func()" (refresh_list)="runQuery()"></app-editor-subscription>
+    <app-subscription-preview *ngFor="let sub of allSubscriptions" [subscription]="sub" (refresh_list)="runQuery()"></app-subscription-preview>
+</div>
