@@ -3,20 +3,20 @@
         <div class="award__left">
             <div class="award__editor__field">
                 <label for="name_award">Name:</label>
-                <input type="text" name="name" formControlName="name" id="name_award">
+                <input type="text" name="name" formControlName="name">
             </div>
             <div class="award__editor__field">
                 <label for="description_award">Description:</label>
-                <input type="text" name="description" formControlName="description" id="description_award">
+                <input type="text" name="description" formControlName="description">
             </div>
             <div class="award__editor__field">
                 <label for="image_award">Image:</label>
-                <input type="text" name="image" formControlName="image" id="image_award">
+                <input type="text" name="image" formControlName="image">
             </div>
         </div>
         <div class="award__right">
-            <button class="award-option--create" (click)="submitForm()">
-                <i class="ion-trash-a"></i> Create Award
+            <button class="award-option--{{type}}" (click)="submitForm($event)">
+                <i class="ion-trash-a"></i> {{type}} Award
             </button>
         </div>
     </div>

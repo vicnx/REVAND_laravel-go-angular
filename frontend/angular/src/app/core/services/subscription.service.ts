@@ -44,11 +44,10 @@ export class SubscriptionService {
         }
         */
         
-        console.log(subscription);
-        if (subscription.id) {
-            return this.apiService.putlaravel('/subscription/' + subscription.id, { subscription: subscription })
+        console.log(subscription.subscription);
+        if (subscription.subscription.id) {
+            return this.apiService.putlaravel('/subscription/' + subscription.subscription.id, { subscription: subscription })
                 .pipe(map(data => data.subscription));
-
         } else {
             return this.apiService.postlaravel('/subscription/', subscription )
                 .pipe(map(data => data.subscription));

@@ -34,9 +34,10 @@ export class AwardsService {
 
     save(award): Observable<Award> {
         console.log("DENTRO DE SAVE SERVICE");
-        console.log(award);
+        // console.log(award);
         if (award.id) {
-            return this.apiService.put('/awards/' + award.id, { award: award })
+            // console.log(award.name);
+            return this.apiService.put('/awards/' + award.id, award )
                 .pipe(map(data => data.award));
 
         } else {

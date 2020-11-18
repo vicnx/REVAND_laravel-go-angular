@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import {AwardComponent} from './awards/award/award.component';
 import {AwardResolver} from './awards/award/award-resolver.service';
+import { SubscriptionResolver } from './subscriptions/subscription/subscription-resolver.service';
+import { SubscriptionComponent } from './subscriptions/subscription/subscription.component';
 
 
 
@@ -38,12 +40,13 @@ const routes: Routes = [
         {
           path: '', loadChildren: () => import(`./subscriptions/subscriptions.module`).then(m => m.SubscriptionsModule), pathMatch: 'full'
         },
-        // {
-        //   path: ':id',
-        //   component: AwardComponent,
-        //   resolve: {
-        //     award: AwardResolver
-        //   }
+        {
+          path: ':id',
+          component: SubscriptionComponent,
+          resolve: {
+            award: SubscriptionResolver
+          }
+        }
         //   // loadChildren: './award/award.module#AwardModule'
         // },
       ] 

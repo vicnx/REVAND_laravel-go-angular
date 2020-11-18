@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SubscriptionsComponent } from './subscriptions.component';
-// import { AwardResolver } from './subscript/award-resolver.service';
-// import { AwardComponent } from './award/award.component';
+import { SubscriptionResolver } from './subscription/subscription-resolver.service';
+import { SubscriptionComponent } from './subscription/subscription.component';
 
 const routes: Routes = [
   {
@@ -11,14 +11,14 @@ const routes: Routes = [
       //   path:'editor',
       //   loadChildren: () => import('./editor-award/editor-award.module').then(m => m.EditorAwardModule)
       // }, 
-      // {
-      //   path: ':id',
-      //   component: AwardComponent,
-      //   resolve: {
-      //     award: AwardResolver
-      //   }
+      {
+        path: ':id',
+        component: SubscriptionComponent,
+        resolve: {
+          subscription: SubscriptionResolver
+        }
       //   // loadChildren: './award/award.module#AwardModule'
-      // },
+      },
       // {
       //   path: '', redirectTo: 'editor', pathMatch: 'full'
       // },

@@ -48,12 +48,17 @@ func AwardByID(c *gin.Context) {
 func AwardUpdate(c *gin.Context) {
 	var award Awards
 	id := c.Params.ByName("id")
+	// fmt.Println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+	// fmt.Println(&award)
 	err := GetAwardByID(&award, id) //te llena &award (si lo encuentra pone err a nil (la instancia))
 	if err != nil { //si no esta instanciada
 		fmt.Println("err no es nil")
 		c.JSON(http.StatusNotFound, "NOT FOUND") // envia al cliente un JSON
 	}else{ //si esta instanciada hace el update
+		// fmt.Println(c.BindJSON(&award))
 		c.BindJSON(&award) // recoge los nuevos datos del cliente y los guarda en &award
+		fmt.Println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+		fmt.Println(award)
 		err = UpdateAward(&award) // guardamos los nuevos datos
 		if err != nil {
 			c.JSON(http.StatusOK, "Not found")

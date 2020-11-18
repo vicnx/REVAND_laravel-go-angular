@@ -2,9 +2,12 @@
     display: block;
     width: 38px;
     height: 38px;
-    background: url('https://png2.cleanpng.com/sh/df62c5e58ceb590d65643e0124d08d96/L0KzQYm3U8I3N6lniZH0aYP2gLBuTfpmdpxuhuU2c3BphMjokvUuaqZuhNY2Y3BxhLr1lf92e15uhuZuZ4LkhLr2jr1xdKZsRdlydHj4cn68gfI5aWUASqY7ZkPmSHACVsc5OmIATqMAMkKzRYG4WcQzP2U3RuJ3Zx==/kisspng-jenkins-software-build-continuous-integration-plug-github-5ab8a49242f3c8.9678219615220501942742.png');
+    background: url('https://styles.redditmedia.com/t5_gr5z3/styles/profileIcon_snoo0dc0859b-bce7-43d5-8eeb-e25c660c81d5-headshot.png?width=256&height=256&crop=256:256,smart&frame=1&s=6379ac4fd6779ad82e7eafb9bdea4316f4db6169');
+    /* background: url('https://www.jenkins.io/images/logos/brno/brno.png'); */
     background-size: contain;
     background-color: #d6d6d6;
+    background-repeat: no-repeat;
+    background-position: center;
     box-shadow: 0 2px 4px 0 rgba(37,50,56,.1);
     border-radius: 10px;
 }
