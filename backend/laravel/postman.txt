@@ -1,0 +1,37 @@
+UPDATE
+PUT http://localhost:8000/api/subscription/17
+
+{
+    "subscription": {
+        "name": "modificado",
+        "price": "99999"
+    }
+}
+
+
+
+Create
+POST http://127.0.0.1:8000/api/subscription/
+
+{
+    "subscription": {
+        "name": "modificado",
+        "price": "99999"
+    }
+}
+
+
+"subscription": {
+    "name": "modificado",
+    "price": "99999"
+}
+
+
+Delete
+DELETE http://127.0.0.1:8000/api/subscription/17
+
+GET
+GET http://127.0.0.1:8000/api/subscription/17
+
+GET ALL
+GET http://127.0.0.1:8000/api/subscription/
