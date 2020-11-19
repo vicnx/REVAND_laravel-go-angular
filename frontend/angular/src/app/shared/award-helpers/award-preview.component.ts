@@ -15,11 +15,6 @@ export class AwardPreviewComponent{
   @Output() item = new EventEmitter<Award>();
   constructor (
     private awardsService: AwardsService,
-    private element: ElementRef,
-    private resolver: ComponentFactoryResolver,
-    private injector: Injector,
-    private app: ApplicationRef,
-    private renderer: Renderer2,
     ){}
 
   // @Input() test: Award;
@@ -38,7 +33,7 @@ export class AwardPreviewComponent{
 
 
     
-    test(event) {
+    modify(event) {
       // let factory = this.resolver.resolveComponentFactory(AwardEditorComponent);
       // console.log(this.award);
       let node = event.target;
