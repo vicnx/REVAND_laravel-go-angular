@@ -7,12 +7,13 @@
     </div>
     <div class="subscription__right">
         <div class="subscription__right__options">
-            <!-- <button class="subscription-option--edit" [ngClass]="{disabled: isDeleting}" (click)="test($event)">
+            <button class="subscription-option--edit" [ngClass]="{disabled: isDeleting}" (click)="modify($event)">
                 <i class="ion-trash-a"></i> Edit Sub
-            </button> -->
+            </button>
             <button class="subscription-option--delete" [ngClass]="{disabled: isDeleting}" (click)="deleteSub()">
                 <i class="ion-trash-a"></i> Delete Sub
             </button>
         </div>
     </div>
 </div>
+<app-editor-subscription [item]="subscription" style="display: none; transition: 0.5s;"></app-editor-subscription>

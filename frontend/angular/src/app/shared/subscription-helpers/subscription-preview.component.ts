@@ -36,6 +36,39 @@ export class SubscriptionPreviewComponent{
         );
     }
 
+    modify(event) {
+      // let factory = this.resolver.resolveComponentFactory(AwardEditorComponent);
+      // console.log(this.award);
+      let node = event.target;
+      let nodeParent = node.parentNode.parentNode.parentNode.parentNode;
+      let editor = nodeParent.querySelector('app-editor-subscription');
+
+      this.item.next();
+
+      if (node.classList.contains('oppened')) {
+        node.classList.remove('oppened');
+        editor.style.display = 'none'
+      }else{
+        node.classList.add('oppened');
+        editor.style.display = 'unset'
+      }
+      
+      
+
+
+
+      // console.log("=====================");
+      // console.log(node.parentNode.parentNode.parentNode.parentNode);
+      // var doc = new DOMParser().parseFromString('<app-editor-award [item]="'+this.award+'"></app-editor-award>', 'text/html');
+      // let editor = doc.body.firstChild;
+      // console.log(editor);
+      // node.parentNode.parentNode.parentNode.parentNode.insertBefore(editor, node.parentNode.parentNode.parentNode.nextSibling);
+      // const ref = factory.create(this.injector, [], editor);
+      // this.app.attachView(ref.hostView);
+      // this.item.next();
+      // node.parentNode.parentNode.parentNode.style.display = "none"
+    }
+
     // test(event) {
     //   let factory = this.resolver.resolveComponentFactory(AwardEditorComponent);
     //   console.log(this.award);

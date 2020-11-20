@@ -65,7 +65,7 @@ class SubscriptionController extends ApiController
     public function update(UpdateSubscription $request, Subscription $subscription)
 
     // public function update(Subscription $subscription, Request $request)
-    {
+    {   
         if ($request->has('subscription')) {
             $subscription->update($request->get('subscription'));
         }

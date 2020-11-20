@@ -11,8 +11,8 @@
             </div>
         </div>
         <div class="subscription__right">
-            <button class="subscription-option--create" (click)="submitForm()">
-                <i class="ion-trash-a"></i> Create subscription
+            <button class="subscription-option--{{type}}" (click)="submitForm($event)">
+                <i class="ion-trash-a"></i> {{type}} subscription
             </button>
         </div>
     </div>
