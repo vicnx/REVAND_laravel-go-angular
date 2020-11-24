@@ -14,7 +14,7 @@ import (
 func Migrate(db *gorm.DB) {
 	// users.AutoMigrate()
 	db.AutoMigrate(&awards.Awards{}) //generate table Awards
-	db.AutoMigrate(&users.UserModel{}) //generate table Awards
+	db.AutoMigrate(&users.UserModel{}) //generate table Users
 	// db.AutoMigrate(&articles.TagModel{})
 	// db.AutoMigrate(&articles.FavoriteModel{})
 	// db.AutoMigrate(&articles.ArticleUserModel{})
@@ -34,7 +34,7 @@ func main() {
 	MakeRoutes(r)
 
 	v1 := r.Group("/api")
-	
+
 	awards.AwardsAuthed(v1.Group("/awards"))
 	users.UsersRegister(v1.Group("/users"))
 	v1.Use(users.AuthMiddleware(false))

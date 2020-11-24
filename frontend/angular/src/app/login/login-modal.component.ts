@@ -19,10 +19,20 @@ export class LoginModalComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
     
   }
   
+  loadLogin(){
+    console.log("LOGIN LOAD");
+    let auth = document.getElementById('modal-login');
+    auth.className = 'hide-modal';
+    //esto carrega el form de login
+  }
+
+  loadRegister(){
+    console.log("REGISTER LOAD");
+    //esto carrega el form de register
+  }
 
   submitForm(event) {
     this.isSubmitting = true;
