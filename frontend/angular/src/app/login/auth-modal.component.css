@@ -24,7 +24,7 @@
     z-index: 999999;
 }
 
-.modal-login{
+.modal-auth{
     box-sizing: border-box;
     overflow: hidden;
     position: absolute;
@@ -43,7 +43,7 @@
     border-radius: 10px;    
 }
 
-/* .modal-login-content{
+/* .modal-auth-content{
     box-sizing: border-box;
     overflow: hidden;
     position: absolute;
@@ -62,7 +62,7 @@
     border-radius: 10px;
 } */
 
-.login__social__options{
+.auth__social__options{
     display: flex;
     width: 90%;
     flex-direction: column;
@@ -80,14 +80,14 @@
     align-items: center;
 }
 
-.login__local__options{
+.auth__local__options{
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.login__local__options__info{
+.auth__local__options__info{
     font-size: .875rem;
     color: #607d8b;
     line-height: normal;
@@ -109,7 +109,7 @@
     cursor: pointer;
 }
 
-.login_separator__veritcal{
+.auth_separator__veritcal{
     margin: 0 32px;
     border: 1px solid #13c1ac;
 }

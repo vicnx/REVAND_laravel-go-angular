@@ -5,11 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 // import { Award, AwardsService } from '../../core';
 
 @Component({
-  selector: 'login-modal',
-  templateUrl: './login-modal.component.html',
-  styleUrls: ['login-modal.component.css']
+  selector: 'auth-modal',
+  templateUrl: './auth-modal.component.html',
+  styleUrls: ['auth-modal.component.css']
 })
-export class LoginModalComponent implements OnInit {
+export class AuthModalComponent implements OnInit {
 
   isSubmitting = false;
   constructor(
@@ -23,27 +23,32 @@ export class LoginModalComponent implements OnInit {
   }
   
   loadLogin(){
+    let modal = document.getElementById('modal-auth-canvas');
+    let auth = modal.querySelector('#modal-auth');
     console.log("LOGIN LOAD");
-    let auth = document.getElementById('modal-login');
+    // let auth = document.getElementById('modal-auth');
     auth.className = 'hide-modal';
+
+
     //esto carrega el form de login
   }
 
   loadRegister(){
+    let modal = document.getElementById('modal-auth-canvas');
+    let auth = modal.querySelector('#modal-auth');
     console.log("REGISTER LOAD");
+    auth.className = 'hide-modal';
     //esto carrega el form de register
   }
 
   submitForm(event) {
     this.isSubmitting = true;
-    
-
   }
 
   hideModal(){
-    let login = document.getElementById('modal-login-canvas');
+    let auth = document.getElementById('modal-auth-canvas');
 
-    login.className = 'hide-modal';
+    auth.className = 'hide-modal';
   }
 
 }

@@ -1,20 +1,20 @@
-<div id="modal-login-canvas" class="hide-modal">
+<div id="modal-auth-canvas" class="hide-modal">
     <div class="background_modal--black" (click)="hideModal()"></div>
-    <div id="modal-login" class="modal-login">
+    <div id="modal-auth" class="modal-auth">
         <h1>Log in to our app!</h1>
-        <div class="login__social__options">
+        <div class="auth__social__options">
             <a href="" class="social__option">Log In with Google</a>
             <a href="" class="social__option">Log In with GitHub</a>
         </div>
     
-        <div class="login__local__options">
-            <span class="login__local__options__info">Continue with your email</span>
+        <div class="auth__local__options">
+            <span class="auth__local__options__info">Continue with your email</span>
             <div class="local__options__canvas">
                 <!-- <a href="" class="local__options__canvas__btn" id="btn-login" (click)="loadLogin()">Log In</a>
                 <span class="login__separator__vertical"></span>
                 <a href="" class="local__options__canvas__btn" id="btn-register" (click)="loadRegister()">Register</a> -->
                 <button class="local__options__canvas__btn" id="btn-login" (click)="loadLogin()">Log In</button>
-                <span class="login__separator__vertical"></span>
+                <span class="auth__separator__vertical"></span>
                 <button class="local__options__canvas__btn" id="btn-register" (click)="loadRegister()">Register</button>
             </div>
         </div>

@@ -11,15 +11,15 @@ export class HeaderComponent implements OnInit {
     
   }
 
-  showLogin(){
+  showAuth(){
     console.log("login");
-    let login = document.getElementById('modal-login-canvas');
+    let login = document.getElementById('modal-auth-canvas');
     // if (login.classList.contains('hide-modal')) {
-    let auth = document.getElementById('modal-login');
+    let auth = document.getElementById('modal-auth');
     // }
     login.className = 'active-modal';
 
-    auth.className = "modal-login active-modal"
+    auth.className = "modal-auth active-modal"
 
   }
 }

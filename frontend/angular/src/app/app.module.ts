@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { HeaderComponent,SharedModule } from './shared';
-import { LoginModalComponent } from './login/login-modal.component'
+import { AuthModalComponent } from './login/auth-modal.component'
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, LoginModalComponent],
+  declarations: [AppComponent, HeaderComponent, AuthModalComponent],
   imports: [
     BrowserModule,
     CoreModule,
