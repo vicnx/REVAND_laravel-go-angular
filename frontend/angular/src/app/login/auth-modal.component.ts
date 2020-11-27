@@ -12,28 +12,30 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AuthModalComponent implements OnInit {
 
   isSubmitting = false;
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder
-  ) {}
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit() {
-    
+
   }
-  
-  loadLogin(){
+
+  loadLogin() {
     let modal = document.getElementById('modal-auth-canvas');
     let auth = modal.querySelector('#modal-auth');
     console.log("LOGIN LOAD");
     // let auth = document.getElementById('modal-auth');
     auth.className = 'hide-modal';
+    // load modalregister <3
 
 
     //esto carrega el form de login
   }
 
-  loadRegister(){
+  loadRegister() {
     let modal = document.getElementById('modal-auth-canvas');
     let auth = modal.querySelector('#modal-auth');
     console.log("REGISTER LOAD");
@@ -45,10 +47,11 @@ export class AuthModalComponent implements OnInit {
     this.isSubmitting = true;
   }
 
-  hideModal(){
+  hideModal() {
     let auth = document.getElementById('modal-auth-canvas');
 
     auth.className = 'hide-modal';
   }
 
+  
 }
