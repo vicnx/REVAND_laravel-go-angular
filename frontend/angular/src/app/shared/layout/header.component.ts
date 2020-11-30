@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
     // }
     login.className = 'active-modal';
 
-    auth.className = "modal-auth active-modal"
+    auth.className = "modal active-modal"
 
   }
 }

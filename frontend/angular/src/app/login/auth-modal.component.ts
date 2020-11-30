@@ -36,10 +36,11 @@ export class AuthModalComponent implements OnInit {
   }
 
   loadRegister() {
-    let modal = document.getElementById('modal-auth-canvas');
-    let auth = modal.querySelector('#modal-auth');
+    let modalAuth = document.getElementById('modal-auth-canvas');
+    let modalRegister = document.getElementById('modal-register-canvas');
+    // let auth = modalAuth.querySelector('#modal-auth');
     console.log("REGISTER LOAD");
-    auth.className = 'hide-modal';
+    modalAuth.className = 'hide-modal';
     //esto carrega el form de register
   }
 

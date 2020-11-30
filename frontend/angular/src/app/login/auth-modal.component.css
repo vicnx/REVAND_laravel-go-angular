@@ -23,8 +23,8 @@
     max-height: 580px;
     z-index: 999999;
 }
-/* .modal-auth{ */
 .modal{
+/* .modal{ */
     box-sizing: border-box;
     overflow: hidden;
     position: absolute;
