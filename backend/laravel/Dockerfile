@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM creativeworkx/php7.2-apache
 WORKDIR /app
 COPY . .
 RUN apt-get update
@@ -6,7 +6,6 @@ RUN apt-get install -y php-gd php-xml php7.2-mbstring
 RUN apt-get install -y php7.2-xml
 RUN apt-get install -y php7.2-mysql
 RUN apt install -y php7.2-cli
-RUN apt install -y curl
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 RUN apt-get install -y zip unzip php7.2-zip
@@ -17,6 +16,7 @@ RUN composer update laravel/framework
 RUN cp .env.example .env
 RUN php artisan key:generate
 RUN php artisan route:list
+# RUN php artisan migrate
 
 EXPOSE 8000
 
