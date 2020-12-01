@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'register-modal',
-  templateUrl: './register-modal.component.html',
-  styleUrls: ['register-modal.component.css']
+  selector: 'login-modal',
+  templateUrl: './login-modal.component.html',
+  styleUrls: ['login-modal.component.css']
 })
-export class RegisterModalComponent implements OnInit {
+export class LoginModalComponent implements OnInit {
 
   isSubmitting = false;
   

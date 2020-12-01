@@ -1,8 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-
-// import { Award, AwardsService } from '../../core';
 
 @Component({
   selector: 'auth-modal',
@@ -10,49 +6,29 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['auth-modal.component.css']
 })
 export class AuthModalComponent implements OnInit {
-
+  @Output()
+  modal_auth_type: EventEmitter<any> = new EventEmitter<any>();
   isSubmitting = false;
   
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private fb: FormBuilder,
-  ) { }
+  constructor() { }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   loadLogin() {
-    let modal = document.getElementById('modal-auth-canvas');
-    let auth = modal.querySelector('#modal-auth');
-    console.log("LOGIN LOAD");
-    // let auth = document.getElementById('modal-auth');
-    auth.className = 'hide-modal';
-    // load modalregister <3
-
-
-    //esto carrega el form de login
+    //hacemos un emit con el parametro login para despues capturarlo en el main-auth y cargar una vista u otra.
+    this.modal_auth_type.emit('login');
   }
 
   loadRegister() {
-    let modalAuth = document.getElementById('modal-auth-canvas');
-    let modalRegister = document.getElementById('modal-register-canvas');
-    // let auth = modalAuth.querySelector('#modal-auth');
-    console.log("REGISTER LOAD");
-    modalAuth.className = 'hide-modal';
-    //esto carrega el form de register
+    //hacemos un emit con el parametro register para despues capturarlo en el main auth y cargar una vista u otra.
+    this.modal_auth_type.emit('register');
   }
 
   submitForm(event) {
     this.isSubmitting = true;
   }
 
-  hideModal() {
-    let auth = document.getElementById('modal-auth-canvas');
 
-    auth.className = 'hide-modal';
-  }
 
   
 }

@@ -5,9 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { HeaderComponent,SharedModule } from './shared';
-import { AuthModalComponent } from './login/auth-modal.component'
+import { MainAuthModalComponent } from './login/main-auth-modal.component'
 import { RegisterModalComponent } from './login/register-modal.component'
-// import { AuthModalComponent } from './login/auth-modal.component'
+import { LoginModalComponent } from './login/login-modal.component'
+import { AuthModalComponent } from './login/auth-modal.component'
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -15,7 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, AuthModalComponent, RegisterModalComponent],
+  declarations: [AppComponent, HeaderComponent, MainAuthModalComponent, RegisterModalComponent, AuthModalComponent, LoginModalComponent ],
   imports: [
     BrowserModule,
     CoreModule,

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-layout-header',
@@ -15,11 +15,11 @@ export class HeaderComponent implements OnInit {
     console.log("login");
     let login = document.getElementById('modal-auth-canvas');
     // if (login.classList.contains('hide-modal')) {
-    let auth = document.getElementById('modal-auth');
+    // let auth = document.getElementById('modal-auth');
     // }
     login.className = 'active-modal';
 
-    auth.className = "modal active-modal"
+    // auth.className = "modal active-modal"
 
   }
 }

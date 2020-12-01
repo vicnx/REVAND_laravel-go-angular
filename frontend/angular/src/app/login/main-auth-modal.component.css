@@ -1,4 +1,5 @@
 @import url('./login-style.css');
+
 .auth__social__options{
     display: flex;
     width: 90%;

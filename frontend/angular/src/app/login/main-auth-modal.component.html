@@ -1,0 +1,10 @@
+<div id="modal-auth-canvas" class="hide-modal">
+    <div class="background_modal--black" (click)="hideModal()"></div>
+    <div id="modal-auth-content" >
+        <auth-modal (modal_auth_type)="set_auth_type($event)" *ngIf="[modal_auth_type]=='auth'"></auth-modal>
+        <!-- Con ngIf cargamos o no el componente dependiendo del emit. -->
+        <register-modal *ngIf="[modal_auth_type]=='register'"></register-modal>
+        <login-modal *ngIf="[modal_auth_type]=='login'"></login-modal>
+    </div>
+    
+</div>
