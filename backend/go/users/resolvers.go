@@ -13,25 +13,25 @@ func SaveOne(data interface{}) error {
 	return err
 }
 
-func FindOneUser(condition interface{}) (UserModel, error) {
+func FindOneUser(condition interface{}) (Users, error) {
 	db := common.GetDB()
-	var model UserModel
+	var model Users
 	err := db.Where(condition).First(&model).Error
 	return model, err
 }
 
-func (u *UserModel) checkPassword(password string) error {
+func (u *Users) checkPassword(password string) error {
 	bytePassword := []byte(password)
 	byteHashedPassword := []byte(u.PasswordHash)
 	return bcrypt.CompareHashAndPassword(byteHashedPassword, bytePassword)
 }
 
-func (model *UserModel) Update(data interface{}) error {
+func (model *Users) Update(data interface{}) error {
 	db := common.GetDB()
 	err := db.Model(model).Update(data).Error
 	return err
 }
-func (u *UserModel) setPassword(password string) error {
+func (u *Users) setPassword(password string) error {
 	if len(password) == 0 {
 		return errors.New("password should not be empty!")
 	}

@@ -19,17 +19,17 @@ func UserRegister(router *gin.RouterGroup) {
 
 
 func UsersRegistration(c *gin.Context) {
-	userModelValidator := NewUserModelValidator()
-	if err := userModelValidator.Bind(c); err != nil {
+	UsersValidator := NewUsersValidator()
+	if err := UsersValidator.Bind(c); err != nil {
 		c.JSON(http.StatusUnprocessableEntity, common.NewValidatorError(err))
 		return
 	}
-
-	if err := SaveOne(&userModelValidator.userModel); err != nil {
+	// fmt.printLn()
+	if err := SaveOne(&UsersValidator.Users); err != nil {
 		c.JSON(http.StatusUnprocessableEntity, common.NewError("database", err))
 		return
 	}
-	c.Set("my_user_model", userModelValidator.userModel)
+	c.Set("my_user_model", UsersValidator.Users)
 	serializer := UserSerializer{c}
 	c.JSON(http.StatusCreated, gin.H{"user": serializer.Response()})
 }
@@ -40,18 +40,18 @@ func UsersLogin(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, common.NewValidatorError(err))
 		return
 	}
-	userModel, err := FindOneUser(&UserModel{Email: loginValidator.userModel.Email})
+	Users, err := FindOneUser(&Users{Email: loginValidator.Users.Email})
 
 	if err != nil {
 		c.JSON(http.StatusForbidden, common.NewError("login", errors.New("Not Registered email or invalid password")))
 		return
 	}
 
-	if userModel.checkPassword(loginValidator.User.Password) != nil {
+	if Users.checkPassword(loginValidator.User.Password) != nil {
 		c.JSON(http.StatusForbidden, common.NewError("login", errors.New("Not Registered email or invalid password")))
 		return
 	}
-	UpdateContextUserModel(c, userModel.ID)
+	UpdateContextUsers(c, Users.ID)
 	serializer := UserSerializer{c}
 	c.JSON(http.StatusOK, gin.H{"user": serializer.Response()})
 }
@@ -62,19 +62,19 @@ func UserRetrieve(c *gin.Context) {
 }
 
 func UserUpdate(c *gin.Context) {
-	myUserModel := c.MustGet("my_user_model").(UserModel)
-	userModelValidator := NewUserModelValidatorFillWith(myUserModel)
-	if err := userModelValidator.Bind(c); err != nil {
+	myUsers := c.MustGet("my_user_model").(Users)
+	UsersValidator := NewUsersValidatorFillWith(myUsers)
+	if err := UsersValidator.Bind(c); err != nil {
 		c.JSON(http.StatusUnprocessableEntity, common.NewValidatorError(err))
 		return
 	}
 
-	userModelValidator.userModel.ID = myUserModel.ID
-	if err := myUserModel.Update(userModelValidator.userModel); err != nil {
+	UsersValidator.Users.ID = myUsers.ID
+	if err := myUsers.Update(UsersValidator.Users); err != nil {
 		c.JSON(http.StatusUnprocessableEntity, common.NewError("database", err))
 		return
 	}
-	UpdateContextUserModel(c, myUserModel.ID)
+	UpdateContextUsers(c, myUsers.ID)
 	serializer := UserSerializer{c}
 	c.JSON(http.StatusOK, gin.H{"user": serializer.Response()})
 }

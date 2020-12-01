@@ -7,6 +7,13 @@
 </div> -->
 
 <div id="modal-auth" class="modal active-modal"> <!--class = modal-auth-->
-    <h1>REGISTER!</h1>
-    
+    <h1>Register!</h1>
+    <h5>Write your info</h5>
+
+    <form [formGroup]="registerForm" (ngSubmit)="registerSubmit()">
+        <input type="text"      formControlName="username"    id="register_username"  class="input_form_register" placeholder="Username..">
+        <input type="email"     formControlName="email"       id="register_email"     class="input_form_register" placeholder="Email..">
+        <input type="password"  formControlName="password"    id="register_password"  class="input_form_register" placeholder="Password..">
+        <button type="submit"   [disabled]="!registerForm.valid"  id="btn_create_account" class="btn_create_account"     >Create account</button>
+    </form>
 </div>

@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { AwardListComponent,AwardPreviewComponent,AwardEditorComponent } from './award-helpers';
 import { SubscriptionListComponent,SubscriptionPreviewComponent,SubscriptionEditorComponent } from './subscription-helpers';
+import { ShowAuthedDirective } from './show-authed.directive';
 // import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
 // import { ListErrorsComponent } from './list-errors.component';
 // import { ShowAuthedDirective } from './show-authed.directive'; 
@@ -24,7 +25,8 @@ import { SubscriptionListComponent,SubscriptionPreviewComponent,SubscriptionEdit
     AwardEditorComponent,
     SubscriptionListComponent,
     SubscriptionPreviewComponent,
-    SubscriptionEditorComponent
+    SubscriptionEditorComponent,
+    ShowAuthedDirective
   ],
   exports: [
     AwardListComponent,
@@ -38,6 +40,7 @@ import { SubscriptionListComponent,SubscriptionPreviewComponent,SubscriptionEdit
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
+    ShowAuthedDirective
   ]
 })
 export class SharedModule {}

@@ -33,21 +33,21 @@ var MyAuth2Extractor = &request.MultiExtractor{
 }
 
 // A helper to write user_id and user_model to the context
-func UpdateContextUserModel(c *gin.Context, my_user_id uint) {
-	var myUserModel UserModel
+func UpdateContextUsers(c *gin.Context, my_user_id uint) {
+	var myUsers Users
 	if my_user_id != 0 {
 		db := common.GetDB()
-		db.First(&myUserModel, my_user_id)
+		db.First(&myUsers, my_user_id)
 	}
 	c.Set("my_user_id", my_user_id)
-	c.Set("my_user_model", myUserModel)
+	c.Set("my_user_model", myUsers)
 }
 
 // You can custom middlewares yourself as the doc: https://github.com/gin-gonic/gin#custom-middleware
 //  r.Use(AuthMiddleware(true))
 func AuthMiddleware(auto401 bool) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		UpdateContextUserModel(c, 0)
+		UpdateContextUsers(c, 0)
 		token, err := request.ParseFromRequest(c.Request, MyAuth2Extractor, func(token *jwt.Token) (interface{}, error) {
 			b := ([]byte(common.NBSecretPassword))
 			return b, nil
@@ -61,7 +61,7 @@ func AuthMiddleware(auto401 bool) gin.HandlerFunc {
 		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 			my_user_id := uint(claims["id"].(float64))
 			//fmt.Println(my_user_id,claims["id"])
-			UpdateContextUserModel(c, my_user_id)
+			UpdateContextUsers(c, my_user_id)
 		}
 	}
 }

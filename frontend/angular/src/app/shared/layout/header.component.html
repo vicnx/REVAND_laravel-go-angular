@@ -9,9 +9,17 @@
             </div>
         </div>
     </div>
-    <div class="main-header__options">
-        <button class="main-header__options__btnLogin" routerLink="/admin-panel">Admin Panel</button>
+    <div class="main-header__options" *appShowAuthed="false">
+        <!-- <button class="main-header__options__btnLogin" routerLink="/admin-panel">Admin Panel</button> -->
         <button class="main-header__options__btnLogin" id="btn-Login" (click)="showAuth()">Log in or Register</button>
+        <a class="main-header__options__btnUpload" (click)="showAuth()">
+            <span>Upload Product</span>
+        </a>
+    </div>
+
+    <div class="main-header__options" *appShowAuthed="true">
+        <button class="main-header__options__btnLogin" routerLink="/admin-panel">Admin Panel</button>
+        <button class="main-header__options__btnLogin" id="btn-Login" (click)="logout()">Logout</button>
         <a class="main-header__options__btnUpload">
             <span>Upload Product</span>
         </a>

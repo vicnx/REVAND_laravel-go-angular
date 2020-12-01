@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from './core';
 // import { faUsers } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
@@ -6,6 +7,14 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+  constructor (
+    private userService: UserService
+  ) {}
   title = 'angular';
+
+  ngOnInit() {
+    console.log("app.component");
+    this.userService.populate();
+  }
 }

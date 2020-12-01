@@ -1,1 +1,35 @@
 @import url('./login-style.css');
+
+.input_form_login{
+    outline: none;
+    border: none;
+    width: 90%;
+    height: 40px;
+    font-size: 16px;
+    border-bottom: 1px solid grey;
+}
+
+.btn_login_account{
+    box-sizing: border-box;
+    position: relative;
+    border: none;
+    text-align: center;
+    line-height: 34px;
+    white-space: nowrap;
+    border-radius: 21px;
+    font-size: 1rem;
+    color: #fff;
+    background: #13c1ac;
+    width: 100%;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    cursor: pointer;
+    margin-top: 20px;
+    /* font-family: Wallie; */
+}
+.btn_login_account:disabled{
+    background-color: #6fc7bd;
+}

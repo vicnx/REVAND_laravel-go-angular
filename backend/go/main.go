@@ -14,7 +14,7 @@ import (
 func Migrate(db *gorm.DB) {
 	// users.AutoMigrate()
 	db.AutoMigrate(&awards.Awards{}) //generate table Awards
-	db.AutoMigrate(&users.UserModel{}) //generate table Users
+	db.AutoMigrate(&users.Users{}) //generate table Users
 	// db.AutoMigrate(&articles.TagModel{})
 	// db.AutoMigrate(&articles.FavoriteModel{})
 	// db.AutoMigrate(&articles.ArticleUserModel{})

@@ -55,6 +55,7 @@
 }
 
 .app-search__input input{
+    box-sizing: border-box;
     width: 100%;
     height: 40px;
     font-family: Wallie,Helvetica;
@@ -90,7 +91,8 @@
     opacity: 1;
     visibility: visible;
     transition: visibility 0s 350ms,opacity 350ms linear;
-    width: 540px;
+    width: auto;
+    min-width: 330px;
     height: 65px;
     background-size: 510px 65px;
 }
