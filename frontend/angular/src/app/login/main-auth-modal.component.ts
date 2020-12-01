@@ -1,10 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, NgModule } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { DomSanitizer} from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
-  import { AuthModalComponent } from './auth-modal.component'
-
-// import { Award, AwardsService } from '../../core';
+import { Component,OnInit,} from '@angular/core';
 
 @Component({
   selector: 'main-auth-modal',
@@ -49,7 +43,6 @@ export class MainAuthModalComponent implements OnInit {
 
   hideModal() {
     let auth = document.getElementById('modal-auth-canvas');
-
     auth.className = 'hide-modal';
   }
 

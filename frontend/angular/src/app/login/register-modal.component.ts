@@ -37,7 +37,7 @@ export class RegisterModalComponent implements OnInit {
     const user_data = this.registerForm.value;
     this.userService.attemptAuth('register', user_data).subscribe(
       data => {
-        location.reload();
+        // location.reload();
       },
       err => {
         console.log("Error register submit");
