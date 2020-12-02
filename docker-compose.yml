@@ -98,7 +98,7 @@ services:
       - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
-      - .common/traefik/traefik.yml:/etc/traefik/traefik.yml
+      - ./common/traefik:/etc/traefik
   grafana:
     image: grafana/grafana:7.1.5
     container_name: revand_grafana
@@ -106,7 +106,7 @@ services:
     - "3500:3000"
     restart: on-failure
     volumes:
-    - '.common/grafana:/etc/grafana/provisioning/datasources/'
+    - './common/grafana:/etc/grafana/provisioning/datasources/'
     - 'myGrafanaVol:/var/lib/grafana'
     networks:
     - revand_network

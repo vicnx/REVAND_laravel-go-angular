@@ -13,20 +13,22 @@ class CreateSubscriptionsUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscriptions_users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('subscription_id')->unsigned();
-
-            /* user id foreign key constraint declaration */
-            $table->foreign('user_id')->references('id')->on('users')
-                ->onDelete('cascade')->onUpdate('cascade');
-
-            /* subscription id foreign key constraint declaration */
-            $table->foreign('subscription_id')->references('id')->on('subscriptions')
-                ->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
-        });
+        if(!Schema::hasTable('subscriptions_users')){
+            Schema::create('subscriptions_users', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('user_id')->unsigned();
+                $table->integer('subscription_id')->unsigned();
+    
+                /* user id foreign key constraint declaration */
+                $table->foreign('user_id')->references('id')->on('users')
+                    ->onDelete('cascade')->onUpdate('cascade');
+    
+                /* subscription id foreign key constraint declaration */
+                $table->foreign('subscription_id')->references('id')->on('subscriptions')
+                    ->onDelete('cascade')->onUpdate('cascade');
+                $table->timestamps();
+            });
+        } 
     }
 
     /**
