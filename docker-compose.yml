@@ -1,7 +1,11 @@
 version: '3'
 services:
   laravel:
+    container_name: revand_laravel
     build: ./backend/laravel
+    working_dir: /app
+    volumes:
+    - ./backend/laravel:/app
     ports:
     - "8000:8000"
     networks:
@@ -12,8 +16,21 @@ services:
     depends_on:
     - mysql
     - go
+    working_dir: /app
+    command: >
+      bash -c " composer install &&
+      composer update laravel/framework &&
+      cp .env.example .env &&
+      php artisan key:generate &&
+      php artisan route:list &&
+      php artisan migrate &&
+      php artisan serve --host=0.0.0.0 --port=8000"
   go:
+    container_name: revand_go
     build: ./backend/go
+    working_dir: /home/xente/Servidor20_21/go_projects/src/github.com/revand/App_Go_Larave_Angular_TEST/backend/go/
+    volumes:
+    - ./backend/go:/home/xente/Servidor20_21/go_projects/src/github.com/revand/App_Go_Larave_Angular_TEST/backend/go/
     ports:
     - "3000:3000"
     networks:
@@ -22,8 +39,16 @@ services:
     - mysql
     depends_on:
     - mysql
+    environment:
+    - GOROOT=/usr/local/go
+    - GOPATH=/home/xente/Servidor20_21/go_projects/
+    command: bash -c "govendor sync && fresh"
   angular:
+    container_name: revand_angular
     build: ./frontend/angular
+    working_dir: /app
+    volumes:
+    - ./frontend/angular:/app
     ports:
     - "4200:4200"
     networks:
@@ -34,16 +59,52 @@ services:
     depends_on:
     - go
     - laravel
+    working_dir: /app
+    command: bash -c "npm install && ng serve --host=0.0.0.0 --port=4200"
   mysql:
+    container_name: revand_mysql
     image: mysql:5.7
     ports:
     - "3306:3306"
     networks:
     - revand_network
+    volumes:
+    - db_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: revand
       MYSQL_USER: vicnx
       MYSQL_PASSWORD: 12345678
+  redis:
+    image: redis:alpine
+    restart: on-failure
+    ports: 
+      - "6379:6379"
+    volumes:
+      - "redis:/redis_data"
+    networks: 
+      - revand_network
+  grafana:
+    image: grafana/grafana:7.1.5
+    container_name: revand_grafana
+    ports:
+    - "3500:3000"
+    volumes:
+    - './grafana:/etc/grafana/provisioning/datasources/'
+    - 'myGrafanaVol:/var/lib/grafana'
+    networks:
+    - revand_network
+    depends_on: 
+    - go
+    - laravel
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
+      GF_INSTALL_PLUGINS: "grafana-clock-panel 1.0.1"
 networks:
     revand_network:
+volumes:
+    db_data:
+    myGrafanaVol:
+    redis:

@@ -16,6 +16,7 @@ func CreateAward(data interface{}) error {
 //Obtener todos los Awards
 func GetAllAwards(data interface{}) error {
 	fmt.Println(data)
+	fmt.Println("mango")
 	db := common.GetDB()
 	err := db.Find(data).Error
 	return err
