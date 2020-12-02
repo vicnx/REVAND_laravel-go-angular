@@ -8,7 +8,8 @@ import (
 	"github.com/revand/App_Go_Larave_Angular_TEST/backend/go/awards"
 	"github.com/revand/App_Go_Larave_Angular_TEST/backend/go/users"
 	"github.com/revand/App_Go_Larave_Angular_TEST/backend/go/common"
-
+	// "github.com/revand/App_Go_Larave_Angular_TEST/backend/go/redis"
+	// "github.com/go-redis/redis"
 )
 
 func Migrate(db *gorm.DB) {
@@ -24,6 +25,9 @@ func Migrate(db *gorm.DB) {
 
 
 func main() {
+
+	// c, err := redis.Dial("tcp", "redis:6379")
+
 	//Conection db
 	db := common.Init()
 	Migrate(db)
@@ -35,11 +39,14 @@ func main() {
 
 	v1 := r.Group("/api")
 
+	// NO TOKEN
 	awards.AwardsAuthed(v1.Group("/awards"))
 	users.UsersRegister(v1.Group("/users"))
 	v1.Use(users.AuthMiddleware(false))
+	//redis
+	// redis.Routers(v1.Group("/redis"))
 
-
+    // SI TOKEN
 	v1.Use(users.AuthMiddleware(true))
 	users.UserRegister(v1.Group("/user"))
 

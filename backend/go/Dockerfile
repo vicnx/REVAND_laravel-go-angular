@@ -24,6 +24,8 @@ ENV PATH=$PATH:/home/xente/Servidor20_21/go_projects/bin
 # RUN go get -d -v ./...
 RUN go get -u github.com/gin-gonic/gin
 RUN go get -u github.com/kardianos/govendor
+RUN go get -u github.com/go-redis/redis
+# github.com/go-redis/redis/v8
 # RUN govendor sync
 RUN go get -u github.com/pilu/fresh
 RUN go get -u github.com/go-sql-driver/mysql

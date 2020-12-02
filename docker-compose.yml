@@ -10,6 +10,7 @@ services:
     - "8000:8000"
     networks:
     - revand_network
+    restart: on-failure
     links:
     - mysql
     - go
@@ -35,6 +36,7 @@ services:
     - "3000:3000"
     networks:
     - revand_network
+    restart: on-failure
     links:
     - mysql
     depends_on:
@@ -53,6 +55,7 @@ services:
     - "4200:4200"
     networks:
     - revand_network
+    restart: on-failure
     links:
     - go
     - laravel
@@ -68,6 +71,7 @@ services:
     - "3306:3306"
     networks:
     - revand_network
+    restart: on-failure
     volumes:
     - db_data:/var/lib/mysql
     environment:
@@ -77,6 +81,7 @@ services:
       MYSQL_PASSWORD: 12345678
   redis:
     image: redis:alpine
+    container_name: revand_redis
     restart: on-failure
     ports: 
       - "6379:6379"
@@ -84,13 +89,24 @@ services:
       - "redis:/redis_data"
     networks: 
       - revand_network
+  traefik:
+    image: traefik:v2.0
+    container_name: revand_traefik
+    restart: on-failure
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
+      - .common/traefik/traefik.yml:/etc/traefik/traefik.yml
   grafana:
     image: grafana/grafana:7.1.5
     container_name: revand_grafana
     ports:
     - "3500:3000"
+    restart: on-failure
     volumes:
-    - './grafana:/etc/grafana/provisioning/datasources/'
+    - '.common/grafana:/etc/grafana/provisioning/datasources/'
     - 'myGrafanaVol:/var/lib/grafana'
     networks:
     - revand_network
