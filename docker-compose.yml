@@ -29,10 +29,10 @@ services:
   go:
     container_name: revand_go
     build: ./backend/go
-    working_dir: /app
+    working_dir: /home/xente/Servidor20_21/go_projects/src/github.com/revand/App_Go_Larave_Angular_TEST/backend/go/
     volumes:
-    # - ./backend/go:/home/xente/Servidor20_21/go_projects/src/github.com/revand/App_Go_Larave_Angular_TEST/backend/go/
-      - ./backend/go:/app
+    - ./backend/go:/home/xente/Servidor20_21/go_projects/src/github.com/revand/App_Go_Larave_Angular_TEST/backend/go/
+      # - ./backend/go:/app
     ports:
     - "3000:3000"
     networks:
@@ -40,16 +40,13 @@ services:
     restart: on-failure
     links:
     - mysql
-    - redis
     depends_on:
     - mysql
-    - redis
-    # environment:
-    # - GOROOT=/usr/local/go
-    # - GOPATH=/home/xente/Servidor20_21/go_projects/
+    environment:
+    - GOROOT=/usr/local/go
+    - GOPATH=/home/xente/Servidor20_21/go_projects/
     # command: bash -c "govendor sync && fresh"
-    command: bash -c "fresh"
-
+    command: bash -c "govendor sync && fresh"
   angular:
     container_name: revand_angular
     build: ./frontend/angular
