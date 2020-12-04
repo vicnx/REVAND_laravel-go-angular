@@ -14,6 +14,7 @@ export class AdminComponent implements OnInit {
     private userService: UserService,
     private router: Router
   ) {}
+  isSubmitting = false;
   currentUser: User;
   
   ngOnInit() {
@@ -21,10 +22,19 @@ export class AdminComponent implements OnInit {
       (userData) => {
         this.currentUser = userData;
 
-        if(this.currentUser.type != "admin"){
+        if(this.currentUser.type != "client"){
+          console.log("Access denied hdp");
           this.router.navigateByUrl('/');
         }else{
-          
+          this.userService.attemptAuthLaravel(this.currentUser).subscribe(
+            data => {
+              this.router.navigateByUrl('/panel-admin');
+            },
+            err => {
+              console.log("Error register submit");
+              this.isSubmitting = false;
+            }
+          );
         }
       }
     );
