@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   api_url: 'http://localhost:3000/api', //GO BACKEND
-  api_url_laravel: 'http://localhost:8000/api' //Laravel Backend
+  api_url_laravel: 'http://localhost:8000/api', //Laravel Backend
+  api_url_redis: "redis:6379/api/redis" //Laravel Backend
 };
 
 /*

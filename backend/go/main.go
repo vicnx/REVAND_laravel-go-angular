@@ -8,7 +8,7 @@ import (
 	"github.com/revand/App_Go_Larave_Angular_TEST/backend/go/awards"
 	"github.com/revand/App_Go_Larave_Angular_TEST/backend/go/users"
 	"github.com/revand/App_Go_Larave_Angular_TEST/backend/go/common"
-	// "github.com/revand/App_Go_Larave_Angular_TEST/backend/go/redis"
+	"github.com/revand/App_Go_Larave_Angular_TEST/backend/go/redis"
 	// "github.com/go-redis/redis"
 )
 
@@ -22,7 +22,10 @@ func Migrate(db *gorm.DB) {
 	// db.AutoMigrate(&articles.CommentModel{})
 }
 
-
+type Author struct {
+	Name string `json:"name"`
+	Age int `json:"age"`
+}
 
 func main() {
 
@@ -39,12 +42,25 @@ func main() {
 
 	v1 := r.Group("/api")
 
+
+
+
+// ======================== redis
+
+
+
+
+
+
+// ============================
+
+
 	// NO TOKEN
 	awards.AwardsAuthed(v1.Group("/awards"))
 	users.UsersRegister(v1.Group("/users"))
 	v1.Use(users.AuthMiddleware(false))
 	//redis
-	// redis.Routers(v1.Group("/redis"))
+	redis.Routers(v1.Group("/redis"))
 
     // SI TOKEN
 	v1.Use(users.AuthMiddleware(true))

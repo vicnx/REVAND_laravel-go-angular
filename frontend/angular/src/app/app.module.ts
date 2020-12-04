@@ -9,6 +9,7 @@ import { MainAuthModalComponent } from './login/main-auth-modal.component'
 import { RegisterModalComponent } from './login/register-modal.component'
 import { LoginModalComponent } from './login/login-modal.component'
 import { AuthModalComponent } from './login/auth-modal.component'
+import { RedisService } from './core';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -24,7 +25,9 @@ import { HttpClientModule } from '@angular/common/http';
     HomeModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    RedisService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

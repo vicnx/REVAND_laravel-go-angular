@@ -92,7 +92,7 @@
     visibility: visible;
     transition: visibility 0s 350ms,opacity 350ms linear;
     width: auto;
-    min-width: 330px;
+    min-width: 260px;
     height: 65px;
     background-size: 510px 65px;
 }

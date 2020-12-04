@@ -17,6 +17,8 @@ export class ApiService {
     return  throwError(error.error);
   }
 
+
+  // ---------------------------- GO --------------------------------------
   get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
     return this.http.get(`${environment.api_url}${path}`, { params })
       .pipe(catchError(this.formatErrors));
@@ -65,4 +67,6 @@ export class ApiService {
       `${environment.api_url_laravel}${path}`
     ).pipe(catchError(this.formatErrors));
   }
+
+  
 }

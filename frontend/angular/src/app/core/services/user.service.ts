@@ -4,6 +4,8 @@ import { Observable ,  BehaviorSubject ,  ReplaySubject } from 'rxjs';
 
 import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
+import { RedisService } from './redis.service';
+
 import { User } from '../models';
 import { map ,  distinctUntilChanged } from 'rxjs/operators';
 
@@ -18,6 +20,7 @@ export class UserService {
 
   constructor (
     private apiService: ApiService,
+    private redisService: RedisService,
     private http: HttpClient,
     private jwtService: JwtService
   ) {}
@@ -40,6 +43,8 @@ export class UserService {
     }
   }
 
+  
+
   setAuth(user: User) {
     // Save JWT sent from server in localstorage
     this.jwtService.saveToken(user.token);
@@ -47,6 +52,7 @@ export class UserService {
     this.currentUserSubject.next(user);
     // Set isAuthenticated to true
     this.isAuthenticatedSubject.next(true);
+    this.redisService.set({key:"user_"+user.username, value:"Token "+user.token});
   }
 
   purgeAuth() {
