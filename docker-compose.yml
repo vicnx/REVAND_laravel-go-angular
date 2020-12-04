@@ -11,11 +11,9 @@ services:
     networks:
     - revand_network
     restart: on-failure
-    links:
-    - mysql
-    - go
     depends_on:
     - mysql
+    - redis
     - go
     working_dir: /app
     command: >
@@ -38,15 +36,14 @@ services:
     networks:
     - revand_network
     restart: on-failure
-    links:
-    - mysql
     depends_on:
     - mysql
+    - redis
     environment:
     - GOROOT=/usr/local/go
     - GOPATH=/home/xente/Servidor20_21/go_projects/
-    # command: bash -c "govendor sync && fresh"
-    command: bash -c "govendor sync && fresh"
+    # command: bash -c "govendor sync && fresh"     go mod init github.com/revand/App_Go_Larave_Angular_TEST/backend/go && 
+    command: bash -c "go mod vendor && go get -u github.com/go-redis/redis/v8 && go mod vendor && govendor sync && fresh"
   angular:
     container_name: revand_angular
     build: ./frontend/angular
