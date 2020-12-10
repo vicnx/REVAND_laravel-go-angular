@@ -11,5 +11,6 @@ RUN mv composer.phar /usr/local/bin/composer
 RUN apt-get install -y zip unzip php7.2-zip
 RUN apt-get install -y git
 RUN apt install -y zip unzip php-zip
+# RUN apt-get install php-redis -y
 
 EXPOSE 8000

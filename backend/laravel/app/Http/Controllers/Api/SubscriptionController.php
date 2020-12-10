@@ -38,7 +38,9 @@ class SubscriptionController extends ApiController
 
     //SHOW ONE SUB
     public function show(Subscription $subscription)
-    {
+    {   
+        error_log("====================================");
+        error_log(auth()->user());
         return $this->respondWithTransformer($subscription);
     }
 

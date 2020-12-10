@@ -31,7 +31,7 @@ type DBConfig struct {
 
 func BuildDBConfig() *DBConfig {
 	dbConfig := DBConfig{
-		Host:     "mysql", //reemplazado para que funcione con compose (localhost)
+		Host:     "mysql", //reemplazado para que funcione con compose (localhost) / mysql
 		Port:     3306,
 		User:     "vicnx",																												
 		Password: "12345678",

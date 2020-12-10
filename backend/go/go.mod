@@ -11,7 +11,7 @@ require (
 	github.com/gin-gonic/gin v1.1.5-0.20170716034208-93b3a0d7ec95
 	github.com/go-playground/locales v0.11.2-0.20170327191450-1e5f1161c641 // indirect
 	github.com/go-playground/universal-translator v0.16.1-0.20170327191703-71201497bace // indirect
-	github.com/go-redis/redis/v8 v8.4.0
+	github.com/go-redis/redis/v8 v8.4.2
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/gosimple/slug v1.1.0 // indirect
 	github.com/jinzhu/gorm v0.0.0-20170703134954-2a1463811ee1

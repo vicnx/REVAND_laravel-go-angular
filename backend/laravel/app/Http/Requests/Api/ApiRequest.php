@@ -27,5 +27,5 @@ class ApiRequest extends FormRequest
         return [
             //
         ];
-    }
+    }   
 }

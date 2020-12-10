@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 // Route::post('/subscription', 'SubscriptionController@create');
 
@@ -27,5 +27,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['namespace' => 'Api'], function () {
 
     Route::resource('/subscription','SubscriptionController');
-
+    Route::post('users/login', 'AuthController@login');
+    Route::post('users', 'AuthController@register');
+    Route::get('user', 'UserController@index');
+    Route::get('test', 'AuthController@test');
 });

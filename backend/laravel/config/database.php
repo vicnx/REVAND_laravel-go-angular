@@ -46,7 +46,7 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'mysql'), //localhost
+            'host' => env('DB_HOST', 'mysql'), // localhost
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'revand'),
             'username' => env('DB_USERNAME', 'vicnx'),
@@ -89,6 +89,19 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+        ],
+
+        'redis' => [
+
+            'client' => env('REDIS_CLIENT', 'predis'),
+        
+            'default' => [
+                'host' => env('REDIS_HOST', 'redis'),
+                'password' => env('REDIS_PASSWORD', null),
+                'port' => env('REDIS_PORT', 6379),
+                'database' => 0,
+            ],
+        
         ],
 
     ],
