@@ -30,5 +30,5 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('users/login', 'AuthController@login');
     Route::post('users', 'AuthController@register');
     Route::get('user', 'UserController@index');
-    Route::get('test', 'AuthController@test');
+    Route::post('admin-login', 'AuthController@login_from_redis');
 });

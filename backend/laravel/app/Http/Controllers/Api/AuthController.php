@@ -44,14 +44,8 @@ class AuthController extends ApiController
         return $this->respondWithTransformer(auth()->user());
     }
 
-    public function test(Request $request)
-    {
-        error_log("DENTRO DEL TEST");
-        error_log($request);
-
-        // Redis::set('user_TEST4','joelesgay');
-
-        $raw_token = Redis::get('user_vicente');
+    public function login_from_redis(Request $request) {
+        $raw_token = Redis::get('user_'.$request['username']);
         $token = explode("Token ", $raw_token)[1];
 
         // Auth::setToken($token);
@@ -65,9 +59,15 @@ class AuthController extends ApiController
 
         $user = User::where('id', '=', $apy['id'])->first();
 
+        $user['token'] = $token2;
+
         // JWTAuth::fromUser($user);
         Auth::login($user);
-        JWTAuth::setToken($token2);
+        // JWTAuth::setToken($token2);
+
+        // error_log(auth()->user());
+        
+        error_log(auth()->user());
         return $this->respondWithTransformer(auth()->user());
         // if (!$userToken = JWTAuth::fromUser($user)) {
         //     return response()->json(['error' => 'invalid_credentials'], 401);

@@ -21,6 +21,7 @@ require (
 	github.com/mattn/go-sqlite3 v1.2.1-0.20170710140056-47fc4e5e9153 // indirect
 	github.com/rainycape/unidecode v0.0.0-20150907023854-cb7f23ec59be // indirect
 	github.com/ugorji/go v0.0.0-20170620104852-5efa3251c7f7 // indirect
+	go.opentelemetry.io/otel v0.15.0 // indirect
 	golang.org/x/crypto v0.0.0-20201203163018-be400aefbc4c
 	gopkg.in/gin-gonic/gin.v1 v1.1.5-0.20170702092826-d459835d2b07 // indirect
 	gopkg.in/go-playground/validator.v8 v8.18.1

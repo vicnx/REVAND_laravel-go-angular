@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { User, UserService } from '../../core';
+import { Subscription, SubscriptionService } from '../../core';
 import { Router } from '@angular/router';
 
 
@@ -12,7 +13,8 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   constructor(
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private subscriptionService: SubscriptionService,
   ) {}
   currentUser: User;
   ngOnInit() {
@@ -36,7 +38,11 @@ export class HeaderComponent implements OnInit {
     location.reload();
   }
   adminpanel(){
-    this.userService.sendloginlaravel(this.currentUser.username);
-    console.log(this.currentUser);
+    // console.log(this.currentUser);
+    // this.userService.attemptAuthLaravel(this.currentUser.username).subscribe((data) => {
+    //         console.log(data);
+    // })
+
+    // console.log(this.currentUser);
   }
 }

@@ -21,14 +21,16 @@ export class AdminComponent implements OnInit {
     this.userService.currentUser.subscribe(
       (userData) => {
         this.currentUser = userData;
-
+        console.log('============================');
+        console.log(this.currentUser);
         if(this.currentUser.type != "client"){
           console.log("Access denied hdp");
           this.router.navigateByUrl('/');
         }else{
-          this.userService.attemptAuthLaravel(this.currentUser).subscribe(
+          this.userService.attemptAuthLaravel(this.currentUser.username).subscribe(
             data => {
-              this.router.navigateByUrl('/panel-admin');
+              console.log(data);
+              // this.router.navigateByUrl('/panel-admin');
             },
             err => {
               console.log("Error register submit");

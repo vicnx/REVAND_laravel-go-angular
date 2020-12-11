@@ -12,6 +12,10 @@ class UserTransformer extends Transformer
             'email'     => $data['email'],
             'token'     => $data['token'],
             'username'  => $data['username'],
+            'image'  => $data['image'],
+            'provider'  => $data['provider'],
+            'type'  => $data['type'],
+            'bio'  => $data['bio'],
         ];
     }
 }

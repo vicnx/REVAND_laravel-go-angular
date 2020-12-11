@@ -17,4 +17,18 @@ export class JwtService {
     window.localStorage.removeItem('jwtToken');
   }
 
+  // ============ Laravel =============
+
+  getTokenLaravel(): String {
+    console.log("RETURN TOKEN");
+    return window.localStorage['jwtTokenLaravel'];
+  }
+
+  saveTokenLaravel(token: String) {
+    window.localStorage['jwtTokenLaravel'] = token;
+  }
+
+  destroyTokenLaravel() {
+    window.localStorage.removeItem('jwtTokenLaravel');
+  }
 }

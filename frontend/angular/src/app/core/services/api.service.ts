@@ -50,20 +50,21 @@ export class ApiService {
     return this.http.get(`${environment.api_url_laravel}${path}`, { params })
       .pipe(catchError(this.formatErrors));
   }
+
   putlaravel(path: string, body: Object = {}): Observable<any> {
     return this.http.put(
       `${environment.api_url_laravel}${path}`,
       JSON.stringify(body)
     ).pipe(catchError(this.formatErrors));
   }
+
   postlaravel(path: string, body: Object = {}): Observable<any> {
-    console.log("EN POSSSSST");
-    console.log(`${environment.api_url_laravel}${path}`);
     return this.http.post(
       `${environment.api_url_laravel}${path}`,
       JSON.stringify(body)
     ).pipe(catchError(this.formatErrors));
   }
+  
   deletelaravel(path): Observable<any> {
     return this.http.delete(
       `${environment.api_url_laravel}${path}`

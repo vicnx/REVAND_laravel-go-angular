@@ -41,60 +41,19 @@ export class UserService {
       // Remove any potential remnants of previous auth states
       this.purgeAuth();
     }
-  }
 
-  attemptAuthLaravel(credentials): Observable<User> {
-    return this.apiService.postlaravel('/users/login', { user: credentials })
-      .pipe(map(
-        data => {
-          this.setAuthLaravel(data.user);
-          return data;
-        },
-      ));
-  }
-
-  attemptAuthLaravel2(credentials): Observable<User> {
-    return this.apiService.postlaravel('/test', { user: credentials })
-      .pipe(map(
-        data => {
-          // this.setAuthLaravel(data.user);
-          return data;
-        },
-      ));
-  }
-
-
-  sendloginlaravel(username): Observable<User> {
-    console.log(username);
-    console.log("DENTRO DE SEND LOGIN LARAVEL");
-    return this.apiService.getlaravel('/test/').pipe(map(
-      data => data));
-    
-    // return this.apiService.postlaravel('/test/' , { user: user } )
-    //             .pipe(map(data => data));
-    // return this.apiService.postlaravel('/test/', username)
-    //   .pipe(map(
+    // if (this.jwtService.getTokenLaravel()) {
+    //   this.apiService.getlaravel('/user/').subscribe(
     //     data => {
-    //       console.log("send to laravel successs");
-    //       return data;
+    //       this.setAuth(data.user)
     //     },
-    //     err => {
-    //       console.log("error");
-    //       console.log(err)
-    //       // this.errors = err;
-    //       // this.isSubmitting = false;
-    //     }
-    //   ));
-  }
-
-  setAuthLaravel(user: User) {
-    // Save JWT sent from server in localstorage
-    this.jwtService.saveToken(user.token);
-    // Set current user data into observable
-    this.currentUserSubject.next(user);
-    // Set isAuthenticated to true
-    this.isAuthenticatedSubject.next(true);
-    this.redisService.set({ key: "user_laravel_" + user.username, value: "Token " + user.token });
+    //     err => this.purgeAuth()
+    //   );
+    // } else {
+    //   console.log("purge auth");
+    //   // Remove any potential remnants of previous auth states
+    //   this.purgeAuth();
+    // }
   }
 
   setAuth(user: User) {
@@ -144,4 +103,42 @@ export class UserService {
       }));
   }
 
+
+  // LARAVEL SERVICES AUTH
+
+  attemptAuthLaravel(username): Observable<User> {
+    console.log(username);
+    console.log("DENTRO DE SEND LOGIN LARAVEL");
+
+    return this.apiService.postlaravel('/admin-login/', { username })
+      .pipe(map(
+        data => {
+          this.setAuth(data.user);
+          return data
+        },
+        err => console.log(err)
+      ));
+  }
+
+  // setAuthLaravel(user: User) {
+  //   // Save JWT sent from server in localstorage
+  //   this.jwtService.saveTokenLaravel(user.token);
+  //   // Set current user data into observable
+  //   // this.currentUserSubject.next(user);
+  //   console.log(user);
+  //   // user['laravelToken'] =
+  //   // this.currentUserSubject.next(user);
+  //   // this.currentUser.laravelToken = user.token;
+  //   // Set isAuthenticated to true
+  //   this.isAuthenticatedSubject.next(true);
+  // }
+
+  // purgeAuthLaravel() {
+  //   // Remove JWT from localstorage
+  //   this.jwtService.destroyTokenLaravel();
+  //   // Set current user to an empty object
+  //   this.currentUserSubject.next({} as User);
+  //   // Set auth status to false
+  //   this.isAuthenticatedSubject.next(false);
+  // }
 }
