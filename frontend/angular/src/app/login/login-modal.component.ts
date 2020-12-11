@@ -33,6 +33,7 @@ export class LoginModalComponent implements OnInit {
   loginSubmit() {
     this.isSubmitting = true;
     const user_data = this.loginForm.value;
+    console.log(this.loginForm.value)
     this.userService.attemptAuth('login', user_data).subscribe(
       data => {
         location.reload();

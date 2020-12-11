@@ -47,11 +47,56 @@ export class UserService {
     return this.apiService.postlaravel('/users/login', { user: credentials })
       .pipe(map(
         data => {
-          this.setAuth(data.user);
+          this.setAuthLaravel(data.user);
           return data;
-        }
+        },
       ));
   }
+
+  attemptAuthLaravel2(credentials): Observable<User> {
+    return this.apiService.postlaravel('/test', { user: credentials })
+      .pipe(map(
+        data => {
+          // this.setAuthLaravel(data.user);
+          return data;
+        },
+      ));
+  }
+
+
+  sendloginlaravel(username): Observable<User> {
+    console.log(username);
+    console.log("DENTRO DE SEND LOGIN LARAVEL");
+    return this.apiService.getlaravel('/test/').pipe(map(
+      data => data));
+    
+    // return this.apiService.postlaravel('/test/' , { user: user } )
+    //             .pipe(map(data => data));
+    // return this.apiService.postlaravel('/test/', username)
+    //   .pipe(map(
+    //     data => {
+    //       console.log("send to laravel successs");
+    //       return data;
+    //     },
+    //     err => {
+    //       console.log("error");
+    //       console.log(err)
+    //       // this.errors = err;
+    //       // this.isSubmitting = false;
+    //     }
+    //   ));
+  }
+
+  setAuthLaravel(user: User) {
+    // Save JWT sent from server in localstorage
+    this.jwtService.saveToken(user.token);
+    // Set current user data into observable
+    this.currentUserSubject.next(user);
+    // Set isAuthenticated to true
+    this.isAuthenticatedSubject.next(true);
+    this.redisService.set({ key: "user_laravel_" + user.username, value: "Token " + user.token });
+  }
+
   setAuth(user: User) {
     // Save JWT sent from server in localstorage
     this.jwtService.saveToken(user.token);
@@ -76,7 +121,9 @@ export class UserService {
     return this.apiService.post('/users/' + route, { user: credentials })
       .pipe(map(
         data => {
+          // console.log('attemptAuth')
           this.setAuth(data.user);
+          // this.sendloginlaravel(data.user.username);
           return data;
         }
       ));

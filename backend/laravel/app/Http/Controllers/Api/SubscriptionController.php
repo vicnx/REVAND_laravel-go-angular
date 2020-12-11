@@ -31,6 +31,7 @@ class SubscriptionController extends ApiController
             'name' => $request->input('subscription.name'),
             'price' => $request->input('subscription.price'),
         ]);
+        error_log("mango ninoiwsda");
         
         // Pasamos la subscription al transformer
         return $this->respondWithTransformer($subscription);

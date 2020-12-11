@@ -57,6 +57,8 @@ export class ApiService {
     ).pipe(catchError(this.formatErrors));
   }
   postlaravel(path: string, body: Object = {}): Observable<any> {
+    console.log("EN POSSSSST");
+    console.log(`${environment.api_url_laravel}${path}`);
     return this.http.post(
       `${environment.api_url_laravel}${path}`,
       JSON.stringify(body)

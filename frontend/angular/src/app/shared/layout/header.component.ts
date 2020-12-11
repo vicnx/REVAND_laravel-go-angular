@@ -35,4 +35,8 @@ export class HeaderComponent implements OnInit {
     this.userService.purgeAuth();
     location.reload();
   }
+  adminpanel(){
+    this.userService.sendloginlaravel(this.currentUser.username);
+    console.log(this.currentUser);
+  }
 }

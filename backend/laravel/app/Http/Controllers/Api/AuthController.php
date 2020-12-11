@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Auth;
 use App\Models\User;
 use App\Http\Requests\Api\LoginUser;
@@ -36,26 +37,50 @@ class AuthController extends ApiController
         $credentials = $request->only('user.email', 'user.password');
         $credentials = $credentials['user'];
 
-        if (! Auth::once($credentials)) {
+        if (!Auth::once($credentials)) {
             return $this->respondFailedLogin();
         }
         error_log(auth()->user());
         return $this->respondWithTransformer(auth()->user());
     }
 
-    public function test(Request $request){
+    public function test(Request $request)
+    {
         error_log("DENTRO DEL TEST");
         error_log($request);
 
+        // Redis::set('user_TEST4','joelesgay');
 
+        $raw_token = Redis::get('user_vicente');
+        $token = explode("Token ", $raw_token)[1];
 
-        $user = Redis::get('user_mango1');
+        // Auth::setToken($token);
 
-        // JWTAuth::setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NTUyOTYyMjQ0NDQsImZpcnN0bmFtZSI6IlRlc3QgVXNlciIsImlkIjoiYWRtaW5AdGVzdC5pbyIsImlkZW50aXR5X2lkIjoiMmRlNjI2NWUtNThkMy00ZWY5LWEzYjYtYTg5YjAwYTJkZmUzIiwibGFzdG5hbWUiOiJBZG1pbmlzdHJhdG9yIiwib3JpZ19pYXQiOjE0NTUyOTI2MjUsInByb2ZpbGVfaWQiOiI4MDY1ZmNiMi1hNTUyLTQyMGMtOGRhMi1jNmJiNGQ5YWNjYjYifQ.RRfE0okr3Wu6yMb-gd4DVhTYaqHw54F-uY1Nn8HOUXc");
+        // $user = auth()->setToken($token)->user();
 
-        // $token = JWTAuth::getToken();
-        // $decode = JWTAuth::decode($token);
-        return response()->json($user);
+        JWTAuth::setToken($token);
+
+        $token2 = JWTAuth::getToken();
+        $apy = JWTAuth::getPayload($token2)->toArray();
+
+        $user = User::where('id', '=', $apy['id'])->first();
+
+        // JWTAuth::fromUser($user);
+        Auth::login($user);
+        JWTAuth::setToken($token2);
+        return $this->respondWithTransformer(auth()->user());
+        // if (!$userToken = JWTAuth::fromUser($user)) {
+        //     return response()->json(['error' => 'invalid_credentials'], 401);
+        // }
+        
+        // JWTAuth::setToken($raw_token);
+        // Redis::set('user_TEST4','joelesgay');
+        // return response()->json(auth()->user());
+        // return $this->respondWithTransformer(auth()->user());
+
+        // $token_jwt = JWTAuth::getToken();
+        // $decode = JWTAuth::decode($token_jwt);
+        // return response()->json($token);
     }
 
     /**
@@ -72,11 +97,11 @@ class AuthController extends ApiController
             'username' => $request->input('user.username'),
             'email' => $request->input('user.email'),
             'password' => $request->input('user.password'),
-            
+
         ]);
         error_log("----------------------------------------------------------------------------------");
         error_log("----------------------------------------------------------------------------------");
-        
+
         error_log($user);
         return $this->respondWithTransformer($user);
     }
