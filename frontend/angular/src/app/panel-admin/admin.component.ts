@@ -18,28 +18,18 @@ export class AdminComponent implements OnInit {
   currentUser: User;
   
   ngOnInit() {
+
+    //esta suscrito al cambio de usuario. comprueba si es admin o cliente, Si no es admin te vuelve al home. (no carga el admin panel.)
     this.userService.currentUser.subscribe(
-      (userData) => {
+      (userData)=> {
         this.currentUser = userData;
-        console.log('============================');
-        console.log(this.currentUser);
-        if(this.currentUser.type != "client"){
-          console.log("Access denied hdp");
+        if(this.currentUser.type != "admin"){
+          console.log("Access denied");
           this.router.navigateByUrl('/');
         }else{
-          this.userService.attemptAuthLaravel(this.currentUser.username).subscribe(
-            data => {
-              console.log(data);
-              // this.router.navigateByUrl('/panel-admin');
-            },
-            err => {
-              console.log("Error register submit");
-              this.isSubmitting = false;
-            }
-          );
+          console.log("OKAYS Eres un mango");
         }
       }
-    );
-    console.log("Admin Component");
+    )
   }
 }

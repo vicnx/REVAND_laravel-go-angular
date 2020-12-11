@@ -18,10 +18,10 @@ export class HeaderComponent implements OnInit {
   ) {}
   currentUser: User;
   ngOnInit() {
+    console.log("load ngoninit header");
     this.userService.currentUser.subscribe(
       (userData) => {
         this.currentUser = userData;
-        console.log(this.currentUser);
       }
     );
   }
@@ -32,17 +32,22 @@ export class HeaderComponent implements OnInit {
     login.className = 'active-modal';
 
   }
-
   logout(){
     this.userService.purgeAuth();
     location.reload();
   }
   adminpanel(){
-    // console.log(this.currentUser);
-    // this.userService.attemptAuthLaravel(this.currentUser.username).subscribe((data) => {
-    //         console.log(data);
-    // })
+    //al presionar el boton admin panel comprueba si el current user es admin o cliente, si es Admin envia el login a laravel y abre el panel admin
+    if(this.currentUser.type != "admin"){
+      console.log("Access denied");
+      this.router.navigateByUrl('/');
+    }else{
+      this.userService.attemptAuthLaravel(this.currentUser.username).subscribe(
+        data => {
+          this.router.navigateByUrl('/admin-panel');
+        }
+      );
+    }
 
-    // console.log(this.currentUser);
   }
 }

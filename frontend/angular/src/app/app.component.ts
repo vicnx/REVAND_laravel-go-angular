@@ -14,7 +14,6 @@ export class AppComponent implements OnInit{
   title = 'angular';
 
   ngOnInit() {
-    console.log("app.component");
     this.userService.populate();
   }
 }

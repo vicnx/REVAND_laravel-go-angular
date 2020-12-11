@@ -10,11 +10,6 @@ export class RedisService {
   ) {}
 
   set(body: Object = {}) {
-      console.log(body);
-      // body["value"] = JSON.stringify(body["value"])
-      // body["key"] = JSON.stringify(body["key"])
-      console.log("ADADASDASDASDDD");
-      console.log(body)
     return this.api.post("/redis/", body).subscribe(
         data => {
           return data

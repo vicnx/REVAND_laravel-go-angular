@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 export class JwtService {
 
   getToken(): String {
-    console.log("RETURN TOKEN");
     return window.localStorage['jwtToken'];
   }
 

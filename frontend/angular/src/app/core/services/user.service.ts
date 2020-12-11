@@ -28,10 +28,12 @@ export class UserService {
   // Verify JWT in localstorage with server & load user's info.
   // This runs once on application startup.
   populate() {
+    console.log("POPULATE");
     // If JWT detected, attempt to get & store user's info
     if (this.jwtService.getToken()) {
       this.apiService.get('/user/').subscribe(
         data => {
+          
           this.setAuth(data.user)
         },
         err => this.purgeAuth()
@@ -104,15 +106,18 @@ export class UserService {
   }
 
 
-  // LARAVEL SERVICES AUTH
+  // LARAVEL SERVICES AUTH (LARAVEL ONLY ADMINS)
 
   attemptAuthLaravel(username): Observable<User> {
     console.log(username);
     console.log("DENTRO DE SEND LOGIN LARAVEL");
-
+    //deslogeamos para poder reemplazar el token (guardar el de laravel)
+    this.purgeAuth();
+    //enviamos a laravel
     return this.apiService.postlaravel('/admin-login/', { username })
       .pipe(map(
         data => {
+          //logeamos con la info de laravel
           this.setAuth(data.user);
           return data
         },

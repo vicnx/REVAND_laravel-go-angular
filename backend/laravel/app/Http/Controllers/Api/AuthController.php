@@ -58,7 +58,20 @@ class AuthController extends ApiController
         $apy = JWTAuth::getPayload($token2)->toArray();
 
         $user = User::where('id', '=', $apy['id'])->first();
+        // if ($user['type'] == 'admin') {
+        //     $user['token'] = $token2;
 
+        //     // JWTAuth::fromUser($user);
+        //     Auth::login($user);
+        //     // JWTAuth::setToken($token2);
+    
+        //     // error_log(auth()->user());
+            
+        //     error_log(auth()->user());
+        //     return $this->respondWithTransformer(auth()->user());
+        // } else {
+        //     return response()->json(false);
+        // }
         $user['token'] = $token2;
 
         // JWTAuth::fromUser($user);
