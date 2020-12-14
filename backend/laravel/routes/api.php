@@ -22,6 +22,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // Route::get('/subscription', 'SubscriptionController@show');
 
+// Route::group(
+//     ['middleware' => ['cors']],
+//     ['namespace' => 'Api'],
+//     function () {
+//     Route::resource('/subscription','SubscriptionController');
+//     Route::post('users/login', 'AuthController@login');
+//     Route::post('users', 'AuthController@register');
+//     Route::get('user', 'UserController@index');
+//     Route::post('admin-login', 'AuthController@login_from_redis');
+// });
+
 
 
 Route::group(['namespace' => 'Api'], function () {

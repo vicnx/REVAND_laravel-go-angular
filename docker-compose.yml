@@ -62,7 +62,7 @@ services:
     - go
     - laravel
     working_dir: /app
-    command: bash -c "npm install && ng serve --host=0.0.0.0 --port=4200"
+    command: bash -c "npm install && npm start"
   mysql:
     container_name: revand_mysql
     image: mysql:5.7

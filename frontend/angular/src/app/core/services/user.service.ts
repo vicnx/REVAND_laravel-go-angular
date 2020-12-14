@@ -113,6 +113,7 @@ export class UserService {
     console.log("DENTRO DE SEND LOGIN LARAVEL");
     //deslogeamos para poder reemplazar el token (guardar el de laravel)
     this.purgeAuth();
+    console.log(this.apiService);
     //enviamos a laravel
     return this.apiService.postlaravel('/admin-login/', { username })
       .pipe(map(
