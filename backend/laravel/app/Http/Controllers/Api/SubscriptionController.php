@@ -18,13 +18,17 @@ class SubscriptionController extends ApiController
     public function __construct(SubscriptionTransformer $transformer)
     {
         $this->transformer = $transformer;
-
-        // $this->middleware('auth.api')->except(['index', 'show']);
-        // $this->middleware('auth.api:optional')->only(['index', 'show']);
+        
+        $this->middleware('auth.api')->except(['index', 'show']);
+        $this->middleware('auth.api:optional')->only(['index', 'show']);
+        
     }
     
     public function store(Request $request)
     {
+        error_log("MAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGN");
+
+        error_log(auth()->user());
         $subscription = new Subscription(); 
         //guarda la sub en subscription 
         $subscription = $subscription->create([
@@ -48,6 +52,9 @@ class SubscriptionController extends ApiController
     //SHOW ALL SUBS
     public function index(): JsonResponse
     {
+        error_log("MAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGN");
+
+        error_log(auth()->user());
         /* get all subscriptions ordered by published date */
         $subscriptions = Subscription::orderBy('id', 'asc')->get();
 

@@ -38,6 +38,7 @@ class AuthController extends ApiController
         $credentials = $credentials['user'];
 
         if (!Auth::once($credentials)) {
+            
             return $this->respondFailedLogin();
         }
         error_log(auth()->user());
@@ -57,43 +58,57 @@ class AuthController extends ApiController
         $token2 = JWTAuth::getToken();
         $apy = JWTAuth::getPayload($token2)->toArray();
 
-        $user = User::where('id', '=', $apy['id'])->first();
-        // if ($user['type'] == 'admin') {
-        //     $user['token'] = $token2;
 
-        //     // JWTAuth::fromUser($user);
-        //     Auth::login($user);
-        //     // JWTAuth::setToken($token2);
+        $token = Auth::login(User::find($apy['id']));
     
-        //     // error_log(auth()->user());
-            
-        //     error_log(auth()->user());
-        //     return $this->respondWithTransformer(auth()->user());
-        // } else {
-        //     return response()->json(false);
+
+        // if (!Auth::once($credentials)) {
+        //     return $this->respondFailedLogin();
         // }
-        $user['token'] = $token2;
-
-        // JWTAuth::fromUser($user);
-        Auth::login($user);
-        // JWTAuth::setToken($token2);
-
-        // error_log(auth()->user());
-        
         error_log(auth()->user());
         return $this->respondWithTransformer(auth()->user());
-        // if (!$userToken = JWTAuth::fromUser($user)) {
-        //     return response()->json(['error' => 'invalid_credentials'], 401);
-        // }
-        
-        // JWTAuth::setToken($raw_token);
-        // Redis::set('user_TEST4','joelesgay');
-        // return response()->json(auth()->user());
-        // return $this->respondWithTransformer(auth()->user());
 
-        // $token_jwt = JWTAuth::getToken();
-        // $decode = JWTAuth::decode($token_jwt);
-        // return response()->json($token);
+
+
+
+
+        // $user = User::where('id', '=', $apy['id'])->first();
+        // // if ($user['type'] == 'admin') {
+        // //     $user['token'] = $token2;
+
+        // //     // JWTAuth::fromUser($user);
+        // //     Auth::login($user);
+        // //     // JWTAuth::setToken($token2);
+    
+        // //     // error_log(auth()->user());
+            
+        // //     error_log(auth()->user());
+        // //     return $this->respondWithTransformer(auth()->user());
+        // // } else {
+        // //     return response()->json(false);
+        // // }
+        // $user['token'] = $token2;
+
+        // // JWTAuth::fromUser($user);
+        // Auth::login($user);
+        // // JWTAuth::setToken($token2);
+
+        // // error_log(auth()->user());
+        
+        // error_log(auth()->user());
+        // return $this->respondWithTransformer(auth()->user());
+        // // if (!$userToken = JWTAuth::fromUser($user)) {
+        // //     return response()->json(['error' => 'invalid_credentials'], 401);
+        // // }
+        
+        // // JWTAuth::setToken($raw_token);
+        // // Redis::set('user_TEST4','joelesgay');
+        // // return response()->json(auth()->user());
+        // // return $this->respondWithTransformer(auth()->user());
+
+        // // $token_jwt = JWTAuth::getToken();
+        // // $decode = JWTAuth::decode($token_jwt);
+        // // return response()->json($token);
     }
 
     /**
