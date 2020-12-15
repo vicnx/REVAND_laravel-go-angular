@@ -10,6 +10,7 @@ use App\Http\Requests\Api\RegisterUser;
 use App\Resolvers\Transformers\UserTransformer;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends ApiController
 {
@@ -57,15 +58,28 @@ class AuthController extends ApiController
 
         $token2 = JWTAuth::getToken();
         $apy = JWTAuth::getPayload($token2)->toArray();
+        $user = User::find($apy['id']);
+        $token3 = JWTAuth::fromUser($user);
 
+        $user = JWTAuth::toUser($token3);
+        $user['token'] = $token3;
 
-        $token = Auth::login(User::find($apy['id']));
+        error_log("USER AUTH WDOSHJINILDJKNIKOLAWDNDAWDJKLAWD");
+        error_log(print_r(auth()->user(),true));
+        // $token = auth()->tokenById(1);
+        // $user = User::where('id', '=', $apy['id'])->first();
+        // $token = JWTAuth::fromUser($user);
+        // error_log($token);
+        
+        // $user1 = JWTAuth::toUser($token);
+        // $token = Auth::loginUsingId($apy['id']);
     
 
         // if (!Auth::once($credentials)) {
         //     return $this->respondFailedLogin();
         // }
-        error_log(auth()->user());
+        // error_log(auth()->user());
+        
         return $this->respondWithTransformer(auth()->user());
 
 

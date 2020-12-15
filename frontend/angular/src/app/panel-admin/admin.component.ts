@@ -23,6 +23,7 @@ export class AdminComponent implements OnInit {
     this.userService.currentUser.subscribe(
       (userData)=> {
         this.currentUser = userData;
+        console.log(this.currentUser);
         if(this.currentUser.type != "admin"){
           console.log("Access denied");
           this.router.navigateByUrl('/');

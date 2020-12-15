@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 // class User extends Authenticatable
 class User extends Authenticatable implements JWTSubject
 {
+    protected $table = 'users';
     // use Notifiable, Followable, HasFavorite;
     use Notifiable;
 
@@ -37,7 +38,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password', 'bio', 'image', 'provider', 'type', 'token', 'go_token'
+        'username', 'email', 'password', 'bio', 'image', 'provider', 'type', 'token',
     ];
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Subscription;
 use App\Http\Resources\Subscription as SubscriptionResource;
 //import controller from ../
+use Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\UpdateSubscription;
 use App\Http\Requests\Api\DeleteSubscription;
@@ -20,13 +21,15 @@ class SubscriptionController extends ApiController
         $this->transformer = $transformer;
         
         $this->middleware('auth.api')->except(['index', 'show']);
-        $this->middleware('auth.api:optional')->only(['index', 'show']);
+        // $this->middleware('auth.api:optional')->only(['index', 'show']);
         
     }
     
     public function store(Request $request)
     {
         error_log("MAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGN");
+
+        Auth::guard('api')->user();
 
         error_log(auth()->user());
         $subscription = new Subscription(); 
@@ -53,8 +56,9 @@ class SubscriptionController extends ApiController
     public function index(): JsonResponse
     {
         error_log("MAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGN");
-
-        error_log(auth()->user());
+        error_log(print_r(auth()->user(),true));
+        
+        // error_log(request()->user());
         /* get all subscriptions ordered by published date */
         $subscriptions = Subscription::orderBy('id', 'asc')->get();
 
