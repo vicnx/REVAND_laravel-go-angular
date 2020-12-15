@@ -46,7 +46,46 @@ class AuthController extends ApiController
         return $this->respondWithTransformer(auth()->user());
     }
 
-    public function login_from_redis(Request $request) {
+
+
+
+
+
+    public function login_from_redis(Request $request){
+        $raw_token = Redis::get('user_'.$request['username']);
+        $token = explode("Bearer ", $raw_token)[1];
+        JWTAuth::setToken($token);
+        $token2 = JWTAuth::getToken();
+        $apy = JWTAuth::getPayload($token2)->toArray();
+        if(Auth::loginUsingId($apy['id'])){ 
+            // error_log(print_r('Estamos dentro'));
+            $user = Auth::user(); 
+
+            
+            error_log($user);
+
+            // $success['token'] =  $token2; 
+            // $success['username'] = $user->name;
+            // $success['email'] = $user->email;
+            return $this->respondWithTransformer(auth()->user()); 
+        } 
+        else{ 
+            return response()->json(['error'=>'Unauthorised'], 401); 
+        } 
+
+        // return $this->respondWithTransformer($user);
+    }
+
+
+
+
+
+
+
+
+
+
+    public function login_from_redis_deprecated(Request $request) {
         $raw_token = Redis::get('user_'.$request['username']);
         $token = explode("Token ", $raw_token)[1];
 

@@ -6,6 +6,8 @@ use App\Models\Subscription;
 use App\Http\Resources\Subscription as SubscriptionResource;
 //import controller from ../
 use Auth;
+
+use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\UpdateSubscription;
 use App\Http\Requests\Api\DeleteSubscription;
@@ -20,25 +22,23 @@ class SubscriptionController extends ApiController
     {
         $this->transformer = $transformer;
         
-        $this->middleware('auth.api')->except(['index', 'show']);
+        
+        $this->middleware('auth.api');
         // $this->middleware('auth.api:optional')->only(['index', 'show']);
         
     }
     
     public function store(Request $request)
     {
-        error_log("MAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGN");
-
-        Auth::guard('api')->user();
-
-        error_log(auth()->user());
+        $user = JWTAuth::parseToken()->authenticate();
+        // error_log($request);
         $subscription = new Subscription(); 
         //guarda la sub en subscription 
         $subscription = $subscription->create([
             'name' => $request->input('subscription.name'),
             'price' => $request->input('subscription.price'),
+            'admin_id'=> $user->id
         ]);
-        error_log("mango ninoiwsda");
         
         // Pasamos la subscription al transformer
         return $this->respondWithTransformer($subscription);
@@ -46,19 +46,18 @@ class SubscriptionController extends ApiController
 
     //SHOW ONE SUB
     public function show(Subscription $subscription)
-    {   
-        error_log("====================================");
-        error_log(auth()->user());
+    {      
         return $this->respondWithTransformer($subscription);
     }
 
     //SHOW ALL SUBS
     public function index(): JsonResponse
-    {
-        error_log("MAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGNMAGN");
-        error_log(print_r(auth()->user(),true));
-        
-        // error_log(request()->user());
+    {        
+        $user = JWTAuth::parseToken()->authenticate();
+        $userId = $user->id;
+        error_log($user->token);
+        // echo response()->json(auth()->user());
+
         /* get all subscriptions ordered by published date */
         $subscriptions = Subscription::orderBy('id', 'asc')->get();
 

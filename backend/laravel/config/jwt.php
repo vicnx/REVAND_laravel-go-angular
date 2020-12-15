@@ -147,6 +147,7 @@ return [
         */
 
         'jwt' => 'Tymon\JWTAuth\Providers\JWT\Namshi',
+        // 'jwt' => 'Tymon\JWTAuth\Providers\JWT\NamshiAdapter',
 
         /*
         |--------------------------------------------------------------------------
@@ -158,7 +159,7 @@ return [
         */
 
         'auth' => 'Tymon\JWTAuth\Providers\Auth\Illuminate',
-
+        // 'auth' => 'Tymon\JWTAuth\Providers\Auth\IlluminateAuthAdapter',
         /*
         |--------------------------------------------------------------------------
         | Storage Provider
@@ -169,6 +170,7 @@ return [
         */
 
         'storage' => 'Tymon\JWTAuth\Providers\Storage\Illuminate',
+        // 'storage' => 'Tymon\JWTAuth\Providers\Storage\IlluminateCacheAdapter',
 
     ],
 

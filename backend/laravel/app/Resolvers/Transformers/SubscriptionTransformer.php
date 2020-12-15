@@ -13,6 +13,7 @@ class SubscriptionTransformer extends Transformer
             'id'                => $data['id'],
             'name'              => $data['name'],
             'price'             => $data['price'],
+            'admin_id'          => $data['admin_id'],
             'created_at'        => $data['created_at'],
         ];
     }

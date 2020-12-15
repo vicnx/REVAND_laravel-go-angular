@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\UpdateUser;
 use App\Resolvers\Transformers\UserTransformer;
+use Tymon\JWTAuth\Facades\JWTAuth;
+
 
 class UserController extends ApiController
 {
@@ -25,8 +27,9 @@ class UserController extends ApiController
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
-    {
-        return $this->respondWithTransformer(auth()->user());
+    {   
+        //return del user auth con JWTAuth
+        return $this->respondWithTransformer(JWTAuth::parseToken()->authenticate());
     }
 
     /**

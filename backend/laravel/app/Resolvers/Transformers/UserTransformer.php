@@ -5,7 +5,7 @@ namespace App\Resolvers\Transformers;
 class UserTransformer extends Transformer
 {
     protected $resourceName = 'user';
-
+    
     public function transform($data)
     {
         return [

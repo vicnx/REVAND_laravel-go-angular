@@ -19,7 +19,7 @@ class Subscription extends Model
      * @var array $fillable
      */
     protected $fillable = [
-        'name', 'price'
+        'name', 'price','admin_id'
     ];
 
     /**

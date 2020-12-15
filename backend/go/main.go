@@ -43,18 +43,6 @@ func main() {
 	v1 := r.Group("/api")
 
 
-
-
-// ======================== redis
-
-
-
-
-
-
-// ============================
-
-
 	// NO TOKEN
 	awards.AwardsAuthed(v1.Group("/awards"))
 	users.UsersRegister(v1.Group("/users"))

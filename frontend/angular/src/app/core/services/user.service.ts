@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Location } from "@angular/common";
 import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 
 import { ApiService } from './api.service';
@@ -22,40 +23,35 @@ export class UserService {
     private apiService: ApiService,
     private redisService: RedisService,
     private http: HttpClient,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private location: Location
   ) { }
 
   // Verify JWT in localstorage with server & load user's info.
   // This runs once on application startup.
   populate() {
     console.log("POPULATE");
+    console.log(location.pathname.split('/',5)[1]);
+    
+    
     // If JWT detected, attempt to get & store user's info
     if (this.jwtService.getToken()) {
-      this.apiService.get('/user/').subscribe(
-        data => {
-          
-          this.setAuth(data.user)
-        },
-        err => this.purgeAuth()
-      );
+      if (location.pathname.split('/',5)[1] == 'admin-panel'){
+        this.apiService.getlaravel('/user/').subscribe(
+          data => { this.setAuth(data.user) },
+          err => this.purgeAuth()
+        );
+      }else{
+        this.apiService.get('/user/').subscribe(
+          data => { this.setAuth(data.user) },
+          err => this.purgeAuth()
+        );
+      }
     } else {
       console.log("purge auth");
       // Remove any potential remnants of previous auth states
       this.purgeAuth();
     }
-
-    // if (this.jwtService.getTokenLaravel()) {
-    //   this.apiService.getlaravel('/user/').subscribe(
-    //     data => {
-    //       this.setAuth(data.user)
-    //     },
-    //     err => this.purgeAuth()
-    //   );
-    // } else {
-    //   console.log("purge auth");
-    //   // Remove any potential remnants of previous auth states
-    //   this.purgeAuth();
-    // }
   }
 
   setAuth(user: User) {
@@ -65,7 +61,8 @@ export class UserService {
     this.currentUserSubject.next(user);
     // Set isAuthenticated to true
     this.isAuthenticatedSubject.next(true);
-    this.redisService.set({ key: "user_" + user.username, value: "Token " + user.token });
+    console.log("SEND REDIS");
+    this.redisService.set({ key: "user_" + user.username, value: "Bearer " + user.token });
   }
 
   purgeAuth() {
@@ -109,8 +106,6 @@ export class UserService {
   // LARAVEL SERVICES AUTH (LARAVEL ONLY ADMINS)
 
   attemptAuthLaravel(username): Observable<User> {
-    console.log(username);
-    console.log("DENTRO DE SEND LOGIN LARAVEL");
     //deslogeamos para poder reemplazar el token (guardar el de laravel)
     this.purgeAuth();
     console.log(this.apiService);
@@ -118,8 +113,10 @@ export class UserService {
     return this.apiService.postlaravel('/admin-login/', { username })
       .pipe(map(
         data => {
+          console.log(data);
           //logeamos con la info de laravel
           this.setAuth(data.user);
+          // this.setAuth(data);
           return data
         },
         err => console.log(err)
