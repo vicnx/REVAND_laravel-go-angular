@@ -10,7 +10,8 @@ import { UserService } from '../core';
   styleUrls: ['register-modal.component.css'],
 })
 export class RegisterModalComponent implements OnInit {
-
+  @Output()
+  modal_auth_type: EventEmitter<any> = new EventEmitter<any>();
   isSubmitting = false;
   registerForm: FormGroup;
   
@@ -30,6 +31,16 @@ export class RegisterModalComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+
+  go_back() {
+    console.log("GOBACK");
+    this.modal_auth_type.emit('auth');
+  }
+  close() {
+    let auth = document.getElementById('modal-auth-canvas');
+    auth.className = 'hide-modal';
   }
 
   registerSubmit() {

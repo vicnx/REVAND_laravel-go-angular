@@ -28,6 +28,11 @@ export class AuthModalComponent implements OnInit {
     this.isSubmitting = true;
   }
 
+  close() {
+    let auth = document.getElementById('modal-auth-canvas');
+    auth.className = 'hide-modal';
+  }
+
 
 
   

@@ -9,7 +9,8 @@
 <div id="modal-auth" class="modal active-modal"> <!--class = modal-auth-->
     <h1>Register!</h1>
     <h5>Write your info</h5>
-
+    <a class="btn--back" (click)="go_back()"><i class="fas fa-angle-double-left"></i></a>
+    <a class="btn--close" (click)="close()"><i class="fas fa-times"></i></a>
     <form [formGroup]="registerForm" (ngSubmit)="registerSubmit()">
         <input type="text"      formControlName="username"    id="register_username"  class="input_form_register" placeholder="Username..">
         <input type="email"     formControlName="email"       id="register_email"     class="input_form_register" placeholder="Email..">

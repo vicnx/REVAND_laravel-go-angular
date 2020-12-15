@@ -33,6 +33,8 @@ export class MainAuthModalComponent implements OnInit {
   }
 
   set_auth_type(event){
+    console.log("event set auth type");
+    console.log(event);
     // ponemos la variable modal_auth_type con el nombre del evento recogido de auth-modal
     this.modal_auth_type = event;
   }

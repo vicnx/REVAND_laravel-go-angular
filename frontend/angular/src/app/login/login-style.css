@@ -61,3 +61,30 @@
     background: #fff;
     border-radius: 10px;
 }
+.btn--back{
+    margin: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 30px;
+    cursor: pointer;
+    transition: 0.2s;
+    color: rgb(94, 94, 94);
+}
+.btn--back:hover{
+    color: black;
+}
+
+.btn--close{
+    margin: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 30px;
+    cursor: pointer;
+    transition: 0.2s;
+    color: rgb(94, 94, 94);
+}
+.btn--close:hover{
+    color: black;
+}

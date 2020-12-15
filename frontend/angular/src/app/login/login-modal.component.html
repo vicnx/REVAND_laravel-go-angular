@@ -2,6 +2,8 @@
     <h1>LOGIN!</h1>
     <h5>Write your info</h5>
 
+    <a class="btn--back" (click)="go_back()"><i class="fas fa-angle-double-left"></i></a>
+    <a class="btn--close" (click)="close()"><i class="fas fa-times"></i></a>
     <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
         <input type="email"     formControlName="email"       id="login_email"     class="input_form_login" placeholder="Email..">
         <input type="password"  formControlName="password"    id="login_password"  class="input_form_login" placeholder="Password..">

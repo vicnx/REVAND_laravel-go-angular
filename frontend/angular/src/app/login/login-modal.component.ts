@@ -9,7 +9,8 @@ import { UserService } from '../core';
   styleUrls: ['login-modal.component.css']
 })
 export class LoginModalComponent implements OnInit {
-
+  @Output()
+  modal_auth_type: EventEmitter<any> = new EventEmitter<any>();
   isSubmitting = false;
   loginForm: FormGroup;
   
@@ -28,6 +29,17 @@ export class LoginModalComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+
+  go_back() {
+    console.log("GOBACK");
+    this.modal_auth_type.emit('auth');
+  }
+
+  close() {
+    let auth = document.getElementById('modal-auth-canvas');
+    auth.className = 'hide-modal';
   }
 
   loginSubmit() {
