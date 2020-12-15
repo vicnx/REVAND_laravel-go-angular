@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'Api'], function () {
 
     Route::resource('/subscription','SubscriptionController');
+    Route::resource('/award','AwardController');
     Route::post('users/login', 'AuthController@login');
     Route::post('users', 'AuthController@register');
     Route::get('user', 'UserController@index');
