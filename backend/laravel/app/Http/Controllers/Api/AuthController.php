@@ -57,17 +57,20 @@ class AuthController extends ApiController
         JWTAuth::setToken($token);
         $token2 = JWTAuth::getToken();
         $apy = JWTAuth::getPayload($token2)->toArray();
+
         if(Auth::loginUsingId($apy['id'])){ 
             // error_log(print_r('Estamos dentro'));
+            
             $user = Auth::user(); 
 
             
             error_log($user);
+            error_log($user->token);
 
             // $success['token'] =  $token2; 
             // $success['username'] = $user->name;
             // $success['email'] = $user->email;
-            return $this->respondWithTransformer(auth()->user()); 
+            return $this->respondWithTransformer($user); 
         } 
         else{ 
             return response()->json(['error'=>'Unauthorised'], 401); 

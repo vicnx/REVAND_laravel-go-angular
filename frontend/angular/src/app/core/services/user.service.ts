@@ -122,26 +122,4 @@ export class UserService {
         err => console.log(err)
       ));
   }
-
-  // setAuthLaravel(user: User) {
-  //   // Save JWT sent from server in localstorage
-  //   this.jwtService.saveTokenLaravel(user.token);
-  //   // Set current user data into observable
-  //   // this.currentUserSubject.next(user);
-  //   console.log(user);
-  //   // user['laravelToken'] =
-  //   // this.currentUserSubject.next(user);
-  //   // this.currentUser.laravelToken = user.token;
-  //   // Set isAuthenticated to true
-  //   this.isAuthenticatedSubject.next(true);
-  // }
-
-  // purgeAuthLaravel() {
-  //   // Remove JWT from localstorage
-  //   this.jwtService.destroyTokenLaravel();
-  //   // Set current user to an empty object
-  //   this.currentUserSubject.next({} as User);
-  //   // Set auth status to false
-  //   this.isAuthenticatedSubject.next(false);
-  // }
 }
