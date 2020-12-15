@@ -29,7 +29,7 @@ export class AwardListComponent{
         this.awardsService.query().subscribe((awards) => {
             // console.log("object");
             // console.log(awards);
-            this.allAwards = awards;
+            this.allAwards = awards['data'];
         });
     }
     refresh(){

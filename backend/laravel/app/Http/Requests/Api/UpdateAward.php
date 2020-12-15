@@ -35,9 +35,9 @@ class UpdateAward extends ApiRequest
     public function rules()
     {
         return [
-            'name' => 'sometimes|string|max:255',
-            'description' => 'sometimes|string|max:255',
-            'image' => 'optional|string|max:255',
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'image' => 'required|string|max:255',
         ];
     }
 }

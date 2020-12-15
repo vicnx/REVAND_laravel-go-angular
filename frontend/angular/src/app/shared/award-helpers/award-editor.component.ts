@@ -63,6 +63,8 @@ export class AwardEditorComponent implements OnInit {
     console.log(this.award);
     console.log(event);
 
+    if (!this.award.image) this.award.image = 'null';
+
     if (this.update){
       //esto oculta el editor cuando finalizas la edicion
       let node = event.target;

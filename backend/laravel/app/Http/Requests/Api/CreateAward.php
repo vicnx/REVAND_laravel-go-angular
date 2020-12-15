@@ -36,7 +36,7 @@ class CreateAward extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-            'image' => 'optional|string|max:255',
+            'image' => 'required|string|max:255',
         ];
     }
 }

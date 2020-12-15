@@ -74,6 +74,7 @@ class AwardController extends ApiController
 
     // public function update(Subscription $subscription, Request $request)
     {   
+        error_log($request);
         if ($request->has('award')) {
             $award->update($request->get('award'));
         }

@@ -16,8 +16,8 @@ export class AwardsService {
     ) { }
 
     query(): Observable<Award[]> {
-        console.log(this.apiService.get('/awards/'));
-        return this.apiService.get('/awards/');
+        console.log(this.apiService.getlaravel('/award/'));
+        return this.apiService.getlaravel('/award/');
     }
 
     // getAwards(): Observable<Award[]> {
@@ -25,23 +25,24 @@ export class AwardsService {
     // }
 
     get(id): Observable<Award> {
-        return this.apiService.get('/awards/' + id).pipe(map(data => data.award));
+        return this.apiService.getlaravel('/award/' + id).pipe(map(data => data.award));
     }
 
     destroy(slug) {
-        return this.apiService.delete('/awards/' + slug);
+        return this.apiService.deletelaravel('/award/' + slug);
     }
 
     save(award): Observable<Award> {
         console.log("DENTRO DE SAVE SERVICE");
+        award= {award}
         // console.log(award);
-        if (award.id) {
-            // console.log(award.name);
-            return this.apiService.put('/awards/' + award.id, award )
+        if (award.award.id) {
+            // console.log(award.award.id);
+            return this.apiService.putlaravel('/award/' + award.award.id, award )
                 .pipe(map(data => data.award));
 
         } else {
-            return this.apiService.post('/awards/', award )
+            return this.apiService.postlaravel('/award/', award )
                 .pipe(map(data => data.award));
         }
     }
