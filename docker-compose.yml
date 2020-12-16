@@ -15,6 +15,7 @@ services:
     - mysql
     - redis
     - go
+    - mongo
     working_dir: /app
     command: >
       bash -c " composer install &&
@@ -44,6 +45,7 @@ services:
     depends_on:
       - mysql
       - redis
+      - mongo
     networks:
       - revand_network
 
@@ -99,6 +101,25 @@ services:
       MYSQL_DATABASE: revand
       MYSQL_USER: vicnx
       MYSQL_PASSWORD: 12345678
+  mongo:
+    container_name: revand_mongo
+    image: mongo:3.5
+    ports:
+      - "27017:27017"
+    volumes:
+      - "mongodata:/data/db"
+    restart: on-failure
+    # environment:
+      # MONGODB_USER: jowi
+      # MONGODB_PASS: 12345678
+      # MONGODB_DATABASE: revand
+
+      # MONGO_INITDB_ROOT_USERNAME: jowi
+      # MONGO_INITDB_ROOT_PASSWORD: 12345678
+      # MONGO_INITDB_DATABASE: revand
+    networks:
+      - revand_network
+    # command: mongod
   redis:
     image: redis:alpine
     container_name: revand_redis
@@ -144,3 +165,5 @@ volumes:
     db_data:
     myGrafanaVol:
     redis:
+    mongodata:
+    # mongodb:
