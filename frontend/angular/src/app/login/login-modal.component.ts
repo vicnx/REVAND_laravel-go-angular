@@ -28,7 +28,7 @@ export class LoginModalComponent implements OnInit {
 
   }
 
-  get form() { return this.loginForm.controls; }
+  get form_login() { return this.loginForm.controls; }
 
 
   ngOnInit() {
@@ -55,6 +55,7 @@ export class LoginModalComponent implements OnInit {
         location.reload();
       },
       err => {
+        console.log(this.loginForm.controls.email.errors);
         console.log("Usuario o contraseña incorrectos");
         this.error = "Usuario o contraseña incorrectos";
         this.loginForm = this.fb.group({
