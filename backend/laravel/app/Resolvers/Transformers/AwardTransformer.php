@@ -12,8 +12,8 @@ class AwardTransformer extends Transformer
         return [
             'id'                => $data['id'],
             'name'              => $data['name'],
-            'description'       => $data['price'],
-            'image'             => $data['admin_id'],
+            'description'       => $data['description'],
+            'image'             => $data['image'],
             'created_at'        => $data['created_at'],
         ];
     }

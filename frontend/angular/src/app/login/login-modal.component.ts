@@ -59,6 +59,7 @@ export class LoginModalComponent implements OnInit {
         console.log("Usuario o contraseña incorrectos");
         this.error = "Usuario o contraseña incorrectos";
         this.loginForm = this.fb.group({
+          'email': ['', Validators.required],
           'password': ['', Validators.required]
         });
         this.isSubmitting = false;

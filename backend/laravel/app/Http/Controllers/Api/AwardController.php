@@ -47,6 +47,8 @@ class AwardController extends ApiController
     //SHOW ONE SUB
     public function show(Award $award)
     {      
+        error_log("ETAMOS DETRO XAVALES!");
+        error_log($award);
         return $this->respondWithTransformer($award);
     }
 

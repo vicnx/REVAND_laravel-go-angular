@@ -5,12 +5,12 @@
     <a class="btn--close" (click)="close()"><i class="fas fa-times"></i></a>
     <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
         <input type="email"     formControlName="email"       id="login_email"     class="input_form_login" placeholder="Email..">
-        <div *ngIf="form_login.email.errors && (form_login.email.dirty || form_login.email.touched)" class="text--error">
-            <div *ngIf="form_login.email.errors.required">Email is required</div>
+        <div *ngIf="loginForm.controls.email?.errors && (loginForm.controls.email.dirty || loginForm.controls.email.touched)" class="text--error">
+            <div *ngIf="loginForm.controls.email.errors.required">Email is required</div>
         </div>
         <input type="password"  formControlName="password"    id="login_password"  class="input_form_login" placeholder="Password..">
-        <div *ngIf="form_login.password.errors && (form_login.password.dirty || form_login.password.touched)" class="text--error">
-            <div *ngIf="form_login.password.errors.required">Password is required</div>
+        <div *ngIf="loginForm.controls.password?.errors && (loginForm.controls.password.dirty || loginForm.controls.password.touched)" class="text--error">
+            <div *ngIf="loginForm.controls.password?.errors.required">Password is required</div>
         </div>
         <span class="text--error">{{error}}</span>
         <button type="submit"   [disabled]="!loginForm.valid"  id="btn_login_account" class="btn_login_account">Log In</button>
