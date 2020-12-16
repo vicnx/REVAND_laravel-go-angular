@@ -1,12 +1,18 @@
 <div id="modal-auth" class="modal active-modal"> <!--class = modal-auth-->
     <h1>LOGIN!</h1>
     <h5>Write your info</h5>
-
     <a class="btn--back" (click)="go_back()"><i class="fas fa-angle-double-left"></i></a>
     <a class="btn--close" (click)="close()"><i class="fas fa-times"></i></a>
     <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
         <input type="email"     formControlName="email"       id="login_email"     class="input_form_login" placeholder="Email..">
+        <div *ngIf="form.email.errors && (form.email.dirty || form.email.touched)" class="text--error">
+            <div *ngIf="form.email.errors.required">Email is required</div>
+        </div>
         <input type="password"  formControlName="password"    id="login_password"  class="input_form_login" placeholder="Password..">
+        <div *ngIf="form.password.errors && (form.password.dirty || form.password.touched)" class="text--error">
+            <div *ngIf="form.password.errors.required">Password is required</div>
+        </div>
+        <span class="text--error">{{error}}</span>
         <button type="submit"   [disabled]="!loginForm.valid"  id="btn_login_account" class="btn_login_account">Log In</button>
     </form>
 </div>

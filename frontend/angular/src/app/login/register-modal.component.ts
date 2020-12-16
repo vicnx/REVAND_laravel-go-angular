@@ -21,17 +21,21 @@ export class RegisterModalComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.registerForm = this.fb.group({
-      'username': ['', Validators.required],
-      'email': ['', Validators.required],
-      'password': ['', Validators.required]
+      'username': ['', [Validators.required, Validators.minLength(6)]],
+      'email': ['', [Validators.required, Validators.email]],
+      'password': ['', [Validators.required, Validators.minLength(8)]]
     });
        
 
   }
 
+  //un getter para que el html quede mas limpio
+  get form() { return this.registerForm.controls; }
+
   ngOnInit() {
 
   }
+
 
 
   go_back() {

@@ -11,10 +11,22 @@
     <h5>Write your info</h5>
     <a class="btn--back" (click)="go_back()"><i class="fas fa-angle-double-left"></i></a>
     <a class="btn--close" (click)="close()"><i class="fas fa-times"></i></a>
-    <form [formGroup]="registerForm" (ngSubmit)="registerSubmit()">
+    <form [formGroup]="registerForm" (ngSubmit)="registerSubmit()" autocomplete="off">
         <input type="text"      formControlName="username"    id="register_username"  class="input_form_register" placeholder="Username..">
+        <div *ngIf="form.username.errors && (form.username.dirty || form.username.touched)" class="text--error">
+            <div *ngIf="form.username.errors.required">Username is required</div>
+            <div *ngIf="form.username.errors.minlength">Username be at least 6 characters long</div>
+        </div>
         <input type="email"     formControlName="email"       id="register_email"     class="input_form_register" placeholder="Email..">
+        <div *ngIf="form.email.errors && (form.email.dirty || form.email.touched)" class="text--error">
+            <div *ngIf="form.email.errors.required">Email is required</div>
+            <div *ngIf="form.email.errors.email">Email must be a valid email address</div>
+        </div>
         <input type="password"  formControlName="password"    id="register_password"  class="input_form_register" placeholder="Password..">
-        <button type="submit"   [disabled]="!registerForm.valid"  id="btn_create_account" class="btn_create_account"     >Create account</button>
+        <div *ngIf="form.password.errors && (form.password.dirty || form.password.touched)" class="text--error">
+            <div *ngIf="form.password.errors.required">Password is required</div>
+            <div *ngIf="form.password.errors.minlength">Password be at least 8 characters long</div>
+        </div>
+        <button type="submit"   [disabled]="!registerForm.valid"  id="btn_create_account" class="btn_create_account">Create account</button>
     </form>
 </div>

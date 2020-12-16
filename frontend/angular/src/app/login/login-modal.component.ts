@@ -13,6 +13,7 @@ export class LoginModalComponent implements OnInit {
   modal_auth_type: EventEmitter<any> = new EventEmitter<any>();
   isSubmitting = false;
   loginForm: FormGroup;
+  error='';
   
   constructor(
     private router: Router,
@@ -26,6 +27,9 @@ export class LoginModalComponent implements OnInit {
        
 
   }
+
+  get form() { return this.loginForm.controls; }
+
 
   ngOnInit() {
 
@@ -51,8 +55,11 @@ export class LoginModalComponent implements OnInit {
         location.reload();
       },
       err => {
-        console.log("error");
-        // this.errors = err;
+        console.log("Usuario o contraseña incorrectos");
+        this.error = "Usuario o contraseña incorrectos";
+        this.loginForm = this.fb.group({
+          'password': ['', Validators.required]
+        });
         this.isSubmitting = false;
       }
     );

@@ -88,3 +88,12 @@
 .btn--close:hover{
     color: black;
 }
+
+.text--error{
+    color: #cc0033;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: bold;
+    margin-top: 5px;
+}
