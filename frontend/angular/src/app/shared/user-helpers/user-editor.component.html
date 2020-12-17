@@ -1,0 +1,23 @@
+<form [formGroup]="userForm">
+    <div class="user user--edit">
+        <div class="user__left">
+            <div class="user__editor__field">
+                <label for="username_user">Username:</label>
+                <input type="text" name="name" formControlName="name">
+            </div>
+            <div class="user__editor__field">
+                <label for="description_user">Description:</label>
+                <input type="text" name="description" formControlName="description">
+            </div>
+            <div class="user__editor__field">
+                <label for="image_user">Image:</label>
+                <input type="text" name="image" formControlName="image">
+            </div>
+        </div>
+        <div class="user__right">
+            <button class="user-option--{{type}}" (click)="submitForm($event)">
+                <i class="ion-trash-a"></i> {{type}} user
+            </button>
+        </div>
+    </div>
+</form>

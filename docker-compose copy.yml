@@ -1,0 +1,169 @@
+version: '3'
+services:
+  laravel:
+    container_name: revand_laravel
+    build: ./backend/laravel
+    working_dir: /app
+    volumes:
+    - ./backend/laravel:/app
+    ports:
+    - "8000:8000"
+    networks:
+    - revand_network
+    restart: on-failure
+    depends_on:
+    - mysql
+    - redis
+    - go
+    - mongo
+    working_dir: /app
+    command: >
+      bash -c " composer install &&
+      composer update laravel/framework &&
+      cp .env.example .env &&
+      php artisan key:generate &&
+      php artisan route:list &&
+      php artisan migrate &&
+      php artisan migrate:refresh &&
+      php artisan serve --host=0.0.0.0 --port=8000"
+  go:
+    container_name: revand_go
+    image: golang:1.15
+    working_dir: /go/src/goApp
+    volumes:
+      - ./backend/go2:/go/src/goApp
+    restart: on-failure
+    command: >
+      bash -c "rm -f go.mod || true
+      && rm -f go.sum || true
+      && go mod init goApp
+      && go mod tidy
+      && go get github.com/pilu/fresh
+      && fresh "
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+      - redis
+      - mongo
+    networks:
+      - revand_network
+
+  # go:
+  #   container_name: revand_go
+  #   build: ./backend/go
+  #   working_dir: /home/xente/Servidor20_21/go_projects/src/github.com/revand/App_Go_Larave_Angular_TEST/backend/go/
+  #   volumes:
+  #   - ./backend/go:/home/xente/Servidor20_21/go_projects/src/github.com/revand/App_Go_Larave_Angular_TEST/backend/go/
+  #   ports:
+  #   - "3000:3000"
+  #   networks:
+  #   - revand_network
+  #   restart: on-failure
+  #   depends_on:
+  #   - mysql
+  #   - redis
+  #   environment:
+  #   - GOROOT=/usr/local/go
+  #   - GOPATH=/home/xente/Servidor20_21/go_projects/
+  #   command: bash -c "go mod vendor && go get -u github.com/go-redis/redis/v8 && go mod vendor && govendor sync && fresh"
+  angular:
+    container_name: revand_angular
+    build: ./frontend/angular
+    working_dir: /app
+    volumes:
+    - ./frontend/angular:/app
+    ports:
+    - "4200:4200"
+    networks:
+    - revand_network
+    restart: on-failure
+    links:
+    - go
+    - laravel
+    depends_on:
+    - go
+    - laravel
+    working_dir: /app
+    command: bash -c "npm install && npm start"
+  mysql:
+    container_name: revand_mysql
+    image: mysql:5.7
+    ports:
+    - "3306:3306"
+    networks:
+    - revand_network
+    restart: on-failure
+    volumes:
+    - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: revand
+      MYSQL_USER: vicnx
+      MYSQL_PASSWORD: 12345678
+  mongo:
+    container_name: revand_mongo
+    image: mongo:3.5
+    ports:
+      - "27017:27017"
+    volumes:
+      - "mongodata:/data/db"
+    restart: on-failure
+    # environment:
+      # MONGODB_USER: jowi
+      # MONGODB_PASS: 12345678
+      # MONGODB_DATABASE: revand
+
+      # MONGO_INITDB_ROOT_USERNAME: jowi
+      # MONGO_INITDB_ROOT_PASSWORD: 12345678
+      # MONGO_INITDB_DATABASE: revand
+    networks:
+      - revand_network
+    # command: mongod
+  redis:
+    image: redis:alpine
+    container_name: revand_redis
+    restart: on-failure
+    ports: 
+      - "6379:6379"
+    volumes:
+      - "redis:/redis_data"
+    networks: 
+      - revand_network
+  traefik:
+    image: traefik:v2.0
+    container_name: revand_traefik
+    restart: on-failure
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
+      - ./common/traefik:/etc/traefik
+  grafana:
+    image: grafana/grafana:7.1.5
+    container_name: revand_grafana
+    ports:
+    - "3500:3000"
+    restart: on-failure
+    volumes:
+    - './common/grafana:/etc/grafana/provisioning/datasources/'
+    - 'myGrafanaVol:/var/lib/grafana'
+    networks:
+    - revand_network
+    depends_on: 
+    - go
+    - laravel
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
+      GF_INSTALL_PLUGINS: "grafana-clock-panel 1.0.1"
+networks:
+    revand_network:
+volumes:
+    db_data:
+    myGrafanaVol:
+    redis:
+    mongodata:
+    # mongodb:
