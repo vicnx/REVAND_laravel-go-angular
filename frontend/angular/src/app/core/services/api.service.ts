@@ -19,29 +19,48 @@ export class ApiService {
 
 
   // ---------------------------- GO --------------------------------------
-  get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
-    return this.http.get(`${environment.api_url}${path}`, { params })
+
+  /*-----------------------example USE (POST)-----------------------------
+  this.api.post("/user/",'users',body)
+  "/redis/" -> path
+  'redis' -> api_url to use (ALWAYS AFTER THE PATH)
+  body -> for example a user to insert
+  -------------------------------------------------------------------------*/
+  
+  get(path: string, api: string, params: HttpParams = new HttpParams()): Observable<any> {
+    //para recoger la API enviada.
+    let x = "api_go_"+api;
+    environment[x]; //environment.api_go_users (example)
+    
+    return this.http.get(`${environment[x]}${path}`, { params })
       .pipe(catchError(this.formatErrors));
   }
 
 
-  put(path: string, body: Object = {}): Observable<any> {
+  put(path: string,api: string, body: Object = {}): Observable<any> {
+    //para recoger la API enviada.
+    let x = "api_go_"+api;
+    environment[x]; //environment.api_go_users (example)
     return this.http.put(
-      `${environment.api_url}${path}`,
+      `${environment[x]}${path}`,
       JSON.stringify(body)
     ).pipe(catchError(this.formatErrors));
   }
 
-  post(path: string, body: Object = {}): Observable<any> {
+  post(path: string,api: string, body: Object = {}): Observable<any> {
+    let x = "api_go_"+api;
+    environment[x]; //environment.api_go_users (example)
     return this.http.post(
-      `${environment.api_url}${path}`,
+      `${environment[x]}${path}`,
       JSON.stringify(body)
     ).pipe(catchError(this.formatErrors));
   }
 
-  delete(path): Observable<any> {
+  delete(path:string,api:string): Observable<any> {
+    let x = "api_go_"+api;
+    environment[x]; //environment.api_go_users (example)
     return this.http.delete(
-      `${environment.api_url}${path}`
+      `${environment[x]}${path}`
     ).pipe(catchError(this.formatErrors));
   }
 

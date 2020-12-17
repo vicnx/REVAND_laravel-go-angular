@@ -10,7 +10,7 @@ export class RedisService {
   ) {}
 
   set(body: Object = {}) {
-    return this.api.post("/redis/", body).subscribe(
+    return this.api.post("/redis/",'redis', body).subscribe(
         data => {
           return data
         },
@@ -19,7 +19,7 @@ export class RedisService {
   }
 
   get(key: string) {
-    return this.api.get("/redis/"+key).subscribe(
+    return this.api.get("/redis/"+key,'redis').subscribe(
         data => {
           return data
         },
@@ -28,7 +28,7 @@ export class RedisService {
   }
 
   getAll() {
-    return this.api.get("/redis/").subscribe(
+    return this.api.get("/redis/",'redis').subscribe(
         data => {
           console.log(data)
           return data

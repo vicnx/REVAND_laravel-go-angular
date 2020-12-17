@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"goApp/common"
-	"goApp/users"
+	"goApp/src"
 
 	// "goApp/controllers"
 	// "goApp/models"
@@ -35,8 +35,8 @@ func main() {
 	v1.Use(users.AuthMiddleware(true))
 	users.UserRegister(v1.Group("/user"))
 
-	fmt.Printf("0.0.0.0:3000")
-	r.Run(":3000")
+	fmt.Printf("0.0.0.0:8080")
+	r.Run(":8080")
 }
 
 func MakeRoutes(r *gin.Engine) {

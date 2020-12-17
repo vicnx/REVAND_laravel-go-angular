@@ -42,7 +42,7 @@ export class UserService {
           err => this.purgeAuth()
         );
       }else{
-        this.apiService.get('/user/').subscribe(
+        this.apiService.get('/user/','users').subscribe(
           data => { this.setAuth(data.user) },
           err => this.purgeAuth()
         );
@@ -76,12 +76,10 @@ export class UserService {
 
   attemptAuth(type, credentials): Observable<User> {
     const route = (type === 'login') ? 'login' : '';
-    return this.apiService.post('/users/' + route, { user: credentials })
+    return this.apiService.post('/users/' + route,'users', { user: credentials })
       .pipe(map(
         data => {
-          // console.log('attemptAuth')
           this.setAuth(data.user);
-          // this.sendloginlaravel(data.user.username);
           return data;
         }
       ));
@@ -94,7 +92,7 @@ export class UserService {
   // Update the user on the server (email, pass, etc)
   update(user): Observable<User> {
     return this.apiService
-      .put('/user/', { user })
+      .put('/user/','users', { user })
       .pipe(map(data => {
         // Update the currentUser observable
         this.currentUserSubject.next(data.user);

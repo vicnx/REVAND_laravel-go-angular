@@ -14,7 +14,7 @@ services:
     depends_on:
     - mysql
     - redis
-    - users
+    - go_users
     - mongo
     working_dir: /app
     command: >
@@ -27,40 +27,41 @@ services:
       php artisan migrate:refresh &&
       php artisan serve --host=0.0.0.0 --port=8000"
       
-  users:
+  go_users:
     container_name: revand_go_users
     image: golang:1.15
     working_dir: /go/src/goApp
     volumes:
       - ./backend/go3/users:/go/src/goApp
     restart: on-failure
+    expose:
+    - 8080
     labels:
-      # - "traefik.enable=true"
-      - "traefik.http.routers.users.rule=Host(`users.docker.localhost`)"
-      # - "traefik.http.routers.users.rule=Host(`users.local`) && PathPrefix(`/`)"
-      # - traefik.frontend.rule=Host:localhost;PathPrefix:/api
-
-
-      # - "traefik.backend=users"
-      # - "traefik.frontend.rule=Path: /users"
-      # - "traefik.port=3000"
-      # - "traefik.docker.network=revand_network"
-
-
-      # - traefik.frontend.rule=Host:users.docker.localhost
-      # - traefik.docker.network=revand_network
-      # - traefik.site.port=6969
+      - "traefik.enable=true"
+      - "traefik.http.routers.go_users.rule=Host(`go_users.docker.localhost`)"
+      - "traefik.port=8080"
+      - "traefik.docker.network=revand_network"
     networks:
     - revand_network
-    # CGO_ENABLED=0 go build -installsuffix 'static' -o /users . 
-    command: >
-      bash -c "
-      && rm -f go.mod || true
-      && rm -f go.sum || true
-      && go mod init goApp
-      && go mod tidy
-      && go get github.com/pilu/fresh
-      && fresh "
+    command: bash go_script.sh
+
+  go_redis:
+    container_name: revand_go_redis
+    image: golang:1.15
+    working_dir: /go/src/goApp
+    volumes:
+      - ./backend/go3/redis:/go/src/goApp
+    restart: on-failure
+    expose:
+    - 8080
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.go_redis.rule=Host(`go_redis.docker.localhost`)"
+      - "traefik.port=8080"
+      - "traefik.docker.network=revand_network"
+    networks:
+    - revand_network
+    command: bash go_script.sh
 
   angular:
     container_name: revand_angular
@@ -74,7 +75,7 @@ services:
     - revand_network
     restart: on-failure
     depends_on:
-    - users
+    - go_users
     - laravel
     working_dir: /app
     command: bash -c "npm install && npm start"
@@ -136,7 +137,9 @@ services:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
-      - users
+      - go_users
+    networks:
+     - revand_network
   whoami:
     # A container that exposes an API to show its IP address
     image: traefik/whoami
@@ -154,7 +157,7 @@ services:
     networks:
     - revand_network
     depends_on: 
-    - users
+    - go_users
     - laravel
     environment:
       GF_AUTH_ANONYMOUS_ENABLED: "true"
