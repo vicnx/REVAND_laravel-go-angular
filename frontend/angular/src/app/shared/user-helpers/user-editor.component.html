@@ -15,7 +15,10 @@
             </div>
             <div class="user__editor__field">
                 <label for="type_user">Type:</label>
-                <input type="text" name="Type" formControlName="Type">
+                <select name="Type" formControlName="Type">
+                    <option value="admin">Admin</option>
+                    <option value="client">Client</option>
+                  </select>
             </div>
         </div>
         <div class="user__right">

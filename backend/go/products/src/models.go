@@ -1,12 +1,27 @@
 package products
 
 import (
-	"github.com/jinzhu/gorm"
+	// "github.com/jinzhu/gorm"
 	"goApp/common"
+	// "go.mongodb.org/mongo-driver/bson"
+	// "go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type Product struct {
-	ID     primitive.ObjectID 	`bson:"_id,omitempty"`
+/*
+POST http://go_products.docker.localhost/api/products
+
+{
+    "name":"test",
+    "description": "test_desc",
+    "images": null,
+    "price": "55555",
+    "authorID": 1
+}
+
+*/
+
+type Products struct {
+	// ID       primitive.ObjectID `bson:"_id"`
 	Name    	string 			`bson:"name, omitempty"`
 	Description	string 			`bson:"description, omitempty"`
 	Images		[]string 		`bson:"images, omitempty"`
@@ -16,5 +31,5 @@ type Product struct {
 
 func AutoMigrate() {
 	db := common.GetDB()
-	db.AutoMigrate(&Product{})
+	db.AutoMigrate(&Products{})
 }

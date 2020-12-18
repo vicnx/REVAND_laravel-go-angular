@@ -3,32 +3,32 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/jinzhu/gorm"
+	// "github.com/jinzhu/gorm"
 	"goApp/common"
 	"goApp/src"
 )
 
-func Migrate(db *gorm.DB) {
-	products.AutoMigrate()
-}
+// func Migrate(db *gorm.DB) {
+// 	products.AutoMigrate()
+// }
 
 func main() {
 	db := common.Init()
-	Migrate(db)
+	// Migrate(db)
 	defer db.Close()
 	r := gin.Default()
 	MakeRoutes(r)
 	v1 := r.Group("/api")
 
-	// NO TOKEN
-	// v1.Use(users.AuthMiddleware(false))
-	// products.ProductsNoAuthed(v1.Group("/products"))
-	
-	products.Products(v1.Group("/products"))
+	products.ProductsRoutes(v1.Group("/products"))
 
-    // SI TOKEN
+	// // NO TOKEN
+	// v1.Use(users.AuthMiddleware(false))
+	// products.ProductsNoAuthed(v1.Group("/product"))
+	
+    // // SI TOKEN
 	// v1.Use(users.AuthMiddleware(true))
-	// users.UserRegister(v1.Group("/user"))
+	// products.ProductsAuthed(v1.Group("/products"))
 
 	fmt.Printf("0.0.0.0:8080")
 	r.Run(":8080")

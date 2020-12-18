@@ -42,6 +42,11 @@ services:
       - "traefik.docker.network=revand_network"
     networks:
     - revand_network
+    depends_on:
+    - mysql
+    - redis
+    - go_redis
+    - mongo
     command: bash go_script.sh
 
   go_redis:
@@ -60,6 +65,34 @@ services:
       - "traefik.docker.network=revand_network"
     networks:
     - revand_network
+    depends_on:
+    - mysql
+    - redis
+    - mongo
+    command: bash go_script.sh
+
+  go_products:
+    container_name: revand_go_products
+    image: golang:1.15
+    working_dir: /go/src/goApp
+    volumes:
+      - ./backend/go/products:/go/src/goApp
+    restart: on-failure
+    expose:
+    - 8080
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.go_products.rule=Host(`go_products.docker.localhost`)"
+      - "traefik.port=8080"
+      - "traefik.docker.network=revand_network"
+    networks:
+    - revand_network
+    depends_on:
+    - mysql
+    - redis
+    - go_redis
+    - go_users
+    - mongo
     command: bash go_script.sh
 
   angular:
@@ -139,11 +172,11 @@ services:
       - go_users
     networks:
      - revand_network
-  whoami:
-    # A container that exposes an API to show its IP address
-    image: traefik/whoami
-    labels:
-      - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
+  # whoami:
+  #   # A container that exposes an API to show its IP address
+  #   image: traefik/whoami
+  #   labels:
+  #     - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
   grafana:
     image: grafana/grafana:7.1.5
     container_name: revand_grafana

@@ -7,16 +7,29 @@ import (
 )
 
 func ProductList(c *gin.Context) {
-	var product []Products
+	var product Products
+	c.BindJSON(&product);
 	err := GetAllProducts(&product)
 	if err != nil {
-		c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
 		c.JSON(http.StatusOK, product)
 		
+		return
 	}
 }
+
+// func ProductList(c *gin.Context) {
+// 	var product []Products
+// 	err := GetAllProducts(&product)
+// 	if err != nil {
+// 		c.JSON(http.StatusOK, "Not found")
+// 		c.AbortWithStatus(http.StatusNotFound)
+// 	} else {
+// 		c.JSON(http.StatusOK, product)
+		
+// 	}
+// }
 
 func ProductByID(c *gin.Context) {
 	id := c.Params.ByName("id")
@@ -59,12 +72,13 @@ func ProductCreate(c *gin.Context) {
 	c.BindJSON(&product);
 	err := CreateProduct(&product)
 	if err != nil {
-		// c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
 		c.JSON(http.StatusOK, gin.H{"product": product})
+		
 		return
 	}
+	// return
 }
 
 func ProductDelete(c *gin.Context) {

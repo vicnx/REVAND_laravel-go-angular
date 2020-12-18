@@ -1,9 +1,9 @@
 package products
 
 import (
-	"fmt"
+	// "fmt"
 	"github.com/gin-gonic/gin"
-	"net/http"
+	// "net/http"
 )
 
 // func ProductsNoAuthed(router *gin.RouterGroup) {
@@ -18,7 +18,7 @@ import (
 // 	router.DELETE("/", ProductDeleteAll)
 // }
 
-func Products(router *gin.RouterGroup) {
+func ProductsRoutes(router *gin.RouterGroup) {
 	router.GET("/", ProductList)
 	router.GET("/:id", ProductByID)
 	router.POST("/", ProductCreate)
