@@ -4,10 +4,14 @@
 </div> -->
 
 <div id="modal-auth" class="modal active-modal"> <!--class = modal-auth-->
-    <h1>Log in to our app! MANGO!</h1>
+    <section class="auth__welcome">
+        <h1>Welcome to Revand!</h1>
+        <span>Sign in or log in</span>
+    </section>
+    
     <div class="auth__social__options">
-        <a href="" class="social__option">Log In with Google</a>
-        <a href="" class="social__option">Log In with GitHub</a>
+        <a href="" class="social__option social__option__github">Log In with GitHub</a>
+        <a href="" class="social__option social__option__google">Log In with Google</a>
     </div>
     <a class="btn--close" (click)="close()"><i class="fas fa-times"></i></a>
 

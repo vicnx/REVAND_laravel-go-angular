@@ -7,14 +7,40 @@
 }
 
 .social__option{
-    width: 90%;
-    height: 50px;
-    border: 1px solid black;
+    width: 95%;
+    height: 42px;
+    /* border: 1px solid black; */
     border-radius: 50px;
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.auth__welcome h1{
+    color: #253238;
+    margin-bottom: 8px;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: normal;
+    font-family: Wallie,Helvetica;
+}
+
+.auth__welcome span{
+    font-size: .875rem;
+    color: #607d8b;
+    line-height: normal;
+    font-family: Wallie,Helvetica;
+}
+
+.social__option__google{
+    background: #dd4b39;
+}
+
+.social__option__github{
+    background: #424242;
 }
 
 .auth__local__options{
