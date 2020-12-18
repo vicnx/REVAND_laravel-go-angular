@@ -1,0 +1,16 @@
+<div class="user">
+  <div class="user__left">
+      <!-- <img src="{{user.image}}" alt="{{user.name}}" onerror='this.src="https://cdn2.iconfinder.com/data/icons/documents-and-files-v-2/100/doc-03-512.png";'/> -->
+      <span>{{user.email}}</span>&nbsp;&nbsp;&nbsp;
+      <span>{{user.username}}</span>&nbsp;&nbsp;&nbsp;
+      <span class="user__left__text--price">{{user.username}}</span>&nbsp;&nbsp;&nbsp;
+  </div>
+  <div class="user__right">
+      <!-- <span>{{user.description}}</span> -->
+      <div class="user__right__options">
+          <button class="user-option--delete" [ngClass]="{disabled: isDeleting}">
+              <i class="ion-trash-a"></i> Delete user
+          </button>
+      </div>
+  </div>
+</div>

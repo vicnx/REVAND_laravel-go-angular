@@ -1,11 +1,11 @@
-<div class="award__list">
-    <div class="award">
-        <div class="award__left">
-            Award
+<div class="user__list">
+    <div class="user">
+        <div class="user__left">
+            User
         </div>
-        <div class="award__right">
-            <div class="award__right__options">
-                Award Options
+        <div class="user__right">
+            <div class="user__right__options">
+                User Options
             </div>
         </div>
     </div>
@@ -32,6 +32,6 @@
         </div>
     </div> -->
 
-    <app-editor-award (item)="func()" (refresh_list)="runQuery()"></app-editor-award>
-    <app-award-preview *ngFor="let x of allAwards" [award]="x" (refresh_list)="runQuery()"></app-award-preview>
+    <!-- <app-editor-award (item)="func()" (refresh_list)="runQuery()"></app-editor-award> -->
+    <app-user-preview *ngFor="let x of allUsers" [user]="x" (refresh_list)="runQuery()"></app-user-preview>
 </div>

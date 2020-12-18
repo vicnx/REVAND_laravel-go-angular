@@ -1,20 +1,20 @@
 import { Component,OnInit, Input } from '@angular/core';
-import { Award, AwardsService } from '../../core';
+import { UserList, UserService } from '../../core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
-    selector: 'app-award-list',
-    styleUrls: ['award-list.component.css'],
-    templateUrl: './award-list.component.html'
+    selector: 'app-users-list',
+    styleUrls: ['user-list.component.css'],
+    templateUrl: './user-list.component.html'
 })
 
-export class AwardListComponent{
+export class UserListComponent{
     // isDeleting = false;
-    allAwards: Award[];
+    allUsers: any;
     
     constructor (
-        private awardsService: AwardsService,
+        private usersService: UserService,
         private router: Router,
     ) {}
 
@@ -25,11 +25,10 @@ export class AwardListComponent{
         }
     }
     runQuery(){
-        this.allAwards = [];
-        this.awardsService.query().subscribe((awards) => {
-            // console.log("object");
-            // console.log(awards);
-            this.allAwards = awards['data'];
+        this.allUsers = [];
+        this.usersService.GetAllUsers().subscribe((users) => {
+            console.log(users);
+            this.allUsers = users;
         });
     }
     refresh(){

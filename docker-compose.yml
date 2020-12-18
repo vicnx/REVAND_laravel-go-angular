@@ -24,7 +24,6 @@ services:
       php artisan key:generate &&
       php artisan route:list &&
       php artisan migrate &&
-      php artisan migrate:refresh &&
       php artisan serve --host=0.0.0.0 --port=8000"
       
   go_users:
@@ -32,7 +31,7 @@ services:
     image: golang:1.15
     working_dir: /go/src/goApp
     volumes:
-      - ./backend/go3/users:/go/src/goApp
+      - ./backend/go/users:/go/src/goApp
     restart: on-failure
     expose:
     - 8080
@@ -50,7 +49,7 @@ services:
     image: golang:1.15
     working_dir: /go/src/goApp
     volumes:
-      - ./backend/go3/redis:/go/src/goApp
+      - ./backend/go/redis:/go/src/goApp
     restart: on-failure
     expose:
     - 8080

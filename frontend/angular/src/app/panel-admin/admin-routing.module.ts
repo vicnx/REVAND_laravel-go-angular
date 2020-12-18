@@ -5,6 +5,8 @@ import {AwardComponent} from './awards/award/award.component';
 import {AwardResolver} from './awards/award/award-resolver.service';
 import { SubscriptionResolver } from './subscriptions/subscription/subscription-resolver.service';
 import { SubscriptionComponent } from './subscriptions/subscription/subscription.component';
+import { UserResolver } from './users/user/user-resolver.service';
+import { UserComponent } from './users/user/user.component';
 
 
 
@@ -45,6 +47,26 @@ const routes: Routes = [
           component: SubscriptionComponent,
           resolve: {
             award: SubscriptionResolver
+          }
+        }
+        //   // loadChildren: './award/award.module#AwardModule'
+        // },
+      ] 
+    },
+    { path: 'users', 
+      children: [
+        // {
+        //   path:'editor',
+        //   loadChildren: () => import('./awards/editor-award/editor-award.module').then(m => m.EditorAwardModule)
+        // }, 
+        {
+          path: '', loadChildren: () => import(`./users/users.module`).then(m => m.UsersModule), pathMatch: 'full'
+        },
+        {
+          path: ':id',
+          component: UserComponent,
+          resolve: {
+            user: UserResolver
           }
         }
         //   // loadChildren: './award/award.module#AwardModule'

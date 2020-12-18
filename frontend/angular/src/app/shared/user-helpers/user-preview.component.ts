@@ -1,44 +1,42 @@
 import { Component, Input,Output, EventEmitter, ViewChild, ElementRef, ComponentFactoryResolver, Injector, ApplicationRef, Renderer2 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Award, AwardsService } from '../../core';
-import { AwardEditorComponent} from './award-editor.component'
-// import { Award, AwardsService } from '../../../assets/logo-web.png';
+import { UserList, UserService } from '../../core';
+// import { User, UsersService } from '../../../assets/logo-web.png';
 
 @Component({
-  selector: 'app-award-preview',
-  styleUrls: ['award-preview.component.css'],
-  templateUrl: './award-preview.component.html'
+  selector: 'app-user-preview',
+  styleUrls: ['user-preview.component.css'],
+  templateUrl: './user-preview.component.html'
 })
-export class AwardPreviewComponent{
-  @Input() award: Award;
+export class UserPreviewComponent{
+  @Input() user: UserList;
   @Output() refresh_list = new EventEmitter<string>();
-  @Output() item = new EventEmitter<Award>();
+  @Output() item = new EventEmitter<UserList>();
   constructor (
-    private awardsService: AwardsService,
+    private usersService: UserService,
     ){}
 
-  // @Input() test: Award;
+  // @Input() test: User;
   isDeleting = false;
 
-    deleteAward() {
+    // deleteUser() {
       
-        this.isDeleting = true;
-        this.awardsService.destroy(this.award.id).subscribe(success => {
+    //     this.isDeleting = true;
+    //     this.usersService.destroy(this.user.id).subscribe(success => {
             
-            //enviamos un emit al parent. (lo recoge en award-list component)
-            this.refresh_list.next();
-        }
-        );
-    }
+    //         //enviamos un emit al parent. (lo recoge en user-list component)
+    //         this.refresh_list.next();
+    //     }
+    //     );
+    // }
 
 
     
     modify(event) {
-      // let factory = this.resolver.resolveComponentFactory(AwardEditorComponent);
-      // console.log(this.award);
+      // let factory = this.resolver.resolveComponentFactory(UserEditorComponent);
+      // console.log(this.user);
       let node = event.target;
       let nodeParent = node.parentNode.parentNode.parentNode.parentNode;
-      let editor = nodeParent.querySelector('app-editor-award');
+      let editor = nodeParent.querySelector('app-editor-user');
 
       this.item.next();
 
@@ -56,7 +54,7 @@ export class AwardPreviewComponent{
 
       // console.log("=====================");
       // console.log(node.parentNode.parentNode.parentNode.parentNode);
-      // var doc = new DOMParser().parseFromString('<app-editor-award [item]="'+this.award+'"></app-editor-award>', 'text/html');
+      // var doc = new DOMParser().parseFromString('<app-editor-user [item]="'+this.user+'"></app-editor-user>', 'text/html');
       // let editor = doc.body.firstChild;
       // console.log(editor);
       // node.parentNode.parentNode.parentNode.parentNode.insertBefore(editor, node.parentNode.parentNode.parentNode.nextSibling);

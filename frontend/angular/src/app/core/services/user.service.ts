@@ -120,4 +120,16 @@ export class UserService {
         err => console.log(err)
       ));
   }
+
+  GetAllUsers(): Observable<User> {
+    return this.apiService.get('/users/','users')
+      .pipe(map(
+        data => {
+          console.log("++++++++++++++++++++++++++++++++++++++++++++++");
+          console.log(data);
+          return data
+        },
+        err => console.log(err)
+      ));
+  }
 }
