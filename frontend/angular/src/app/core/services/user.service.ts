@@ -132,4 +132,20 @@ export class UserService {
         err => console.log(err)
       ));
   }
+
+
+  save(user): Observable<User> {
+    console.log("DENTRO DE SAVE SERVICE");
+    // user= {user}
+    console.log(user);
+    if (user.ID) {
+        console.log(user);
+        return this.apiService.put('/users/' + user.ID,'users', user )
+            .pipe(map(data => data.user));
+    }
+  }
+  destroy(userid) {
+    console.log(userid);
+    return this.apiService.delete('/users/' + userid,'users');
+  }
 }

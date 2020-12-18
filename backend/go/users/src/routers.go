@@ -5,12 +5,15 @@ import (
 	"goApp/common"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"fmt"
 )
 
 func UsersRegister(router *gin.RouterGroup) {
 	router.GET("/", UsersRetrieve)
 	router.POST("/", UsersRegistration)
 	router.POST("/login", UsersLogin)
+	router.PUT("/:userid",UserUpdateAdmin)
+	router.DELETE("/:userid",UserDeleteAdmin)
 }
 
 func UserRegister(router *gin.RouterGroup) {
@@ -140,5 +143,42 @@ func UsersRetrieve(c *gin.Context) {
 	} else {
 		c.JSON(http.StatusOK, user)
 		
+	}
+}
+
+func UserUpdateAdmin(c *gin.Context) {
+	var user User
+	id := c.Params.ByName("userid")
+
+	fmt.Println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+	fmt.Println(user)
+	err := GetUserByID(&user, id)
+	if err != nil { //si no esta instanciada
+		c.JSON(http.StatusNotFound, "NOT FOUND") // envia al cliente un JSON
+	}else{ //si esta instanciada hace el update
+		// fmt.Println(c.BindJSON(&award))
+		c.BindJSON(&user) // recoge los nuevos datos del cliente y los guarda en &user
+		fmt.Println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+		fmt.Println(user)
+		err = UpdateUserAdmin(&user) // guardamos los nuevos datos
+		if err != nil {
+			c.JSON(http.StatusOK, "Not found")
+			c.AbortWithStatus(http.StatusNotFound)
+		} else {
+			c.JSON(http.StatusOK, gin.H{"user": user})
+			return
+		}
+	}
+}
+
+func UserDeleteAdmin(c *gin.Context) {
+	var user User
+	id := c.Params.ByName("userid")
+	err := DeleteUserAdmin(&user,id)
+	if err != nil {
+		// c.JSON(http.StatusOK, "Not found")
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, gin.H{"userid: " + id: "is deleted"})
 	}
 }

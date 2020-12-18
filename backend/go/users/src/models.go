@@ -138,3 +138,22 @@ func (u User) GetFollowings() []User {
 	tx.Commit()
 	return followings
 }
+
+func UpdateUserAdmin(data interface{}) error {
+	db := common.GetDB()
+	err := db.Save(data).Error
+	return err
+}
+
+//get award by ID
+func GetUserByID(data, id interface{}) error {
+	db := common.GetDB()
+	err := db.Where("id = ?", id).First(data).Error
+	return err
+}
+
+func DeleteUserAdmin(data, id interface{}) error {
+	db := common.GetDB()
+	err := db.Where("id = ?", id).Delete(data).Error
+	return err
+}
