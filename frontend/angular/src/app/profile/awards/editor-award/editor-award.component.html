@@ -1,0 +1,42 @@
+<div class="editor-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 col-xs-12">
+
+        <!-- <app-list-errors [errors]="errors"></app-list-errors> -->
+
+        <form [formGroup]="awardForm">
+          <fieldset [disabled]="isSubmitting">
+
+            <fieldset class="form-group">
+              <input class="form-control form-control-lg"
+                formControlName="name"
+                type="text"
+                placeholder="Award Name" />
+            </fieldset>
+
+            <fieldset class="form-group">
+              <input class="form-control"
+                formControlName="description"
+                type="text"
+                placeholder="Award Description" />
+            </fieldset>
+
+            <fieldset class="form-group">
+              <input class="form-control"
+                formControlName="image"
+                type="text"
+                placeholder="Award image" />
+            </fieldset>
+
+            <button class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submitForm()">
+              New Award
+            </button>
+
+          </fieldset>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
