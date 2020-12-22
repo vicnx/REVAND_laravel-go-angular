@@ -7,13 +7,14 @@ import (
 )
 
 func ProductList(c *gin.Context) {
-	var product Products
-	c.BindJSON(&product);
-	err := GetAllProducts(&product)
+	var products Products
+	// c.BindJSON(&products);
+	err := GetAllProducts(&products)
+	fmt.Println(products);
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
-		c.JSON(http.StatusOK, product)
+		c.JSON(http.StatusOK, gin.H{"products": products})
 		
 		return
 	}

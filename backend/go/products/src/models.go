@@ -1,10 +1,7 @@
 package products
 
 import (
-	// "github.com/jinzhu/gorm"
 	"goApp/common"
-	// "go.mongodb.org/mongo-driver/bson"
-	// "go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 /*

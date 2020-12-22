@@ -3,8 +3,9 @@ import (
 	"fmt"
 	// _ "github.com/jinzhu/gorm"
 	"context"
-	_"log"
-	// "go.mongodb.org/mongo-driver/bson"
+	"log"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/bson"
 	// "go.mongodb.org/mongo-driver/mongo"
 	"goApp/common"
 
@@ -22,44 +23,114 @@ func CreateProduct(data interface{}) error {
 	if err != nil {
 		return err
 	}
+	fmt.Println(err);
 	return err
 }
 
 //Obtener todos los Products
 func GetAllProducts(data interface{}) error {
-	//Define filter query for fetching specific document from collection
-	// filter := bson.D{{}} //bson.D{{}} specifies 'all documents'
-	// products := []Product{}
 	fmt.Println("GETALL ======================")
+
 	client, err := common.GetMongoClient()
-	if err != nil {
-		return err
-	}
+	
 	collection := client.Database(common.DBmongo).Collection(common.PRODUCTS)
-	_, err = collection.Find(context.TODO(), data)
 
-	// //Map result to slice
-	// for cur.Next(context.TODO()) {
-	// 	t := Issue{}
-	// 	err := cur.Decode(&t)
-	// 	if err != nil {
-	// 		return issues, err
-	// 	}
-	// 	issues = append(issues, t)
-	// }
-	// // once exhausted, close the cursor
-	// cur.Close(context.TODO())
-	// if len(issues) == 0 {
-	// 	return issues, mongo.ErrNoDocuments
-	// }
-	// return issues, nil
+	cursor, err := collection.Find(context.TODO(), bson.M{})
+	
+	fmt.Println(cursor);
+	
+	// return err
 
-	fmt.Println(err)
-	if err != nil {
-		return err
+	if err != nil { log.Fatal(err) }
+
+	defer cursor.Close(context.TODO())
+
+	var products []bson.M
+	if err = cursor.All(context.TODO(), &products); 
+	err != nil {
+		log.Fatal(err)
 	}
+
+	// for cursor.Next(context.TODO()) {
+	// 	t := Products{}
+	// 	err := cursor.Decode(&t)
+	// 	if err != nil {
+	// 		return products, err
+	// 	}
+	// 	products = append(products, t)
+	// }
+
+
+	var results []primitive.M
+	for cursor.Next(context.TODO()) {
+		var result bson.M
+		e := cursor.Decode(&result)
+		if e != nil {
+			log.Fatal(e)
+		}
+		// fmt.Println("cursor..&gt;", cursor, "result", reflect.TypeOf(result), reflect.TypeOf(result["_id"]))
+		results = append(results, result)
+	
+	}
+	
+	if err := cursor.Err(); err != nil {
+		log.Fatal(err)
+	}
+	
+	cursor.Close(context.TODO())
+	return results
+
+
+
+	fmt.Println(products);
+	
+	fmt.Println(err)
+
+
 	return err
+
+
+
+
+	// cur, err := collection.Find(context.TODO(), data)
+	// cur, err := collection.Find(context.TODO(), bson.D{})
+	// fmt.Println(cur);
+	
+	// if err != nil {
+	// 	return err
+	// }
+	// fmt.Println(cur);
+	// fmt.Println(products);
+	
+	// for cur.Next(context.TODO()) {
+
+	// 	err := cur.Decode(&Products{})
+	// 	if err != nil { log.Fatal(err) }
+	// 	products = append(products, Products{})
+	// }
+
+	// cur.Close(context.TODO())
+
+	// return err
+
+	// cur, err := collection.Find(context.Background(), bson.D{})
+	// if err != nil { log.Fatal(err) }
+	// defer cur.Close(context.Background())
+	// for cur.Next(context.Background()) {
+	// // To decode into a struct, use cursor.Decode()
+	// result := struct{
+	// 	Foo string
+	// 	Bar int32
+	// }{}
+	// err := cur.Decode(&result)
+
+	// raw := cur.Current
+	// }
+	// if err := cur.Err(); err != nil {
+	// return err
+
 }
+
 
 // //Obtener todos los Products
 // func GetAllProducts(data interface{}) error {

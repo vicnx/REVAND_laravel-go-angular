@@ -1,0 +1,3 @@
+# goApp/src
+src/resolvers.go:81:2: cannot use results (type []primitive.M) as type error in return argument:
+	[]primitive.M does not implement error (missing Error method)
