@@ -1,33 +1,33 @@
-
-<div class="admin-sidebar">
-    <a class="admin-sidebar__option" routerLink="users">
-        <div class="admin-sidebar__option--circle">
-            <i class="fas fa-users"></i>
+<aside class="profile_sidebar">
+    <section class="profile_sidebar__info">
+        <div class="profile_sidebar__info__img">
+            <img src="https://i.pinimg.com/564x/15/81/4b/15814bcbe69d06b95a94d128fffe65d0.jpg" alt="">
         </div>
-        <span>Users</span>
-    </a>
-    <a class="admin-sidebar__option" routerLink="awards">
-        <div class="admin-sidebar__option--circle">
-            <i class="fas fa-award"></i>
+        <h1>Jenna Smith</h1>
+        <button class="follow_btn">Follow</button>
+        <div class="profile_sidebar__info__stats">
+            <div>
+                <span>23</span>
+                <span class="profile_sidebar__info__stats__type">Products</span>
+            </div>
+            <div>
+                <span>12K</span>
+                <span class="profile_sidebar__info__stats__type">Followers</span>
+            </div>
+            <div>
+                <span>17</span>
+                <span class="profile_sidebar__info__stats__type">Awards</span>
+            </div>
         </div>
-        <span>Awards</span>
-    </a>
-    <a class="admin-sidebar__option" routerLink="subscriptions">
-        <div class="admin-sidebar__option--circle">
-            <i class="fas fa-id-card"></i>
-        </div>
-        <span>Subscriptions</span>
-    </a>
-    <a class="admin-sidebar__option">
-        <div class="admin-sidebar__option--circle">
-            <i class="fas fa-users"></i>
-        </div>
-        <span>Categories</span>
-    </a>
-    <a class="admin-sidebar__option">
-        <div class="admin-sidebar__option--circle">
-            <i class="fas fa-list"></i>
-        </div>
-        <span>Products</span>
-    </a>
-</div>
+    </section>
+    <hr>
+    <nav class="profile_sidebar__nav">
+        <a routerLink="dashboard" class="profile_sidebar__nav__item profile_sidebar__nav__item--toggled">Dashboard</a>
+        <a routerLink="dashboard" class="profile_sidebar__nav__item">Products</a>
+        <a routerLink="dashboard" class="profile_sidebar__nav__item">Favorites</a>
+        <!-- <a routerLink="dashboard" class="profile_sidebar__nav__item">Following</a> -->
+        <!-- <a routerLink="dashboard" class="profile_sidebar__nav__item">Awards</a> -->
+        <a routerLink="dashboard" class="profile_sidebar__nav__item">Settings</a>
+        <a class="profile_sidebar__nav__item" (click)="logout()">Log out</a>
+    </nav>
+</aside>

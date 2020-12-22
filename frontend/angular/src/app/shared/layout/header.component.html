@@ -20,7 +20,8 @@
     <div class="main-header__options" *appShowAuthed="true">
         <button class="main-header__options__btnLogin" *ngIf="[currentUser.type]=='admin'" (click)="adminpanel()">Admin Panel</button>
         <!-- <button class="main-header__options__btnLogin" *ngIf="[currentUser.type]=='client'" routerLink="/admin-panel">Admin Panel</button> -->
-        <button class="main-header__options__btnLogin" id="btn-Login" (click)="logout()">Logout</button>
+        <!-- <button class="main-header__options__btnLogin" id="btn-Login" (click)="logout()">Logout</button> -->
+        <button class="main-header__options__btnLogin" id="btn-Login" routerLink="profile/dashboard">Profile</button>
         <a class="main-header__options__btnUpload">
             <span>Upload Product</span>
         </a>

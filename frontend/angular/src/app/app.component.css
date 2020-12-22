@@ -1,0 +1,28 @@
+@font-face {
+    font-family: CooperHewitt;
+    src: url(../assets/fonts/CooperHewitt/CooperHewitt-Light.otf);
+}
+
+@font-face {
+    font-family: CooperHewitt-Medium;
+    src: url(../assets/fonts/CooperHewitt/CooperHewitt-Medium.otf);
+}
+
+@font-face {
+    font-family: CooperHewitt-Bold;
+    src: url(../assets/fonts/CooperHewitt/CooperHewitt-Bold.otf);
+}
+
+@font-face {
+    font-family: EncodeSans;
+    src: url(../assets/fonts/EncodeSans/EncodeSans-Light.ttf);
+}
+
+@font-face {
+    font-family: EncodeSans-Medium;
+    src: url(../assets/fonts/EncodeSans/EncodeSans-Bold.ttf);
+}
+
+body {
+    
+}
