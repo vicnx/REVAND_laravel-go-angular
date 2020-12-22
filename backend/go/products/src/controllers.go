@@ -15,7 +15,7 @@ func ProductList(c *gin.Context) {
 
 	// GET QUERY PARAMS (KEY AND VALUE)
 	key := c.Request.URL.Query().Get("key")
-	value := c.Query("value") // shortcut for c.Request.URL.Query().Get("lastname")
+	value := c.Query("value")
 
 	//send key anb value and save on results
 	results,err := GetAllProducts(key,value)
