@@ -8,6 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	// "go.mongodb.org/mongo-driver/mongo"
 	"goApp/common"
+	// "net/http"
 
 	_ "strconv"
 )
@@ -28,28 +29,54 @@ func CreateProduct(data interface{}) error {
 }
 
 //Obtener todos los Products
-func GetAllProducts(data interface{}) error {
-	fmt.Println("GETALL ======================")
+func GetAllProducts(key string,value string) ([]Products,error) {
 
 	client, err := common.GetMongoClient()
-	
 	collection := client.Database(common.DBmongo).Collection(common.PRODUCTS)
 
-	cursor, err := collection.Find(context.TODO(), bson.M{})
+	//set filter to empty (all products)
+	filter := bson.D{{}} 
 	
-	fmt.Println(cursor);
-	
-	// return err
-
-	if err != nil { log.Fatal(err) }
-
-	defer cursor.Close(context.TODO())
-
-	var products []bson.M
-	if err = cursor.All(context.TODO(), &products); 
-	err != nil {
-		log.Fatal(err)
+	//if key dont empty set filters
+	if key != ""{
+		filter = bson.D{primitive.E{Key: key, Value: value}}	
 	}
+
+	//get products
+	cur, err := collection.Find(context.TODO(), filter)
+	if err != nil { log.Fatal(err) }
+	var results []Products
+	for cur.Next(context.TODO()) {
+		var elem Products
+		err := cur.Decode(&elem)
+		if err != nil { log.Fatal(err) }
+
+		results =append(results, elem)
+	}
+    if err := cur.Err(); err != nil {
+        log.Fatal(err)
+    }
+
+    //Close the cursor once finished
+    cur.Close(context.TODO())
+
+	//return results and err
+	return results,err
+
+	
+	// fmt.Println(cursor);
+	
+	// // return err
+
+	// if err != nil { log.Fatal(err) }
+
+	// defer cursor.Close(context.TODO())
+
+	// var products []bson.M
+	// if err = cursor.All(context.TODO(), &products); 
+	// err != nil {
+	// 	log.Fatal(err)
+	// }
 
 	// for cursor.Next(context.TODO()) {
 	// 	t := Products{}
@@ -60,36 +87,37 @@ func GetAllProducts(data interface{}) error {
 	// 	products = append(products, t)
 	// }
 
+//===========
 
-	var results []primitive.M
-	for cursor.Next(context.TODO()) {
-		var result bson.M
-		e := cursor.Decode(&result)
-		if e != nil {
-			log.Fatal(e)
-		}
-		// fmt.Println("cursor..&gt;", cursor, "result", reflect.TypeOf(result), reflect.TypeOf(result["_id"]))
-		results = append(results, result)
+	// var results []primitive.M
+	// for cursor.Next(context.TODO()) {
+	// 	var result bson.M
+	// 	e := cursor.Decode(&result)
+	// 	if e != nil {
+	// 		log.Fatal(e)
+	// 	}
+	// 	// fmt.Println("cursor..&gt;", cursor, "result", reflect.TypeOf(result), reflect.TypeOf(result["_id"]))
+	// 	results = append(results, result)
 	
-	}
+	// }
 	
-	if err := cursor.Err(); err != nil {
-		log.Fatal(err)
-	}
+	// if err := cursor.Err(); err != nil {
+	// 	log.Fatal(err)
+	// }
 	
-	cursor.Close(context.TODO())
-	return results
-
-
-
-	fmt.Println(products);
+	// cursor.Close(context.TODO())
 	
-	fmt.Println(err)
 
 
-	return err
+
+	// fmt.Println(products);
+	
+	// fmt.Println(err)
 
 
+	// return err
+
+//==============0
 
 
 	// cur, err := collection.Find(context.TODO(), data)

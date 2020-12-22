@@ -48,6 +48,7 @@ func GetMongoClient() (*mongo.Client, error) {
 		}
 		clientInstance = client
 	})
+	fmt.Println("Congratulations, you're already connected to MongoDB!")
 	return clientInstance, clientInstanceError
 }
 

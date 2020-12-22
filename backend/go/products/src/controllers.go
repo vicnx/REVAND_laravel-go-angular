@@ -6,31 +6,27 @@ import (
 	"net/http"
 )
 
+type Filter struct {
+	key		string
+	value	string 	
+}
+
 func ProductList(c *gin.Context) {
-	var products Products
-	// c.BindJSON(&products);
-	err := GetAllProducts(&products)
-	fmt.Println(products);
+
+	// GET QUERY PARAMS (KEY AND VALUE)
+	key := c.Request.URL.Query().Get("key")
+	value := c.Query("value") // shortcut for c.Request.URL.Query().Get("lastname")
+
+	//send key anb value and save on results
+	results,err := GetAllProducts(key,value)
+
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
-		c.JSON(http.StatusOK, gin.H{"products": products})
-		
-		return
+		c.JSON(http.StatusOK, gin.H{"products": results})
 	}
+	return
 }
-
-// func ProductList(c *gin.Context) {
-// 	var product []Products
-// 	err := GetAllProducts(&product)
-// 	if err != nil {
-// 		c.JSON(http.StatusOK, "Not found")
-// 		c.AbortWithStatus(http.StatusNotFound)
-// 	} else {
-// 		c.JSON(http.StatusOK, product)
-		
-// 	}
-// }
 
 func ProductByID(c *gin.Context) {
 	id := c.Params.ByName("id")
