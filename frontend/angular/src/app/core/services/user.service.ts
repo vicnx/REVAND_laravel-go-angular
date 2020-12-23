@@ -144,8 +144,13 @@ export class UserService {
             .pipe(map(data => data.user));
     }
   }
+
   destroy(userid) {
     console.log(userid);
     return this.apiService.delete('/users/' + userid,'users');
+  }
+
+  getprofile(username){
+    return this.apiService.get('/profile/' + username,'users');
   }
 }

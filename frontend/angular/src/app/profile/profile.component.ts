@@ -20,17 +20,17 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
 
     //esta suscrito al cambio de usuario. comprueba si es admin o cliente, Si no es admin te vuelve al home. (no carga el admin panel.)
-    this.userService.currentUser.subscribe(
-      (userData)=> {
-        this.currentUser = userData;
-        console.log(this.currentUser);
-        if(this.currentUser.type != "admin"){
-          console.log("Access denied");
-          this.router.navigateByUrl('/');
-        }else{
-          console.log("OKAYS Eres un mango");
-        }
-      }
-    )
+    // this.userService.currentUser.subscribe(
+    //   (userData)=> {
+    //     this.currentUser = userData;
+    //     // console.log(this.currentUser);
+    //     // if(this.currentUser.type != "admin"){
+    //     //   console.log("Access denied");
+    //     //   this.router.navigateByUrl('/');
+    //     // }else{
+    //     //   console.log("OKAYS Eres un mango");
+    //     // }
+    //   }
+    // )
   }
 }
