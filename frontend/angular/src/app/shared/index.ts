@@ -3,3 +3,4 @@ export * from './shared.module';
 export * from './award-helpers';
 export * from './subscription-helpers';
 export * from './user-helpers';
+export * from './product-helpers';

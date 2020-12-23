@@ -5,6 +5,7 @@ export interface User {
   username: string;
   bio: string;
   image: string;
+  banner: string;
   type: string;
 }
 export interface UserList {
