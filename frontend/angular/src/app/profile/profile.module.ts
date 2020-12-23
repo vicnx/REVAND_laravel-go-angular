@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile.component';
 import { SharedModule } from '../shared';
 import { ProfileRoutingModule } from './profile-routing.module';
-import { DashboardResolver } from './dashboard/dashboard-resolver.service';
+import { ProfileResolver } from './profile-resolver.service';
 
 import { SidebarProfileComponent } from './sidebar/profile-sidebar.component';
 
@@ -14,7 +14,7 @@ import { SidebarProfileComponent } from './sidebar/profile-sidebar.component';
     SharedModule, 
     ProfileRoutingModule
   ],
-  providers:[DashboardResolver]
+  providers:[ProfileResolver]
 
 })
 export class ProfileModule {}

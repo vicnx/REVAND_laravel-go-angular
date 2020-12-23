@@ -1,10 +1,11 @@
 <aside class="profile_sidebar">
     <section class="profile_sidebar__info">
         <div class="profile_sidebar__info__img">
-            <img src="https://i.pinimg.com/564x/15/81/4b/15814bcbe69d06b95a94d128fffe65d0.jpg" alt="">
+            <img src="{{profile.image}}" alt="">
         </div>
-        <h1>Jenna Smith</h1>
-        <button class="follow_btn">Follow</button>
+        <h1>{{profile.username}}</h1>
+        <!-- <small>{{profile.bio}}</small> -->
+        <button *ngIf="[checkCurrentUser]=='false'" class="follow_btn">Follow</button>
         <div class="profile_sidebar__info__stats">
             <div>
                 <span>23</span>
@@ -22,12 +23,12 @@
     </section>
     <hr>
     <nav class="profile_sidebar__nav">
-        <a routerLink="dashboard" class="profile_sidebar__nav__item profile_sidebar__nav__item--toggled">Dashboard</a>
-        <a routerLink="dashboard" class="profile_sidebar__nav__item">Products</a>
-        <a routerLink="dashboard" class="profile_sidebar__nav__item">Favorites</a>
+        <a routerLink="" class="profile_sidebar__nav__item profile_sidebar__nav__item--toggled">Dashboard</a>
+        <a routerLink="" class="profile_sidebar__nav__item">Products</a>
+        <a routerLink="" class="profile_sidebar__nav__item">Favorites</a>
         <!-- <a routerLink="dashboard" class="profile_sidebar__nav__item">Following</a> -->
         <!-- <a routerLink="dashboard" class="profile_sidebar__nav__item">Awards</a> -->
-        <a routerLink="settings" class="profile_sidebar__nav__item">Settings</a>
-        <a class="profile_sidebar__nav__item" (click)="logout()">Log out</a>
+        <a routerLink="settings" *ngIf="[checkCurrentUser]=='true'" class="profile_sidebar__nav__item">Settings</a>
+        <a class="profile_sidebar__nav__item" *ngIf="[checkCurrentUser]=='true'" (click)="logout()">Log out</a>
     </nav>
 </aside>

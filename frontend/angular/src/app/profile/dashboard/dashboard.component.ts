@@ -22,14 +22,10 @@ export class DashboardComponent implements OnInit {
   profile: User;
   currentUser: User;
   ngOnInit() {
-
+    //recuperamos aqui tambien del resolve (de la url el user)
     this.route.data.subscribe(
-      (data: { user: User }) => {
-        console.log(data.user);
-        this.profile = data.user;
-      }
+      (data: { user: User }) => this.profile = data.user
     );
-    console.log("Dashboard Component");
     this.userService.currentUser.subscribe(
       (userData)=> {
         this.currentUser = userData;

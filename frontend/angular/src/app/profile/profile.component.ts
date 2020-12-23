@@ -10,27 +10,28 @@ import { Award, AwardsService } from '../core';
   templateUrl: './profile.component.html'
 })
 export class ProfileComponent implements OnInit {
+  user: User;
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
   isSubmitting = false;
+  profile: User;
   currentUser: User;
-  
   ngOnInit() {
-
-    //esta suscrito al cambio de usuario. comprueba si es admin o cliente, Si no es admin te vuelve al home. (no carga el admin panel.)
-    // this.userService.currentUser.subscribe(
-    //   (userData)=> {
-    //     this.currentUser = userData;
-    //     // console.log(this.currentUser);
-    //     // if(this.currentUser.type != "admin"){
-    //     //   console.log("Access denied");
-    //     //   this.router.navigateByUrl('/');
-    //     // }else{
-    //     //   console.log("OKAYS Eres un mango");
-    //     // }
-    //   }
-    // )
+    console.log("profile component");
+    this.route.data.subscribe(
+      (data: { user: User }) => {
+        //guardamos en profile el usuario de la url (para enviarlo al sidebar)
+        this.profile = data.user;
+      }
+    );
+    this.userService.currentUser.subscribe(
+      (userData)=> {
+        this.currentUser = userData;
+        // console.log(this.currentUser);
+      }
+    )
   }
 }

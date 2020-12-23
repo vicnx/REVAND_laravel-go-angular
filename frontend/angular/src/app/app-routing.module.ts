@@ -14,7 +14,14 @@ const routes: Routes = [
   },
   {
     path: 'profile',
+    // children: [
+    //   {
+    //     path: ':username',
+    //     loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
+    //   }
+    // ]
     loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
+    
     // loadChildren: './editor/editor.module#EditorModule'
   },
   // {

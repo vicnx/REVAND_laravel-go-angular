@@ -27,8 +27,7 @@ export class AwardListComponent{
     runQuery(){
         this.allAwards = [];
         this.awardsService.query().subscribe((awards) => {
-            // console.log("object");
-            // console.log(awards);
+
             this.allAwards = awards['data'];
         });
     }

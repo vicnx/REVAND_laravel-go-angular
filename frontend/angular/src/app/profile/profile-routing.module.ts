@@ -2,33 +2,27 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile.component'
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {DashboardResolver} from './dashboard/dashboard-resolver.service';
+import {SettingsComponent} from './settings/settings.component';
+
+import {ProfileResolver} from './profile-resolver.service';
 
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':username',
     component: ProfileComponent,
-    // redirectTo: 'dashboard',
+    resolve: { user: ProfileResolver },
     children: [
       { 
-        path: ':username',
+        path: '',
         component: DashboardComponent,
-        resolve: {
-          user: DashboardResolver
-        },
-        children: [
-          {
-            path: 'settings',
-            component: DashboardComponent,
-          }
-        ]
       },
       { 
-        
+        path: 'settings',
+        component: SettingsComponent,
       }
-
-    ]
+    ],
+    
   }
 ];
 
