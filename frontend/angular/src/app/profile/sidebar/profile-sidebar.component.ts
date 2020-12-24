@@ -1,8 +1,8 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User, UserService } from '../../core';
-import {ProfileResolver} from './../profile-resolver.service';
+import { ProfileResolver } from './../profile-resolver.service';
 
 
 
@@ -17,16 +17,14 @@ export class SidebarProfileComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private route: ActivatedRoute,
-  ) {}
+  ) { }
   currentUser: User;
   checkCurrentUser: boolean;
   ngOnInit() {
-    this.checkCurrentUser= false; //True if the current user is the same that the obtained by bbdd
+    this.checkCurrentUser = false; //True if the current user is the same that the obtained by bbdd
     this.userService.currentUser.subscribe(
-      (userData)=> {
-        this.currentUser = userData
-        console.log(this.currentUser.username);
-        console.log(this.profile.username);
+      (userData) => {
+        this.currentUser = userData;
         if (this.currentUser.username == this.profile.username) {
           this.checkCurrentUser = true;
         }
@@ -35,14 +33,16 @@ export class SidebarProfileComponent implements OnInit {
   }
 
   ngOnChanges() {
-    if (this.currentUser.username == this.profile.username) {
-      this.checkCurrentUser = true;
+    if (this.currentUser) {
+      if (this.currentUser.username == this.profile.username) {
+        this.checkCurrentUser = true;
+      }
     }
   }
 
-  
 
-  logout(){
+
+  logout() {
     this.userService.purgeAuth();
     location.reload();
   }

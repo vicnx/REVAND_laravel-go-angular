@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class ProductListComponent{
     // isDeleting = false;
-    allProducts: Product[];
+    allProducts: any;
     
     constructor (
         private productService: ProductService,
@@ -27,8 +27,9 @@ export class ProductListComponent{
     runQuery(){
         this.allProducts = [];
         this.productService.query().subscribe((products) => {
-            console.log(products);
+            // console.log(products);
             this.allProducts = products;
+            console.log(this.allProducts);
         });
     }
     refresh(){

@@ -12,6 +12,7 @@ import { AuthModalComponent } from './login/auth-modal.component'
 import { RedisService } from './core';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
+// import { ProductListComponent } from './shared/product-helpers';
 
 // import { FontAwesomeModule } from '@fortawesome/angular-fontawesome' 
 

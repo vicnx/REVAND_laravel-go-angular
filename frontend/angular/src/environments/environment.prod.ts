@@ -5,4 +5,5 @@ export const environment = {
   
   api_go_users: 'http://go_users.docker.localhost/api', //Microservicio Users GO
   api_go_redis: 'http://go_redis.docker.localhost/api', //Microservicio REDIS GO
+  api_go_products: 'http://go_products.docker.localhost/api', //Microservicio Products GO
 };

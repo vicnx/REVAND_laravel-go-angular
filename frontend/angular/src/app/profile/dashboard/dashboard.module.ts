@@ -8,6 +8,6 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 @NgModule({
   imports: [SharedModule, DashboardRoutingModule],
   declarations: [DashboardComponent],
-  providers: []
+  providers: [DashboardRoutingModule]
 })
 export class DashboardModule {}

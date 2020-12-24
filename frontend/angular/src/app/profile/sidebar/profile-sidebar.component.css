@@ -97,6 +97,7 @@
     margin-bottom: 12px;
     color: rgb(100, 100, 100);
     transition: 0.1s;
+    cursor: pointer;
 }
 
 .profile_sidebar__nav__item:hover{

@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AwardListComponent,AwardPreviewComponent,AwardEditorComponent } from './award-helpers';
 import { SubscriptionListComponent,SubscriptionPreviewComponent,SubscriptionEditorComponent } from './subscription-helpers';
 import { UserListComponent,UserPreviewComponent,UserEditorComponent } from './user-helpers';
-import { ProductListComponent } from './product-helpers';
+import { ProductListComponent, ProductPreviewComponent } from './product-helpers';
 
 
 import { ShowAuthedDirective } from './show-authed.directive';
@@ -24,6 +24,8 @@ import { ShowAuthedDirective } from './show-authed.directive';
     RouterModule
   ],
   declarations: [
+    ProductPreviewComponent,
+    ProductListComponent,
     AwardListComponent,
     AwardPreviewComponent,
     AwardEditorComponent,
@@ -33,11 +35,11 @@ import { ShowAuthedDirective } from './show-authed.directive';
     UserListComponent,
     UserPreviewComponent,
     UserEditorComponent,
-    ProductListComponent,
     ShowAuthedDirective
   ],
   exports: [
     ProductListComponent,
+    ProductPreviewComponent,
     AwardListComponent,
     AwardPreviewComponent,
     AwardEditorComponent,

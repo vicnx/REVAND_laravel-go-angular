@@ -30,8 +30,9 @@ export class ApiService {
   get(path: string, api: string, params: HttpParams = new HttpParams()): Observable<any> {
     //para recoger la API enviada.
     let x = "api_go_"+api;
+    // console.log("pepepepepepe");
     environment[x]; //environment.api_go_users (example)
-    
+    console.log(`${environment[x]}${path}`);
     return this.http.get(`${environment[x]}${path}`, { params })
       .pipe(catchError(this.formatErrors));
   }

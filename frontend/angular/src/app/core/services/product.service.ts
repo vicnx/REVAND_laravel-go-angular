@@ -16,7 +16,11 @@ export class ProductService {
     ) { }
 
     query(): Observable<Product[]> {
-        return this.apiService.get('/products/','products').pipe(map(data =>data.data));
+        return this.apiService.get('/products/','products')
+        .pipe(map(
+          data => { return data },
+          err => console.log(err)
+        ));    
     }
 
     // get(id): Observable<Product> {
