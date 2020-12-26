@@ -23,9 +23,9 @@ export class ProductService {
         ));    
     }
 
-    // get(id): Observable<Product> {
-    //     return this.apiService.getlaravel('/subscription/' + id).pipe(map(data => data.subscription));
-    // }
+    get(id): Observable<Product> {
+        return this.apiService.get('/products/','products').pipe(map(data => data.subscription));
+    }
 
     // destroy(id) {
     //     return this.apiService.deletelaravel('/subscription/' + id);

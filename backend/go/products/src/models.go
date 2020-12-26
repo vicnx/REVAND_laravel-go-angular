@@ -2,6 +2,8 @@ package products
 
 import (
 	"goApp/common"
+	// "go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 /*
@@ -18,7 +20,7 @@ POST http://go_products.docker.localhost/api/products
 */
 
 type Products struct {
-	// ID       primitive.ObjectID `bson:"_id"`
+	ID        primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
 	Name    	string 			`bson:"name, omitempty"`
 	Description	string 			`bson:"description, omitempty"`
 	Images		[]string 		`bson:"images, omitempty"`

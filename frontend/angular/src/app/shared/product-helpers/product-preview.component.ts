@@ -13,7 +13,9 @@ export class ProductPreviewComponent{
   @Output() item = new EventEmitter<Product>();
   constructor (
     private productsService: ProductService,
-    ){}
+    ){
+      console.log(this.product);
+    }
 
   // @Input() test: Product;
   isDeleting = false;

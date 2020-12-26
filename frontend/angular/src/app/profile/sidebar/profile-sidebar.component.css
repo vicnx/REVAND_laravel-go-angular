@@ -4,6 +4,8 @@
     /* border: 1px solid black; */
     font-family: CooperHewitt;
     padding-top: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .profile_sidebar__info{

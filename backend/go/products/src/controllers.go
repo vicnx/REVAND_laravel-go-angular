@@ -13,6 +13,16 @@ type Filter struct {
 
 func ProductList(c *gin.Context) {
 
+	check:=checkUser(c)
+	fmt.Println(check)
+	
+	
+	// check:= CheckCurrentUser("mangomango")
+	// fmt.Println(check)
+	// token := c.Request.Header["Authorization"];
+	
+	
+	
 	// GET QUERY PARAMS (KEY AND VALUE)
 	key := c.Request.URL.Query().Get("key")
 	value := c.Query("value")
@@ -65,9 +75,23 @@ func ProductUpdate(c *gin.Context) {
 }
 
 func ProductCreate(c *gin.Context) {
+
+	// token:=getTokenFromHeaders(c)
+	// username:=getUsernameFromHeaders(c)
+	// if username == "undefined" {
+	// 	c.AbortWithStatus(http.StatusUnauthorized)
+	// 	return
+	// }
+	// fmt.Println(username)
+	// fmt.Println(token)
+
+	
+
 	var product Products
 	c.BindJSON(&product);
 	err := CreateProduct(&product)
+	fmt.Println(product);
+	
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
@@ -75,7 +99,6 @@ func ProductCreate(c *gin.Context) {
 		
 		return
 	}
-	// return
 }
 
 func ProductDelete(c *gin.Context) {
