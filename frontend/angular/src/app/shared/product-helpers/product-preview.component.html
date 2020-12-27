@@ -1,5 +1,6 @@
 <article class="product_preview">
-    <section class="product_preview__img">
+    <!-- [routerLink]="['/product/',product.Slug]" -->
+    <section class="product_preview__img" [routerLink]="['/product/',product.Slug]">
         <img src="{{product.Images}}" alt="far cry" onerror='this.src="https://image.api.playstation.com/cdn/EP0001/CUSA05847_00/6SOISQ9M0FkHf52a4iHcO5OLDKMtjzhj.png";'>
     </section>
     <section class="product_preview__data">

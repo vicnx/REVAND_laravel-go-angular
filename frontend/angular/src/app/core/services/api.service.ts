@@ -32,7 +32,7 @@ export class ApiService {
     let x = "api_go_"+api;
     // console.log("pepepepepepe");
     environment[x]; //environment.api_go_users (example)
-    console.log(`${environment[x]}${path}`);
+    // console.log(`${environment[x]}${path}`);
     return this.http.get(`${environment[x]}${path}`, { params })
       .pipe(catchError(this.formatErrors));
   }
@@ -79,7 +79,7 @@ export class ApiService {
   }
 
   postlaravel(path: string, body: Object = {}): Observable<any> {
-    console.log(environment.api_url_laravel);
+    // console.log(environment.api_url_laravel);
     return this.http.post(
       `${environment.api_url_laravel}${path}`,
       JSON.stringify(body)

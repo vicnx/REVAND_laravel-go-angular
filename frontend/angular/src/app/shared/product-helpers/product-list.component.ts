@@ -29,7 +29,7 @@ export class ProductListComponent{
         this.productService.query().subscribe((products) => {
             // console.log(products);
             this.allProducts = products;
-            console.log(this.allProducts);
+            // console.log(this.allProducts);
         });
     }
     refresh(){

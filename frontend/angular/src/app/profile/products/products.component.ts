@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ProductsComponent implements OnInit {
   constructor() {
-    console.log("products COMPONENT");
+    // console.log("products COMPONENT");
   }
   test = "all";
 

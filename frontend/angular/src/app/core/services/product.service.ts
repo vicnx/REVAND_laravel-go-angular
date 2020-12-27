@@ -23,8 +23,8 @@ export class ProductService {
         ));    
     }
 
-    get(id): Observable<Product> {
-        return this.apiService.get('/products/','products').pipe(map(data => data.subscription));
+    get(slug): Observable<Product> {
+        return this.apiService.get('/products/'+slug,'products').pipe(map(data => data));
     }
 
     // destroy(id) {

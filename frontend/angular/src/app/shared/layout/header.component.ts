@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   ) {}
   currentUser: User;
   ngOnInit() {
-    console.log("load ngoninit header");
+    // console.log("load ngoninit header");
     this.userService.currentUser.subscribe(
       (userData) => {
         this.currentUser = userData;
@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
   }
 
   showAuth(){
-    console.log("login");
+    // console.log("login");
     let login = document.getElementById('modal-auth-canvas');
     login.className = 'active-modal';
 

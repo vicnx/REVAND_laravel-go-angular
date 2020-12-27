@@ -4,6 +4,9 @@ import { ProfileComponent } from './profile.component'
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {SettingsComponent} from './settings/settings.component';
 import {ProductsComponent} from './products/products.component';
+import {ProductComponent} from './products/product/product.component';
+import {ProductResolver} from './products/product/product-resolver.service';
+
 
 
 import {ProfileResolver} from './profile-resolver.service';
@@ -30,7 +33,20 @@ const routes: Routes = [
       },
       { 
         path: 'products',
-        loadChildren: () => import(`./products/products.module`).then(m => m.ProductsModule), pathMatch: 'full',
+        children:[
+          {
+            path: '',
+            loadChildren: () => import(`./products/products.module`).then(m => m.ProductsModule), pathMatch: 'full',
+          },
+          {
+            path: ':slug',
+            component: ProductComponent,
+            resolve: {
+              award: ProductResolver
+            }
+          },
+        ]
+        
       }
     ],
     

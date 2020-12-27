@@ -30,8 +30,8 @@ export class UserService {
   // Verify JWT in localstorage with server & load user's info.
   // This runs once on application startup.
   populate() {
-    console.log("POPULATE");
-    console.log(location.pathname.split('/',5)[1]);
+    // console.log("POPULATE");
+    // console.log(location.pathname.split('/',5)[1]);
     
     
     // If JWT detected, attempt to get & store user's info
@@ -48,7 +48,7 @@ export class UserService {
         );
       }
     } else {
-      console.log("purge auth");
+      // console.log("purge auth");
       // Remove any potential remnants of previous auth states
       this.purgeAuth();
     }
@@ -61,7 +61,7 @@ export class UserService {
     this.currentUserSubject.next(user);
     // Set isAuthenticated to true
     this.isAuthenticatedSubject.next(true);
-    console.log("SEND REDIS");
+    // console.log("SEND REDIS");
     this.redisService.set({ key: "user_" + user.username, value: "Bearer " + user.token });
   }
 
@@ -106,12 +106,12 @@ export class UserService {
   attemptAuthLaravel(username): Observable<User> {
     //deslogeamos para poder reemplazar el token (guardar el de laravel)
     this.purgeAuth();
-    console.log(this.apiService);
+    // console.log(this.apiService);
     //enviamos a laravel
     return this.apiService.postlaravel('/admin-login/', { username })
       .pipe(map(
         data => {
-          console.log(data);
+          // console.log(data);
           //logeamos con la info de laravel
           this.setAuth(data.user);
           // this.setAuth(data);
@@ -125,8 +125,8 @@ export class UserService {
     return this.apiService.get('/users/','users')
       .pipe(map(
         data => {
-          console.log("++++++++++++++++++++++++++++++++++++++++++++++");
-          console.log(data);
+          // console.log("++++++++++++++++++++++++++++++++++++++++++++++");
+          // console.log(data);
           return data
         },
         err => console.log(err)
@@ -135,18 +135,18 @@ export class UserService {
 
 
   save(user): Observable<User> {
-    console.log("DENTRO DE SAVE SERVICE");
+    // console.log("DENTRO DE SAVE SERVICE");
     // user= {user}
-    console.log(user);
+    // console.log(user);
     if (user.ID) {
-        console.log(user);
+        // console.log(user);
         return this.apiService.put('/users/' + user.ID,'users', user )
             .pipe(map(data => data.user));
     }
   }
 
   destroy(userid) {
-    console.log(userid);
+    // console.log(userid);
     return this.apiService.delete('/users/' + userid,'users');
   }
 

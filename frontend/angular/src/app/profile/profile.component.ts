@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
   profile: User;
   currentUser: User;
   ngOnInit() {
-    console.log("profile component");
+    // console.log("profile component");
     this.route.data.subscribe(
       (data: { user: User }) => {
         //guardamos en profile el usuario de la url (para enviarlo al sidebar)
