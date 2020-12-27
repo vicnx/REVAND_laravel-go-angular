@@ -5,8 +5,11 @@ go 1.15
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.6.3
+	github.com/go-ping/ping v0.0.0-20201115131931-3300c582a663
 	github.com/go-sql-driver/mysql v1.5.0
+	github.com/gosimple/slug v1.9.0
 	github.com/howeyc/fsnotify v0.9.0 // indirect
+	github.com/imroc/req v0.3.0
 	github.com/jinzhu/gorm v1.9.16
 	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/pilu/config v0.0.0-20131214182432-3eb99e6c0b9a // indirect

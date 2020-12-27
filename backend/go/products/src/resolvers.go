@@ -9,12 +9,23 @@ import (
 	// "go.mongodb.org/mongo-driver/mongo"
 	"goApp/common"
 	// "net/http"
+	"reflect"
+	"github.com/gosimple/slug"
+	// "time"
+	"strconv"
+	"math/rand"
 
 	_ "strconv"
 )
 
 
 func CreateProduct(data interface{}) error {
+	field := reflect.ValueOf(data).Elem().FieldByName("Name").Interface()
+	str := fmt.Sprintf("%v", field)
+	text := slug.Make(str+strconv.Itoa(rand.Intn(9999 - 0) + 0))
+
+	reflect.ValueOf(data).Elem().FieldByName("Slug").SetString(text)
+
 	client, err := common.GetMongoClient()
 	if err != nil {
 		return err
@@ -24,7 +35,6 @@ func CreateProduct(data interface{}) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println(err);
 	return err
 }
 
@@ -84,6 +94,44 @@ func GetAllProducts(key string,value string) ([]Products,error) {
 // }
 
 
+func GetProductBySlug(slug string) (Products,error) {
+	result := Products{}
+	client, err := common.GetMongoClient()
+	collection := client.Database(common.DBmongo).Collection(common.PRODUCTS)
+	
+	filter := bson.D{primitive.E{Key: "slug", Value: slug}}	
+
+	err = collection.FindOne(context.TODO(), filter).Decode(&result)
+
+	if err != nil { return result, err }
+
+	return result, nil
+
+
+	// WORKS =================
+
+	// cur, err := collection.Find(context.TODO(), filter )
+	// if err != nil { log.Fatal(err) }
+	// var results []Products
+
+	// for cur.Next(context.TODO()) {
+	// 	var elem Products
+	// 	err := cur.Decode(&elem)
+	// 	if err != nil { log.Fatal(err) }
+	// 	results =append(results, elem)
+	// }
+
+    // if err := cur.Err(); err != nil {
+    //     log.Fatal(err)
+	// }
+	// fmt.Println(results)
+	
+	// cur.Close(context.TODO())
+	
+	// return results,err
+}
+
+
 
 //update product
 func UpdateProduct(data interface{}) error {
@@ -108,10 +156,10 @@ func DeleteAllProducts(data interface{}) error {
 
 
 //get product by ID
-func GetProductByID(data, id interface{}) error {
-	db := common.GetDB()
-	err := db.Where("id = ?", id).First(data).Error
-	return err
-}
+// func GetProductBySlug(data, slug interface{}) error {
+// 	db := common.GetDB()
+// 	err := db.Where("id = ?", id).First(data).Error
+// 	return err
+// }
 
 

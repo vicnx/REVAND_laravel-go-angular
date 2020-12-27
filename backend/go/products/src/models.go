@@ -21,6 +21,7 @@ POST http://go_products.docker.localhost/api/products
 
 type Products struct {
 	ID        primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
+	Slug		string 			`bson:"slug, omitempty"`
 	Name    	string 			`bson:"name, omitempty"`
 	Description	string 			`bson:"description, omitempty"`
 	Images		[]string 		`bson:"images, omitempty"`
