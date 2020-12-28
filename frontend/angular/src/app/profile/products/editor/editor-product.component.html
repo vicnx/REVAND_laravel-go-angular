@@ -1,0 +1,17 @@
+<div class="product">
+    EDITOR
+    <form [formGroup]="productForm">
+        <fieldset [disabled]="isSubmitting">
+            <input type="text" placeholder="Name" formControlName="Name"><br>
+            <input type="text" placeholder="Description" formControlName="Description"><br>
+            <input type="text" placeholder="Images: [aa,aa]" formControlName="Images"><br>
+            <input type="number" placeholder="Price" formControlName="Price"><br>
+
+            <button class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submitForm()">
+                New Product
+            </button>
+        </fieldset>
+
+    </form>
+
+</div>

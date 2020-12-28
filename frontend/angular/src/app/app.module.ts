@@ -12,6 +12,10 @@ import { AuthModalComponent } from './login/auth-modal.component'
 import { RedisService } from './core';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductResolver } from './profile/products/product/product-resolver.service';
+import { NgImageSliderModule } from 'ng-image-slider';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
+
 // import { ProductListComponent } from './shared/product-helpers';
 
 // import { FontAwesomeModule } from '@fortawesome/angular-fontawesome' 
@@ -24,10 +28,13 @@ import { HttpClientModule } from '@angular/common/http';
     CoreModule,
     SharedModule,
     HomeModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgImageSliderModule,
+    IvyCarouselModule
   ],
   providers: [
-    RedisService
+    RedisService,
+    ProductResolver    
   ],
   bootstrap: [AppComponent]
 })

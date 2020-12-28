@@ -7,11 +7,16 @@ import { ProductResolver } from './product-resolver.service';
 // import { MarkdownPipe } from './markdown.pipe';
 import { SharedModule } from '../../../shared';
 import { ProductRoutingModule } from './product-routing.module';
+import { NgImageSliderModule } from 'ng-image-slider';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
+
 
 @NgModule({
   imports: [
     SharedModule,
-    ProductRoutingModule
+    ProductRoutingModule,
+    NgImageSliderModule,
+    IvyCarouselModule
   ],
   declarations: [
     ProductComponent,

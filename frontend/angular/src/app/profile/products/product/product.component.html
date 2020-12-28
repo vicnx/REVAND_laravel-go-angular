@@ -1,3 +1,50 @@
-<div class="product">
+<div class="product_details_container">
+    <div class="product_details">
+        <header class="product_details__header">
+            <section class="product_details__header__user">
+                <div class="product_details__header__user__img">
+                    <img src="https://media-exp1.licdn.com/dms/image/C4D03AQHgTg56kGYcZQ/profile-displayphoto-shrink_200_200/0?e=1610582400&v=beta&t=OkBkkLXoUVsnTfft3y5k8qfdToOiJId4QImrinAwsQ4" alt="Joel">
+                </div>
+                <div class="product_details__header__user__info">
+                    <span class="product_details__header__user__name">Joel Rev.</span>
+                    <span class="product_details__header__user__products">4 products</span>
+                </div>
+            </section>
+            <section class="product_details__header__rating">
 
+            </section>
+            <section class="product_details__header__actions">
+                <div class="product_details__actions__item product_details__actions__mg">
+                    <div class="product_details__actions__mg__canvas">
+                        <i class="far fa-heart"></i>
+                    </div>
+                </div>
+                <div class="product_details__actions__item product_details__actions__msg">
+                    <div class="product_details__actions__msg__canvas">
+                        <i class="far fa-comment-dots"></i>
+                    </div>
+                </div>
+            </section>
+        </header>
+        <div class="product_details__img">
+            <!-- <ng-image-slider 
+                [images]="imageObject" 
+                [imageSize]="{ width: '100%', height: '100%', space: 0 }"
+                slideImage="1" 
+            #nav></ng-image-slider> -->
+            <carousel
+                [images]="images"
+                cellsToShow=1
+                height=500 style="border-radius: 10px; overflow: hidden;">
+            </carousel>
+        </div>
+
+        <div class="product_details__data">
+            <span class="product__price">{{product.Price}}&nbsp;€</span>
+            <span class="product__name">{{product.Name}}</span>
+            <hr>
+            <p class="product__description">{{product.Description}}</p>
+
+        </div>
+    </div>
 </div>

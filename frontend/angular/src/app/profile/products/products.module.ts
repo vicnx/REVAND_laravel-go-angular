@@ -4,11 +4,12 @@ import { RouterModule } from '@angular/router';
 import { ProductsComponent } from './products.component';
 import { SharedModule } from '../../shared';
 import { ProductsRoutingModule } from './products-routing.module';
-
-
+import { ProductResolver } from './product/product-resolver.service';
+import { NgImageSliderModule } from 'ng-image-slider';
+ 
 @NgModule({
-  imports: [SharedModule, ProductsRoutingModule],
+  imports: [SharedModule, ProductsRoutingModule,NgImageSliderModule],
   declarations: [ProductsComponent],
-  providers: []
+  providers: [ProductResolver]
 })
 export class ProductsModule {}

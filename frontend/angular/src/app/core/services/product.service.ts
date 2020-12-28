@@ -28,21 +28,21 @@ export class ProductService {
     }
 
     // destroy(id) {
-    //     return this.apiService.deletelaravel('/subscription/' + id);
+    //     return this.apiService.deletelaravel('/product/' + id);
     // }
 
-    // save(subscription): Observable<Product> {
-    //     subscription={subscription}
+    save(product): Observable<Product> {
+        // product={product}
         
-    //     console.log(subscription.subscription);
-    //     if (subscription.subscription.id) {
-    //         return this.apiService.putlaravel('/subscription/' + subscription.subscription.id, subscription )
-    //             .pipe(map(data => data.subscription));
-    //     } else {
-    //         return this.apiService.postlaravel('/subscription/', subscription )
-    //             .pipe(map(data => data.subscription));
-    //     }
-    // }
+        console.log(product);
+        if (product._id) {
+            return this.apiService.put('/products/' + product.id,'products', product )
+                .pipe(map(data => data.product));
+        } else {
+            return this.apiService.post('/products/','products', product )
+                .pipe(map(data => data.product));
+        }
+    }
 
 
 }

@@ -21,3 +21,9 @@ button{
     border: none;
     
 }
+body {
+    position: relative;
+    box-sizing: border-box;
+    /* width: 100%; */
+    min-height: 100vh;
+}

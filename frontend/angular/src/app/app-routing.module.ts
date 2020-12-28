@@ -1,36 +1,38 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule,PreloadAllModules } from '@angular/router';
+import { ProductComponent } from './profile/products/product/product.component';
+import { ProductResolver } from './profile/products/product/product-resolver.service';
 
 const routes: Routes = [
-  // {
-  //   path: 'editor',
-  //   loadChildren: () => import('./editor/editor.module').then(m => m.EditorModule)
-  //   // loadChildren: './editor/editor.module#EditorModule'
-  // },
   {
     path: 'admin-panel',
     loadChildren: () => import('./panel-admin/admin.module').then(m => m.AdminModule)
-    // loadChildren: './editor/editor.module#EditorModule'
   },
   {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
-    
-    // loadChildren: './editor/editor.module#EditorModule'
   },
-  // {
-  //   path: 'award',
-  //   loadChildren: () => import('./panel-admin/awards/award/award.module').then(m => m.AwardModule)
-  //   // loadChildren: './award/award.module#AwardModule'
-  // }
-  
+  {
+    path: 'products',
+    children: [
+      {
+        path: '',
+        loadChildren: () => import(`./profile/products/products.module`).then(m => m.ProductsModule), pathMatch: 'full',
+      },
+      {
+        path: ':slug',
+        component: ProductComponent,
+        resolve: {
+          product: ProductResolver
+        }
+      },
+    ]
+
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    // preload all modules; optionally we could
-    // implement a custom preloading strategy for just some
-    // of the modules (PRs welcome 😉)
     preloadingStrategy: PreloadAllModules
   })],
   exports: [RouterModule]

@@ -1,5 +1,6 @@
-import { Component, Input,Output, EventEmitter, ViewChild, ElementRef, ComponentFactoryResolver, Injector, ApplicationRef, Renderer2 } from '@angular/core';
+import { Component, Input,Output, EventEmitter, ViewChild, ElementRef, ComponentFactoryResolver, Injector, ApplicationRef, Renderer2, OnInit } from '@angular/core';
 import { Product, ProductService } from '../../core';
+import { Router } from '@angular/router'
 // import { Product, UsersService } from '../../../assets/logo-web.png';
 
 @Component({
@@ -7,14 +8,19 @@ import { Product, ProductService } from '../../core';
   styleUrls: ['product-preview.component.css'],
   templateUrl: './product-preview.component.html'
 })
-export class ProductPreviewComponent{
+export class ProductPreviewComponent implements OnInit{
   @Input() product: Product;
   @Output() refresh_list = new EventEmitter<string>();
   @Output() item = new EventEmitter<Product>();
-  constructor ( private productsService: ProductService ){}
+  constructor ( private productsService: ProductService, private router: Router ){}
 
   // @Input() test: Product;
   isDeleting = false;
+  currentRoute = this.router.url;
+
+  ngOnInit() {
+    console.log(this.router.url)
+  }
 
     // deleteProduct() {
       

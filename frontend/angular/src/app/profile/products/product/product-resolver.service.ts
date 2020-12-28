@@ -16,7 +16,7 @@ export class ProductResolver implements Resolve<Product> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<any> {
-
+    // console.log(object);
     return this.productsService.get(route.params['slug'])
       .pipe(catchError((err) => this.router.navigateByUrl('/')));
   }
