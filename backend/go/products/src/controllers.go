@@ -83,6 +83,24 @@ func ProductCreate(c *gin.Context) {
 	}
 }
 
+func ProductUpdate(c *gin.Context) {
+	slug := c.Param("slug")
+	var product Products
+
+	c.BindJSON(&product);
+	product.Slug = slug
+	_,err := UpdateProduct(slug,product)
+	
+	if err != nil {
+		c.JSON(http.StatusNotFound, "Not found")
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, gin.H{"product": product})
+		return
+	}
+	return
+}
+
 func ProductDelete(c *gin.Context) {
 	var product Products
 	id := c.Params.ByName("id")
@@ -95,13 +113,3 @@ func ProductDelete(c *gin.Context) {
 	}
 }
 
-func ProductDeleteAll(c *gin.Context) {
-	var product Products
-	err := DeleteAllProducts(&product)
-	if err != nil {
-		c.JSON(http.StatusOK, "Not found")
-		// c.AbortWithStatus(http.StatusNotFound)
-	} else {
-		c.JSON(http.StatusOK, "Truncate product")
-	}
-}

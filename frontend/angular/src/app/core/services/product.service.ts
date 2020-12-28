@@ -36,7 +36,7 @@ export class ProductService {
         
         console.log(product);
         if (product._id) {
-            return this.apiService.put('/products/' + product.id,'products', product )
+            return this.apiService.put('/products/' + product.Slug,'products', product )
                 .pipe(map(data => data.product));
         } else {
             return this.apiService.post('/products/','products', product )

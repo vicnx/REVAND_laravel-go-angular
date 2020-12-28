@@ -16,6 +16,7 @@ export class EditorProductComponent implements OnInit {
   // canModify: boolean;
   isDeleting = false;
   isSubmitting = false;
+  update = false;
   errors: Object = {};
 
   constructor(
@@ -38,6 +39,7 @@ export class EditorProductComponent implements OnInit {
     this.route.data.subscribe(
       (data: { product: Product }) => {
         if (data.product) {
+          this.update = true;
           this.product = data.product;
           this.productForm.patchValue(data.product);
         }
@@ -47,13 +49,9 @@ export class EditorProductComponent implements OnInit {
 
   submitForm() {
     this.isSubmitting = true;
-    console.log("Submit");
     this.getDataProduct(this.productForm.value);
-    console.log("====================");
-    console.log(this.product);
-
     this.productService.save(this.product).subscribe(
-      product => this.router.navigateByUrl('/'),
+      product => this.router.navigateByUrl('/products/'+this.product.Slug),
       err => {
         this.errors = err;
         this.isSubmitting = false;
