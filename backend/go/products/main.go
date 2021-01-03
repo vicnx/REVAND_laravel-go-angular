@@ -3,11 +3,12 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	// "github.com/jinzhu/gorm"
 	"goApp/common"
+	// "github.com/zsais/go-gin-prometheus"
 	"goApp/src"
-	// "net/http"
 	// "strings"
+	// "net/http"
+	// "github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 // func Migrate(db *gorm.DB) {
@@ -15,11 +16,28 @@ import (
 // }
 
 func main() {
+	// http.Handle("/metrics", promhttp.Handler())
+	// http.ListenAndServe(":2112", nil)
 	// http.HandleFunc("/", handler)
 	db := common.Init()
 	// Migrate(db)
 	defer db.Close()
 	r := gin.Default()
+	// p := ginprometheus.NewPrometheus("gin")
+
+	// p.ReqCntURLLabelMappingFn = func(c *gin.Context) string {
+	// 	url := c.Request.URL.Path
+	// 	for _, p := range c.Params {
+	// 		if p.Key == "name" {
+	// 			url = strings.Replace(url, p.Value, ":name", 1)
+	// 			break
+	// 		}
+	// 	}
+	// 	return url
+	// }
+
+	// p.Use(r)
+
 	MakeRoutes(r)
 	v1 := r.Group("/api")
 
@@ -28,6 +46,8 @@ func main() {
 	
 	products.ProductsRoutes(v1.Group("/products"))
 
+	
+
 	// // NO TOKEN
 	// v1.Use(users.AuthMiddleware(false))
 	// products.ProductsNoAuthed(v1.Group("/product"))
@@ -35,6 +55,9 @@ func main() {
     // // SI TOKEN
 	// v1.Use(users.AuthMiddleware(true))
 	// products.ProductsAuthed(v1.Group("/products"))
+
+	// http.Handle("/metrics", promhttp.Handler())
+	// http.ListenAndServe(":2112", nil)
 
 	fmt.Printf("0.0.0.0:8080")
 	r.Run(":8080")

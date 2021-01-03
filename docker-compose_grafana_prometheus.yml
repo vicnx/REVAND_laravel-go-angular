@@ -1,0 +1,219 @@
+version: '3'
+services:
+  laravel:
+    container_name: revand_laravel
+    build: ./backend/laravel
+    working_dir: /app
+    volumes:
+    - ./backend/laravel:/app
+    ports:
+    - "8000:8000"
+    networks:
+    - revand_network
+    restart: on-failure
+    depends_on:
+    - mysql
+    - redis
+    - go_users
+    - mongo
+    working_dir: /app
+    command: >
+      bash -c " composer install &&
+      composer update laravel/framework &&
+      cp .env.example .env &&
+      php artisan key:generate &&
+      php artisan route:list &&
+      php artisan migrate &&
+      php artisan serve --host=0.0.0.0 --port=8000"
+      
+  go_users:
+    container_name: revand_go_users
+    image: golang:1.15
+    working_dir: /go/src/goApp
+    volumes:
+      - ./backend/go/users:/go/src/goApp
+    restart: on-failure
+    expose:
+    - 8080
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.go_users.rule=Host(`go_users.docker.localhost`)"
+      - "traefik.port=8080"
+      - "traefik.docker.network=revand_network"
+    networks:
+    - revand_network
+    depends_on:
+    - mysql
+    - redis
+    - go_redis
+    - mongo
+    command: bash go_script.sh
+
+  go_redis:
+    container_name: revand_go_redis
+    image: golang:1.15
+    working_dir: /go/src/goApp
+    volumes:
+      - ./backend/go/redis:/go/src/goApp
+    restart: on-failure
+    expose:
+    - 8080
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.go_redis.rule=Host(`go_redis.docker.localhost`)"
+      - "traefik.port=8080"
+      - "traefik.docker.network=revand_network"
+    networks:
+    - revand_network
+    depends_on:
+    - mysql
+    - redis
+    - mongo
+    command: bash go_script.sh
+
+  go_products:
+    container_name: revand_go_products
+    image: golang:1.15
+    working_dir: /go/src/goApp
+    volumes:
+      - ./backend/go/products:/go/src/goApp
+    restart: on-failure
+    expose:
+    - 8080
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.go_products.rule=Host(`go_products.docker.localhost`)"
+      - "traefik.port=8080"
+      - "traefik.docker.network=revand_network"
+    networks:
+    - revand_network
+    depends_on:
+    - mysql
+    - redis
+    - go_redis
+    - go_users
+    - mongo
+    command: bash go_script.sh
+
+  angular:
+    container_name: revand_angular
+    build: ./frontend/angular
+    working_dir: /app
+    volumes:
+    - ./frontend/angular:/app
+    ports:
+    - "4200:4200"
+    networks:
+    - revand_network
+    restart: on-failure
+    depends_on:
+    - go_users
+    - laravel
+    working_dir: /app
+    command: bash -c "npm install && npm start"
+  mysql:
+    container_name: revand_mysql
+    image: mysql:5.7
+    ports:
+    - "3306:3306"
+    networks:
+    - revand_network
+    restart: on-failure
+    volumes:
+    - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: revand
+      MYSQL_USER: vicnx
+      MYSQL_PASSWORD: 12345678
+  mongo:
+    container_name: revand_mongo
+    image: mongo:3.5
+    ports:
+      - "27017:27017"
+    volumes:
+      - "mongodata:/data/db"
+    restart: on-failure
+    networks:
+      - revand_network
+  redis:
+    image: redis:alpine
+    container_name: revand_redis
+    restart: on-failure
+    ports: 
+      - "6379:6379"
+    volumes:
+      - "redis:/redis_data"
+    networks: 
+      - revand_network
+  traefik:
+    # The official v2 Traefik docker image
+    image: traefik:v2.3
+    # Enables the web UI and tells Traefik to listen to docker
+    command: 
+    - "--api.dashboard=true"
+    - "--api.insecure=true"
+    - "--providers.docker"
+    - "--entrypoints.web.address=:80"
+    - "--metrics.prometheus=true"
+    - "--metrics.prometheus.buckets=0.1, 0.3, 1.2, 5.0"
+    ports:
+      # The HTTP port
+      - "80:80"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - go_users
+    networks:
+     - revand_network
+  grafana:
+    image: grafana/grafana:7.1.5
+    container_name: revand_grafana
+    ports:
+    - "3500:3000"
+    restart: on-failure
+    volumes:
+    - './common/grafana:/etc/grafana/provisioning/datasources/'
+    - 'myGrafanaVol:/var/lib/grafana'
+    networks:
+    - revand_network
+    depends_on: 
+    - go_users
+    - laravel
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
+      GF_INSTALL_PLUGINS: "grafana-clock-panel 1.0.1"
+  prometheus:
+    image: prom/prometheus:v2.20.1
+    container_name: "revand_prometheus"
+    ports:
+    - "9090:9090"
+    volumes:
+      - './common/prometheus/:/etc/prometheus/'
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    labels:
+      - "traefik.docker.network=traefik"
+      - "traefik.backend=prometheus"
+      - "traefik.frontend.rule=Host:prometheus.localhost"
+      - "traefik.port=9090"
+    depends_on: 
+      - "go_users"
+      - "go_products"
+      - "traefik"
+      - "laravel"
+    networks:
+      - revand_network
+networks:
+    revand_network:
+volumes:
+    db_data:
+    myGrafanaVol:
+    redis:
+    mongodata:
+    # mongodb:

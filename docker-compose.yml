@@ -27,73 +27,49 @@ services:
       php artisan serve --host=0.0.0.0 --port=8000"
       
   go_users:
+    extends:
+      file: common-services.yml
+      service: microservices_go
     container_name: revand_go_users
-    image: golang:1.15
-    working_dir: /go/src/goApp
     volumes:
       - ./backend/go/users:/go/src/goApp
-    restart: on-failure
-    expose:
-    - 8080
     labels:
-      - "traefik.enable=true"
       - "traefik.http.routers.go_users.rule=Host(`go_users.docker.localhost`)"
-      - "traefik.port=8080"
-      - "traefik.docker.network=revand_network"
-    networks:
-    - revand_network
     depends_on:
     - mysql
     - redis
     - go_redis
     - mongo
-    command: bash go_script.sh
 
   go_redis:
+    extends:
+      file: common-services.yml
+      service: microservices_go
     container_name: revand_go_redis
-    image: golang:1.15
-    working_dir: /go/src/goApp
     volumes:
       - ./backend/go/redis:/go/src/goApp
-    restart: on-failure
-    expose:
-    - 8080
     labels:
-      - "traefik.enable=true"
       - "traefik.http.routers.go_redis.rule=Host(`go_redis.docker.localhost`)"
-      - "traefik.port=8080"
-      - "traefik.docker.network=revand_network"
-    networks:
-    - revand_network
     depends_on:
     - mysql
     - redis
     - mongo
-    command: bash go_script.sh
 
   go_products:
+    extends:
+      file: common-services.yml
+      service: microservices_go
     container_name: revand_go_products
-    image: golang:1.15
-    working_dir: /go/src/goApp
     volumes:
       - ./backend/go/products:/go/src/goApp
-    restart: on-failure
-    expose:
-    - 8080
     labels:
-      - "traefik.enable=true"
       - "traefik.http.routers.go_products.rule=Host(`go_products.docker.localhost`)"
-      - "traefik.port=8080"
-      - "traefik.docker.network=revand_network"
-    networks:
-    - revand_network
     depends_on:
     - mysql
     - redis
     - go_redis
     - go_users
     - mongo
-    command: bash go_script.sh
 
   angular:
     container_name: revand_angular
@@ -134,17 +110,8 @@ services:
     volumes:
       - "mongodata:/data/db"
     restart: on-failure
-    # environment:
-      # MONGODB_USER: jowi
-      # MONGODB_PASS: 12345678
-      # MONGODB_DATABASE: revand
-
-      # MONGO_INITDB_ROOT_USERNAME: jowi
-      # MONGO_INITDB_ROOT_PASSWORD: 12345678
-      # MONGO_INITDB_DATABASE: revand
     networks:
       - revand_network
-    # command: mongod
   redis:
     image: redis:alpine
     container_name: revand_redis
@@ -159,7 +126,13 @@ services:
     # The official v2 Traefik docker image
     image: traefik:v2.3
     # Enables the web UI and tells Traefik to listen to docker
-    command: --api.dashboard=true --api.insecure=true --providers.docker --entrypoints.web.address=:80
+    command: 
+    - "--api.dashboard=true"
+    - "--api.insecure=true"
+    - "--providers.docker"
+    - "--entrypoints.web.address=:80"
+    - "--metrics.prometheus=true"
+    - "--metrics.prometheus.buckets=0.1, 0.3, 1.2, 5.0"
     ports:
       # The HTTP port
       - "80:80"
@@ -172,11 +145,6 @@ services:
       - go_users
     networks:
      - revand_network
-  # whoami:
-  #   # A container that exposes an API to show its IP address
-  #   image: traefik/whoami
-  #   labels:
-  #     - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
   grafana:
     image: grafana/grafana:7.1.5
     container_name: revand_grafana
@@ -196,6 +164,27 @@ services:
       GF_AUTH_DISABLE_LOGIN_FORM: "true"
       GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
       GF_INSTALL_PLUGINS: "grafana-clock-panel 1.0.1"
+  prometheus:
+    image: prom/prometheus:v2.20.1
+    container_name: "revand_prometheus"
+    ports:
+    - "9090:9090"
+    volumes:
+      - './common/prometheus/:/etc/prometheus/'
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    labels:
+      - "traefik.docker.network=traefik"
+      - "traefik.backend=prometheus"
+      - "traefik.frontend.rule=Host:prometheus.localhost"
+      - "traefik.port=9090"
+    depends_on: 
+      - "go_users"
+      - "go_products"
+      - "traefik"
+      - "laravel"
+    networks:
+      - revand_network
 networks:
     revand_network:
 volumes:
