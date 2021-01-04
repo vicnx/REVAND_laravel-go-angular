@@ -145,27 +145,33 @@ Para el despliegue de nuestra aplicación Grafana, utilizaremos el siguiente fic
 <!-- ![Grafana Image](media/grafana_cnf.png) -->
 <img src="media/grafana_cnf.png" alt="grafana_cnf">
 
+### Qué es Go?
+
+**Go** es un **nuevo lenguaje de programación** desarrollado por **Google**, nacido en 2009, pero se considera un lenguaje maduro con el cual se han desarrollado miles de proyectos alrededor del mundo. Es un lenguaje **tipado estático**, es decir, una vez declaremos una variable, esta no podrá cambiar de tipo en todo el programa, pero no es necesario indicarle el tipo al instanciarla. 
+
+Es un lenguaje **extremadamente rápido**, ya que fue diseñado para la aumentar velocidad de nuestras aplicaciones. Su **eficencia es equiparable a C** y mucha gente opina que será su sustituto natural, ya que su **sintaxis está insiparada en este mismo.**
+
+Go es muy famoso por su **facilidad para crear microservicios**, ya que es donde destaca realmente su eficiencia.
+
+#### Que son los microservicios?
+
+Los **microservicios** son un tipo de arquitectura que sirve para diseñar aplicaciones. Lo que distingue a la arquitectura de microservicios de los enfoques tradicionales y monolíticos es la forma en que **desglosa una aplicación en sus funciones principales**. Cada función se denomina **servicio** y se puede diseñar e implementar de forma independiente. Por ejemplo, podemos tener un microservicio de **usuarios, otro de productos, y uno de comentarios**. En el caso de que el servico de comentarios **falle**, nuestra aplicacion **seguira funcionando ya que es totalmente independiente.** 
+
 ### Qué es Traefik?
 
 <!-- ![Traefik Image](media/traefik.png) -->
 <img src="media/traefik.png" alt="traefik" width="400px">
 
 
-Traefik es un balanceador de carga y proxy inverso HTTP moderno que facilita la implementación de microservicios.
+**Traefik** es un **balanceador de carga y proxy inverso HTTP** moderno que **facilita la implementación de microservicios.** Este se integra con los componentes de su infraestructura existente ( Docker, Kubernetes, Amazon ECS, etc) y se configura automáticamente de forma dinámica.
 
 #### ¿Qué es un balanceador de carga?
 
-Un balanceador de carga asigna o distribuye las solicitudes que llegan de los clientes a los servidores usando un algoritmo, en nuestro caso, elegiremos a que microservicio Go debería ir la solicitud.
+Un **balanceador de carga** asigna o **distribuye las solicitudes que llegan de los clientes** a los servidores usando un algoritmo, en nuestro caso, elegiremos a que microservicio Go debería ir la solicitud.
 
 #### ¿Qué es un proxy inverso HTTP?
 
-​Un proxy inverso es un tipo de servidor proxy que recupera recursos en nombre de un cliente, es decir, recupera la ruta establecida (example.com/blog). Éste permite a Traefik decidir a que servidor enviar la peticion.
-
-Este se integra con los componentes de su infraestructura existente ( Docker, Kubernetes, Amazon ECS, etc) y se configura automáticamente de forma dinámica.
-
-A partir de una serie de datos recolectados por (en nuestro caso) prometheus obtendremos un **panorama gráfico de la situación de nuestra aplicación.**
-
-Para el despliegue de nuestra aplicación Grafana, utilizaremos el siguiente fichero de configuración **datasources.yml** ubucado en el directorio **./grafana**:
+**Un proxy inverso** es un tipo de servidor proxy que **recupera recursos en nombre de un cliente**, es decir, recupera **la ruta establecida (example.com/blog)**. Éste permite a Traefik decidir a que servidor enviar la peticion.
 
 ### Implementar Grafana y Prometheus junto a Golang
 
