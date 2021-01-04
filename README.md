@@ -175,5 +175,39 @@ Un **balanceador de carga** asigna o **distribuye las solicitudes que llegan de 
 
 **Un proxy inverso** es un tipo de servidor proxy que **recupera recursos en nombre de un cliente**, es decir, recupera **la ruta establecida (example.com/blog)**. Éste permite a Traefik decidir a que servidor enviar la peticion.
 
-### Implementar Grafana y Prometheus junto a Golang
+### Refactorizar Docker-Compose utilizando extends
+
+Vamos a refactorizar nuestro **docker-compose.yml** con la extensión **“extends”**.
+Utilizando esta extensión podremos reutilizar parte del código en nuestros microservicios, de esta manera, los parámetros que tengan en común estos microservicios no estarán repetidos en el **docker-compose.yml**.
+
+#### Precaución
+
+Antes de empezar, la propiedad **extends** de docker-compose se inhabilito a partir de la versión 3 de archivo, pero investigando en diversos foros, al actualizar nuestra versión local de **docker-compose a v1.27.X**, este volvía a funcionar correctamente. Por lo que es necesario verificar nuestra versión de docker-compose para evitar posibles fallos.
+
+<img src="media/compose-version.png" alt="Versión de Docker-Compose">
+
+#### Crear fichero común
+
+A continuación, creamos un nuevo archivo el cual nombraremos **common-services.yml**. Este archivo contendrá todo el código en común de nuestros microservicios:
+
+<img src="media/common-services.png" alt="common-services.yml">
+
+Una vez creado nuestro archivo en común, vamos a modificar nuestro **docker-compose.yml** para indicar a nuestros microservicios que utilicen el fichero **common-services.yml**. Cabe destacar que hay varios parámetros que no pueden ser extendidos ***(por ejemplo, container_name, depends_on, etc)***, además de otros los cuales deben ser únicos en cada microservicio, como los volumes o labels, donde se indica el Host que hace referencia a **Traefik**. Para extender nuestro servicio, incluimos en la parte superior de nuestro microservicio:
+
+```
+extends:
+  file: common-services.yml
+  service: microservices_go
+```
+
+Finalmente, nuestros microservicios se verían mucho más simplificados como podemos observar a continuación:
+
+<img src="media/go_users_extends.png" alt="go_users_extends.png">
+
+<img src="media/go_redis_extends.png" alt="go_redis_extends.png">
+
+<img src="media/go_products_extends.png" alt="go_products_extends.png">
+
+
+
 
