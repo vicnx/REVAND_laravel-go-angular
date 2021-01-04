@@ -9,7 +9,6 @@ import (
 	"github.com/revand/App_Go_Larave_Angular_TEST/backend/go/users"
 	"github.com/revand/App_Go_Larave_Angular_TEST/backend/go/common"
 	"github.com/revand/App_Go_Larave_Angular_TEST/backend/go/redis"
-	// "github.com/go-redis/redis"
 )
 
 func Migrate(db *gorm.DB) {

@@ -108,14 +108,14 @@ services:
 Como ejecutar un fichero docker-compose.yml:
 ``` sudo docker-compose up ```
 
-### Qué es Prometheus?
+## Qué es Prometheus?
 
 <!-- ![Prometheus Image](media/prometheus.png) -->
 <img src="media/prometheus.png" alt="prometheus" width="400px">
 
 **Prometheus** es un **sistema de monitorización** escrito en GO. Con este podemos almacenar **información sobre todos los logs de nuestra aplicación**, entre ellos, acceso a endpoints.
 
-#### Características Principales
+### Características Principales
 - **Modelo de datos multidimensional:** con datos de series de tiempo identificados por nombre métrico y claves/ valores pares.
 - **Lenguaje flexible de consultas:** permite aprovechar esta multidimensionalidad para consultar los datos de manera simple y flexible.
 - **Nodos autónomos de servidor único:** debido a la poca confianza en el almacenamiento distribuido, la colección de series de tiempo ocurre a través de un modelo de extracción, por medio de HTTP.
@@ -130,7 +130,7 @@ Para la creación de nuestro servidor Prometheus, utilizaremos el siguiente fich
 
 Para visualizar las métricas generadas por Prometheus, utilizaremos Grafana.
 
-### Qué es Grafana?
+## Qué es Grafana?
 
 <!-- ![Grafana Image](media/grafana.png) -->
 <img src="media/grafana.png" alt="grafana" width="400px">
@@ -145,7 +145,7 @@ Para el despliegue de nuestra aplicación Grafana, utilizaremos el siguiente fic
 <!-- ![Grafana Image](media/grafana_cnf.png) -->
 <img src="media/grafana_cnf.png" alt="grafana_cnf">
 
-### Qué es Go?
+## Qué es Go?
 
 <img src="media/go.png" alt="go" width="300px">
 
@@ -155,11 +155,15 @@ Es un lenguaje **extremadamente rápido**, ya que fue diseñado para la aumentar
 
 Go es muy famoso por su **facilidad para crear microservicios**, ya que es donde destaca realmente su eficiencia.
 
-#### Que son los microservicios?
+### Que son los microservicios?
 
 Los **microservicios** son un tipo de arquitectura que sirve para diseñar aplicaciones. Lo que distingue a la arquitectura de microservicios de los enfoques tradicionales y monolíticos es la forma en que **desglosa una aplicación en sus funciones principales**. Cada función se denomina **servicio** y se puede diseñar e implementar de forma independiente. Por ejemplo, podemos tener un microservicio de **usuarios, otro de productos, y uno de comentarios**. En el caso de que el servico de comentarios **falle**, nuestra aplicacion **seguira funcionando ya que es totalmente independiente.** 
 
-### Qué es Traefik?
+### Qué es Go Modules?
+
+Los módulos son la forma en que Go gestiona las dependencias. Un **module** es una **coleción de paquetes de Go** almacenados en un fichero llamado **go.mod**. El fichero go.mod define la ruta del módulo, que también es la ruta de importación utilizada para el directorio raíz. El comando go habilita el uso de modulos siempre y cuando el directorio principal que tiene un go.mod, se encuentre fuera del directorio $GOPATH/src.
+
+## Qué es Traefik?
 
 <!-- ![Traefik Image](media/traefik.png) -->
 <img src="media/traefik.png" alt="traefik" width="400px">
@@ -167,26 +171,83 @@ Los **microservicios** son un tipo de arquitectura que sirve para diseñar aplic
 
 **Traefik** es un **balanceador de carga y proxy inverso HTTP** moderno que **facilita la implementación de microservicios.** Este se integra con los componentes de su infraestructura existente ( Docker, Kubernetes, Amazon ECS, etc) y se configura automáticamente de forma dinámica.
 
-#### ¿Qué es un balanceador de carga?
+### ¿Qué es un balanceador de carga?
 
 Un **balanceador de carga** asigna o **distribuye las solicitudes que llegan de los clientes** a los servidores usando un algoritmo, en nuestro caso, elegiremos a que microservicio Go debería ir la solicitud.
 
-#### ¿Qué es un proxy inverso HTTP?
+### ¿Qué es un proxy inverso HTTP?
 
 **Un proxy inverso** es un tipo de servidor proxy que **recupera recursos en nombre de un cliente**, es decir, recupera **la ruta establecida (example.com/blog)**. Éste permite a Traefik decidir a que servidor enviar la peticion.
 
-### Refactorizar Docker-Compose utilizando extends
+## Refactorizar Backend Go a Go Modules
+
+Anteriormente, utilizabamos GOPATH para especificar la ruta donde estará el workspace, es decir, donde ubicaremos nuestros proyectos Go. Dentro de este workspace se instalaban las dependencias de nuestros proyectos y puede llegar a ser tedioso crear un nuevo proyecto o dockerizarlo. Este es un breve ejemplo de como funcionaba anteriormente:
+
+### Docker-Compose.yml
+
+<img src="media/docker-compose-without-modules-go.png" alt="docker-compose-without-modules-go">
+
+### Dockerfile
+
+<img src="media/dockerfile_go.png" alt="dockerfile">
+
+Esta manera de trabajar está anticuada ya que otros lenguajes de programación disponen de un gestor de paquetes el cual nos permite instalar las dependencias fácilmente y es más sencillo empezar un nuevo proyecto (ya que no es necesario crear un workspace de GOPATH para ubicar nuestros proyectos).
+
+Al importar nuestros packages en la aplicación, es necesario indicar la ruta completa desde el workspace, las cuales quedarían así:
+
+<img src="media/maingo-without-modules.png" alt="maingo-without-modules">
+
+### Refactorización
+
+Al refactorizar Go a Go Modules, ya no es necesario disponer de un Dockerfile, lo cual simplifica el proceso. Nuestro docker-compose.yml quedaría finalmente así:
+
+<img src="media/docker-compose-with-modules-go.png" alt="docker-compose-with-modules-go">
+
+En el parámetro **command:** indicamos una serie de comandos que se ejecutarán al lanzarse el contenedor. 
+Primero, confirmamos que no existan anteriores ficheros go.mod y go.sum para evitar conflictos. A continuación, inicializamos nuestro proyecto por módulos con ```go mod init goApp``` ('goApp' es el nombre que hemos indicado a nuestro proyecto en el volumes de docker-compose.yml). Seguidamente, se ejecuta el comando go mod tidy el cual descarga las dependencias que encuentre en nuestros archivos .go y las añade a go.mod y go.sum. Finalmente instalamos fresh para ejecutar nuestro programa y lo iniciamos.
+
+```
+bash -c "rm -f go.mod || true
+      && rm -f go.sum || true
+      && go mod init goApp
+      && go mod tidy
+      && go get github.com/pilu/fresh
+      && fresh "
+```
+
+Hay que tener en cuenta que ya no trabajamos desde el workspace indicado en GOPATH, por lo que las rutas en nuestro programa go cambian:
+
+<img src="media/maingo-with-modules.png" alt="maingo-with-modules">
+
+
+## Refactorizar aplicación Go a Microservicios independientes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Refactorizar Docker-Compose utilizando extends
 
 Vamos a refactorizar nuestro **docker-compose.yml** con la extensión **“extends”**.
 Utilizando esta extensión podremos reutilizar parte del código en nuestros microservicios, de esta manera, los parámetros que tengan en común estos microservicios no estarán repetidos en el **docker-compose.yml**.
 
-#### Precaución
+### Precaución
 
 Antes de empezar, la propiedad **extends** de docker-compose se inhabilito a partir de la versión 3 de archivo, pero investigando en diversos foros, al actualizar nuestra versión local de **docker-compose a v1.27.X**, este volvía a funcionar correctamente. Por lo que es necesario verificar nuestra versión de docker-compose para evitar posibles fallos.
 
 <img src="media/compose-version.png" alt="Versión de Docker-Compose">
 
-#### Crear fichero común
+### Crear fichero común
 
 A continuación, creamos un nuevo archivo el cual nombraremos **common-services.yml**. Este archivo contendrá todo el código en común de nuestros microservicios:
 
@@ -208,6 +269,63 @@ Finalmente, nuestros microservicios se verían mucho más simplificados como pod
 
 <img src="media/go_products_extends.png" alt="go_products_extends.png">
 
+## Implementar Prometheus y Grafana con Traefik
+
+Primero implementaremos **Prometheus** a nuestra aplicación. Para la creación de este servicio, utilizaremos un archivo de configuración llamado **prometheus.yml**
+
+<img src="media/prometheus_cnf.png" alt="prometheus_cnf">
+
+En la configuración usaremos de target el servicio de **Traefik** por el puerto ***8080***.
+
+Para desplegar Grafana en nuestra aplicación correctamente tenemos que crear un archivo de configuración, nombrado como **datasources.yml**:
+
+<img src="media/grafana_cnf.png" alt="grafana_cnf">
+
+En el campo URL introducimos el nombre del servicio de **Prometheus** junto al puerto de ese servicio. 
+
+Para implementar **Grafana** y **Prometheus** con **golang** tendremos que añadir los dos nuevos servicios al **docker-compose** y modificar el servicio **Traefik** para que exponga las métricas.
+ 
+Primero vamos a añadir el servicio **Grafana** de la siguiente forma:
+
+<img src="media/grafana_compose.png" alt="grafana_compose">
+
+Partiremos de una imagen oficial de grafana, en concreto, la versión 7.1.5. 
+Publicaremos el **puerto 3500** y copiaremos el fichero de configuración de grafana a ***/etc/grafana/provisioning/datasources/***. Además, crearemos un volumen **(myGrafanaVol)** asignado al directorio ***/var/lib/grafana***. Para la ejecución del contenedor, es necesario declarar varias variables de entorno para cumplir los requisitos que se exigen. Para ello, en environment, declararemos la siguientes variables:
+
+```
+GF_AUTH_ANONYMOUS_ENABLED: "true"
+GF_AUTH_DISABLE_LOGIN_FORM: "true"
+GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
+GF_INSTALL_PLUGINS: "grafana-clock-panel 1.0.1"
+```
+
+Con estas variables de entorno, los usuarios anónimos estan habilitados, no es necesario logearse para acceder a **Grafana**, y todos aquellos que entren tendrán el rol de admin. Además, instalaremos el plugin "grafana-clock-panel 1.0.1". El contenedor se nombrará ***revand_grafana*** y formará parte de la red ***revand_network***.
+
+Ahora vamos a continuar añadiendo el servicio de **Prometheus** en el **docker-compose.yml** de la siguiente forma:
+
+<img src="media/prometheus_compose.png" alt="prometheus_compose">
+
+El cual ejecutará una imagen oficial de **Prometheus**, más concretamente, la versión 2.20.1. Se publicará por el **puerto 9090** y copiará el fichero de configuración ubicado en nuestra carpeta ***./common/prometheus*** a ***/etc/prometheus/.*** Además, al ejecutar el contenedor, lanzará el comando ***--config.file=/etc/prometheus/prometheus.yml.*** Nombraremos al contenedor como **revand_prometheus** como lo indicamos en el archivo de configuración del **Grafana** y formará parte de la red **revand_network**.
+
+Finalmente en el servicio de **Traefik** tenemos que añadir los siguientes **commandos** para permitir que exporte las métricas.
+
+```
+--metrics.prometheus=true
+--metrics.prometheus.buckets=0.1,0.3,1.2,5.0
+```
+<img src="media/traefik_gp_compose.png" alt="traefik_gp_compose">
+
+### Comprobaciones
+
+Ahora podemos iniciar el **docker-compose** y comprobar que el servicio de **Prometheus** y el de **Grafana** funcionan correctamente y que **Prometheus** recoje métricas de **Traefik**. 
+
+Para comprobarlo, una vez iniciados nos dirigimos a ***localhost:9090 (prometheus)*** y en la sección Status vamos a Targets y ahí podremos comprobar como **Traefik** envia sus métricas:
+
+<img src="media/prometheus_check.png" alt="prometheus_check">
+
+Seguidamente nos podemos dirigir a ***localhost:3500 (grafana)*** y al crear un nuevo panel nos apareceran todos los datos que esta recibiendo **Prometheus** de **Traefik**.
+
+<img src="media/grafana_check.png" alt="grafana_check">
 
 
 
