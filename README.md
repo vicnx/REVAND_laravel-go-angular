@@ -345,7 +345,7 @@ Primero implementaremos **Prometheus** a nuestra aplicación. Para la creación 
 
 En la configuración usaremos de target el servicio de **Traefik** por el puerto ***8080***.
 
-Para desplegar Grafana en nuestra aplicación correctamente tenemos que crear un archivo de configuración, nombrado como **datasources.yml**:
+Para desplegar **Grafana** en nuestra aplicación correctamente tenemos que crear un archivo de configuración, nombrado como **datasources.yml**:
 
 <img src="media/grafana_cnf.png" alt="grafana_cnf">
 
