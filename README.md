@@ -242,6 +242,11 @@ Disponemos de tres microservicios **(users, redis y products)**. Dentro de cada 
 - En **src** se encuentran los **ficheros necesarios** para el funcionamiento clave del microservicio. Podemos observar que la cantidad de ficheros en los microservicios es bastante reducida lo cual permite una fácil comprensión del programa. 
 - En **tmp** se alamcenan los ficheros temporales.
 
+En cada microservicio, debemos tener en cuenta que **deben apuntar al puerto 8080** para que traefik pueda gestionarlos. Lo indicaremos en el **main.go** de cada microservicio:
+
+<img src="media/maingo_port.png" alt="users_estructura_microservicios">
+
+
 ### Microservicios en Docker-Compose con Traefik
 
 Para lanzar cada microservicio, podemos utilizar **docker-compose** para agilizar el proceso junto a **Traefik**.
@@ -255,7 +260,7 @@ Podemos observar en el **servicio traefik** de docker-compose diversos comandos:
 - **--api.dashboard=true** , permite acceder a un dashboard versión web de traefik para observar los servicios que contiene. Esta se sirve por el puerto 8080.
 - **--api.insecure=true** , la API será accesible desde el entrypoint 8080 nombrado como **traefik**
 - **--providers.docker** , habilitar el provider docker para gestionar los servicios i apuntar a las labels de queda microservicio en el docker-compose.
-- **--entrypoints.web.address=:80** , definir que el entrypoint **web** escuche por el puerto 80. Todos nuestros microservicios apuntarán a este puerto y Traefik se encargará de gestionarlos.
+- **--entrypoints.web.address=:80** , definir que el entrypoint **web** escuche por el puerto 80.
 
 En el parámetro **volumes:**, hacemos referencia a nuestros contenedores docker para que traefik pueda gestionarlos.
 
@@ -263,38 +268,39 @@ Finalmente, exponemos los puertos 80 y 8080.
 
 #### Crear microservicios en docker-compose
 
+A continuación, vamos a **crear** los diversos **servicios** en **docker-compose**. Podemos observar que todos los microservicios exponen el **puerto 8080**, esto es para que traefik sea quien los gestione y evitar que haya conflictos.
 
-<!-- ESTRUCUTRA GO MICROSERVICIOS
-<img src="media/estructura_go_microservicios.png" alt="estructura_go_microservicios">
+El **parámetro más importante** para conectar cada microservicio con Traefik són las **labels**. Aquí indicaremos los parámetros necesarios:
 
-MAINGO MICROSERVICIOS
-<img src="media/maingo_microservicios.png" alt="maingo_microservicios">
+- **"traefik.enable=true"**  (Habilitamos Traefik)
+- **"traefik.http.routers.go_redis.rule=Host(`go_redis.docker.localhost`)"** (Indicamos la url que tendrá nuestro microservicio, el proxy inverso se encargará de recoger las peticiones de nuestros clientes)
+- **"traefik.port=8080"** (Apuntamos al puerto 8080 de Traefik)
+- **"traefik.docker.network=revand_network"** (Indicamos en que network se encuentra Traefik)
 
-ESTRUCUTRA USERS INTERNA
-<img src="media/users_estructura_microservicios.png" alt="users_estructura_microservicios"> -->
 
-GO_USERS DOCKER COMPOSE
-<img src="media/go_users_microservice.png" alt="go_users_microservice">
+Cada uno de ellos **ejecutara un script al iniciarse** el contenedor el cual contiene los siguientes comandos (necesarios para iniciar el microservicio Go):
 
-GO_PRODUCTS DOCKER COMPOSE
-<img src="media/go_products_microservice.png" alt="go_products_microservice">
-
-GO_REDIS DOCKER COMPOSE
-<img src="media/go_redis_microservice.png" alt="go_redis_microservice">
-
-BASH SCRIPT
 <img src="media/go_script.png" alt="go_script">
 
-TRAEFIK DOCKER COMPOSE
-<img src="media/traefik_microservice_compose.png" alt="traefik_microservice_compose">
+Finalmente este sería el resultado en nuestro docker-compose.yml
 
+#### GO_USERS - DOCKER COMPOSE
 
+<img src="media/go_users_microservice.png" alt="go_users_microservice">
 
+#### GO_PRODUCTS - DOCKER COMPOSE
 
+<img src="media/go_products_microservice.png" alt="go_products_microservice">
 
+#### GO_REDIS - DOCKER COMPOSE
 
+<img src="media/go_redis_microservice.png" alt="go_redis_microservice">
 
+### Comprobaciones
 
+En el **panel dashboard** de traefik, en la seccion HTTP podemos observar todos los servicios que traefik detecta, en concreto los microservicios GO con las URLs asignadas.  
+
+<img src="media/traefik_dashboard.png" alt="traefik dashboard">
 
 
 
