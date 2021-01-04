@@ -147,6 +147,8 @@ Para el despliegue de nuestra aplicación Grafana, utilizaremos el siguiente fic
 
 ### Qué es Go?
 
+<img src="media/go.png" alt="go" width="300px">
+
 **Go** es un **nuevo lenguaje de programación** desarrollado por **Google**, nacido en 2009, pero se considera un lenguaje maduro con el cual se han desarrollado miles de proyectos alrededor del mundo. Es un lenguaje **tipado estático**, es decir, una vez declaremos una variable, esta no podrá cambiar de tipo en todo el programa, pero no es necesario indicarle el tipo al instanciarla. 
 
 Es un lenguaje **extremadamente rápido**, ya que fue diseñado para la aumentar velocidad de nuestras aplicaciones. Su **eficencia es equiparable a C** y mucha gente opina que será su sustituto natural, ya que su **sintaxis está insiparada en este mismo.**
