@@ -181,7 +181,7 @@ Un **balanceador de carga** asigna o **distribuye las solicitudes que llegan de 
 
 ## Refactorizar Backend Go a Go Modules
 
-Anteriormente, utilizabamos GOPATH para especificar la ruta donde estará el workspace, es decir, donde ubicaremos nuestros proyectos Go. Dentro de este workspace se instalaban las dependencias de nuestros proyectos y puede llegar a ser tedioso crear un nuevo proyecto o dockerizarlo. Este es un breve ejemplo de como funcionaba anteriormente:
+Anteriormente, utilizabamos **GOPATH** para especificar la ruta donde estará el workspace, es decir, donde ubicaremos nuestros proyectos Go. Dentro de este workspace se instalaban las dependencias de nuestros proyectos y puede llegar a ser **tedioso crear un nuevo proyecto o dockerizarlo**. Este es un **breve ejemplo** de como funcionaba anteriormente:
 
 ### Docker-Compose.yml
 
@@ -191,7 +191,7 @@ Anteriormente, utilizabamos GOPATH para especificar la ruta donde estará el wor
 
 <img src="media/dockerfile_go.png" alt="dockerfile">
 
-Esta manera de trabajar está anticuada ya que otros lenguajes de programación disponen de un gestor de paquetes el cual nos permite instalar las dependencias fácilmente y es más sencillo empezar un nuevo proyecto (ya que no es necesario crear un workspace de GOPATH para ubicar nuestros proyectos).
+Esta manera de trabajar está **anticuada** ya que otros lenguajes de programación disponen de un **gestor de paquetes** el cual nos permite **instalar las dependencias fácilmente** y es más sencillo empezar un nuevo proyecto (ya que no es necesario crear un workspace de GOPATH para ubicar nuestros proyectos).
 
 Al importar nuestros packages en la aplicación, es necesario indicar la ruta completa desde el workspace, las cuales quedarían así:
 
@@ -222,7 +222,7 @@ Hay que tener en cuenta que ya no trabajamos desde el workspace indicado en GOPA
 
 ## Refactorizar aplicación Go a Microservicios independientes
 
-Anteriormente, nuestro backend Go agrupaba todas las funcionalidades en una única arquitectura tradicional y monolítica. Esto conlleva varios riesgos, ya que en caso de que falle, todo nuestro backend quedaría paralizado. Cada 'funcionalidad' se ubicaba en un package, por lo que la estructura y los imports serían los siguientes:
+Anteriormente, nuestro backend Go agrupaba todas las **funcionalidades en una única arquitectura tradicional y monolítica**. Esto conlleva varios **riesgos**, ya que en caso de que falle, todo nuestro **backend quedaría paralizado**. Cada 'funcionalidad' se ubicaba en un package, por lo que la estructura y los imports serían los siguientes:
 
 <img src="media/estructura_go_sin_microservicios.png" alt="estructura_go_sin_microservicios">
 
@@ -298,7 +298,7 @@ Finalmente este sería el resultado en nuestro docker-compose.yml
 
 ### Comprobaciones
 
-En el **panel dashboard** de traefik, en la seccion HTTP podemos observar todos los servicios que traefik detecta, en concreto los microservicios GO con las URLs asignadas.  
+En el **panel dashboard** de traefik, en la **seccion HTTP** podemos observar todos los servicios que traefik detecta, en concreto los microservicios GO con las URLs asignadas.  
 
 <img src="media/traefik_dashboard.png" alt="traefik dashboard">
 
