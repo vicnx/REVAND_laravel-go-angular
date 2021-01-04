@@ -222,9 +222,71 @@ Hay que tener en cuenta que ya no trabajamos desde el workspace indicado en GOPA
 
 ## Refactorizar aplicación Go a Microservicios independientes
 
+Anteriormente, nuestro backend Go agrupaba todas las funcionalidades en una única arquitectura tradicional y monolítica. Esto conlleva varios riesgos, ya que en caso de que falle, todo nuestro backend quedaría paralizado. Cada 'funcionalidad' se ubicaba en un package, por lo que la estructura y los imports serían los siguientes:
+
+<img src="media/estructura_go_sin_microservicios.png" alt="estructura_go_sin_microservicios">
+
+<img src="media/maingo-with-modules.png" alt="maingo-with-modules">
+
+Al utilizar la **nueva arquitectura de microservicios**, el backend queda más **limpio** y además es más **eficiente** y **resistente a fallos**.
+
+<img src="media/estructura_go_microservicios.png" alt="estructura_go_microservicios">
+
+<img src="media/maingo_microservicios.png" alt="maingo_microservicios">
+
+Disponemos de tres microservicios **(users, redis y products)**. Dentro de cada uno, se hayan tres directorios **(common,src y tmp)**. 
+
+<img src="media/users_estructura_microservicios.png" alt="users_estructura_microservicios">
+
+- En **common** tenemos la **conexión a la base de datos** y los tests, junto a los credenciales necesarios para la autenticación.
+- En **src** se encuentran los **ficheros necesarios** para el funcionamiento clave del microservicio. Podemos observar que la cantidad de ficheros en los microservicios es bastante reducida lo cual permite una fácil comprensión del programa. 
+- En **tmp** se alamcenan los ficheros temporales.
+
+### Microservicios en Docker-Compose con Traefik
+
+Para lanzar cada microservicio, podemos utilizar **docker-compose** para agilizar el proceso junto a **Traefik**.
+
+**Traefik** se encargará de gestionar y dirigir las peticiones de cada cliente al microservicio en concreto.
+
+<img src="media/traefik_microservice_compose.png" alt="traefik_microservice_compose">
+
+Podemos observar en el **servicio traefik** de docker-compose diversos comandos:
+
+- **--api.dashboard=true** , permite acceder a un dashboard versión web de traefik para observar los servicios que contiene. Esta se sirve por el puerto 8080.
+- **--api.insecure=true** , la API será accesible desde el entrypoint 8080 nombrado como **traefik**
+- **--providers.docker** , habilitar el provider docker para gestionar los servicios i apuntar a las labels de queda microservicio en el docker-compose.
+- **--entrypoints.web.address=:80** , definir que el entrypoint **web** escuche por el puerto 80. Todos nuestros microservicios apuntarán a este puerto y Traefik se encargará de gestionarlos.
+
+En el parámetro **volumes:**, hacemos referencia a nuestros contenedores docker para que traefik pueda gestionarlos.
+
+Finalmente, exponemos los puertos 80 y 8080.
+
+#### Crear microservicios en docker-compose
 
 
+<!-- ESTRUCUTRA GO MICROSERVICIOS
+<img src="media/estructura_go_microservicios.png" alt="estructura_go_microservicios">
 
+MAINGO MICROSERVICIOS
+<img src="media/maingo_microservicios.png" alt="maingo_microservicios">
+
+ESTRUCUTRA USERS INTERNA
+<img src="media/users_estructura_microservicios.png" alt="users_estructura_microservicios"> -->
+
+GO_USERS DOCKER COMPOSE
+<img src="media/go_users_microservice.png" alt="go_users_microservice">
+
+GO_PRODUCTS DOCKER COMPOSE
+<img src="media/go_products_microservice.png" alt="go_products_microservice">
+
+GO_REDIS DOCKER COMPOSE
+<img src="media/go_redis_microservice.png" alt="go_redis_microservice">
+
+BASH SCRIPT
+<img src="media/go_script.png" alt="go_script">
+
+TRAEFIK DOCKER COMPOSE
+<img src="media/traefik_microservice_compose.png" alt="traefik_microservice_compose">
 
 
 

@@ -155,23 +155,20 @@ services:
       - "redis:/redis_data"
     networks: 
       - revand_network
+
   traefik:
-    # The official v2 Traefik docker image
     image: traefik:v2.3
-    # Enables the web UI and tells Traefik to listen to docker
     command: --api.dashboard=true --api.insecure=true --providers.docker --entrypoints.web.address=:80
     ports:
-      # The HTTP port
       - "80:80"
-      # The Web UI (enabled by --api.insecure=true)
       - "8080:8080"
     volumes:
-      # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - go_users
     networks:
      - revand_network
+
   # whoami:
   #   # A container that exposes an API to show its IP address
   #   image: traefik/whoami
