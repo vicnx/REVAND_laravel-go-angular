@@ -60,6 +60,7 @@ export class ApiService {
   delete(path:string,api:string): Observable<any> {
     let x = "api_go_"+api;
     environment[x]; //environment.api_go_users (example)
+    console.log(path);
     return this.http.delete(
       `${environment[x]}${path}`
     ).pipe(catchError(this.formatErrors));

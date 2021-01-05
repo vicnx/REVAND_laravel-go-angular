@@ -1,7 +1,7 @@
 package products
 
 import (
-	// "fmt"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	// "github.com/gosimple/slug"
 	"net/http"
@@ -71,8 +71,10 @@ func ProductBySlug(c *gin.Context) {
 func ProductCreate(c *gin.Context) {
 
 	var product Products
-
 	c.BindJSON(&product);
+	fmt.Println(c.MustGet("my_user_id"))
+	userid := c.MustGet("my_user_id").(uint)
+	product.AuthorID = userid;
 
 	err := CreateProduct(&product)
 	if err != nil {
@@ -102,14 +104,12 @@ func ProductUpdate(c *gin.Context) {
 }
 
 func ProductDelete(c *gin.Context) {
-	var product Products
-	id := c.Params.ByName("id")
-	err := DeleteProduct(&product,id)
+	slug := c.Params.ByName("slug")
+	err := DeleteProduct(slug)
 	if err != nil {
-		// c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
-		c.JSON(http.StatusOK, gin.H{"id: " + id: "is deleted"})
+		c.JSON(http.StatusOK, gin.H{"slug: " + slug: "is deleted"})
 	}
 }
 

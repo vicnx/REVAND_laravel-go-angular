@@ -43,7 +43,7 @@ func main() {
 
 	// test:=VerifyToken(r);
 	// fmt.Println(test)
-	
+	v1.Use(products.AuthMiddleware(true))
 	products.ProductsRoutes(v1.Group("/products"))
 
 	

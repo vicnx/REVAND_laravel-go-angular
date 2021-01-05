@@ -23,5 +23,5 @@ func ProductsRoutes(router *gin.RouterGroup) {
 	router.GET("/:slug", ProductBySlug)
 	router.POST("/", ProductCreate)
 	router.PUT("/:slug", ProductUpdate)
-	router.DELETE("/:id", ProductDelete)
+	router.DELETE("/:slug", ProductDelete)
 }

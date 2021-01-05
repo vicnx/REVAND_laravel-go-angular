@@ -29,6 +29,17 @@ type Products struct {
 	AuthorID    uint 			`bson:"authorid, omitempty"`
 }
 
+type User struct {
+	ID           uint    `gorm:"primary_key"`
+	Username     string  `gorm:"column:username"`
+	Email        string  `gorm:"column:email;unique_index"`
+	Bio          string  `gorm:"column:bio;size:1024"`
+	Image        *string `gorm:"column:image"`
+	Provider     string  `gorm:"column:provider"`
+	Type     	 string  `gorm:"column:type"`
+	PasswordHash string  `gorm:"column:password;not null"`
+}
+
 func AutoMigrate() {
 	db := common.GetDB()
 	db.AutoMigrate(&Products{})

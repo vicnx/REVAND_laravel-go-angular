@@ -5,7 +5,9 @@
         </div>
         <h1>{{profile.username}}</h1>
         <!-- <small>{{profile.bio}}</small> -->
-        <button *ngIf="[checkCurrentUser]=='false'" class="follow_btn">Follow</button>
+        <button *ngIf="[checkCurrentUser]=='false' && [profile.following]=='false'" class="follow_btn" [profile]="profile" (click)="followUser($event)">Follow</button>
+        <button *ngIf="[checkCurrentUser]=='false' && [profile.following]=='true'" class="follow_btn following" [profile]="profile" (click)="unfollowUser($event)">Unfollow</button>
+
         <div class="profile_sidebar__info__stats">
             <div>
                 <span>23</span>

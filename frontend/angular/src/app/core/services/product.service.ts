@@ -44,5 +44,9 @@ export class ProductService {
         }
     }
 
+    destroy(slug) {
+        return this.apiService.delete('/products/' + slug,'products');
+    }
+
 
 }

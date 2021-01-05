@@ -1,9 +1,9 @@
 package products
 
 import (
-	// "github.com/dgrijalva/jwt-go"
-	// "github.com/dgrijalva/jwt-go/request"
-	// "goApp/common"
+	"github.com/dgrijalva/jwt-go"
+	"github.com/dgrijalva/jwt-go/request"
+	"goApp/common"
 	// "github.com/imroc/req"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -17,13 +17,40 @@ import (
 
 )
 
-//http://go_redis.docker.localhost/api
+var MyAuth2Extractor = &request.MultiExtractor{
+	AuthorizationHeaderExtractor,
+	request.ArgumentExtractor{"access_token"},
+}
+var AuthorizationHeaderExtractor = &request.PostExtractionFilter{
+	request.HeaderExtractor{"Authorization"},
+	stripBearerPrefixFromTokenString,
+}
 
+//to save SESSIOn
+func UpdateContextUser(c *gin.Context, my_user_id uint) {
+	var myUserModel User
+	if my_user_id != 0 {
+		db := common.GetDB()
+		db.First(&myUserModel, my_user_id)
+	}
+	c.Set("my_user_id", my_user_id)
+	c.Set("my_user_model", myUserModel)
+}
 func checkUser(c *gin.Context) bool{
-fmt.Println("CHEEECKUSER ======================")
 
-	token:=getTokenFromHeaders(c)
+	// token:=getTokenFromHeaders(c)
 	username:=getUsernameFromHeaders(c)
+	token, err := request.ParseFromRequest(c.Request, MyAuth2Extractor, func(token *jwt.Token) (interface{}, error) {
+		b := ([]byte(common.NBSecretPassword))
+		return b, nil
+	})
+	fmt.Println(token)
+	fmt.Println(err)
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		my_user_id := uint(claims["id"].(float64))
+		// fmt.Println(my_user_id,claims["id"])
+		UpdateContextUser(c, my_user_id)
+	}
 
 	if username == "undefined" {
 		c.AbortWithStatus(http.StatusUnauthorized)
@@ -79,7 +106,7 @@ fmt.Println("CHEEECKUSER ======================")
 	// 		fmt.Println(err)
 				
 	// }
-	fmt.Println(token)
+	// fmt.Println(token)
 	// fmt.Println(err)
 	// fmt.Println(redis_token)
 	// defer redis_token.Body.Close()
@@ -94,10 +121,10 @@ fmt.Println("CHEEECKUSER ======================")
 	return false
 }
 
-func getTokenFromHeaders(c *gin.Context) string {
+func getTokenFromHeaders(c *gin.Context) (string,error) {
 	token := c.Request.Header["Authorization"];
-	stripped:=stripBearerPrefixFromTokenString(token[0]);
-	return stripped
+	stripped,err:=stripBearerPrefixFromTokenString(token[0]);
+	return stripped,err
 }
 
 func getUsernameFromHeaders(c *gin.Context) string {
@@ -105,9 +132,38 @@ func getUsernameFromHeaders(c *gin.Context) string {
 	return username[0]
 }
 
-func stripBearerPrefixFromTokenString(tok string) (string) {
+// func stripBearerPrefixFromTokenString(tok string) (string) {
+// 	if len(tok) > 5 && strings.ToUpper(tok[0:7]) == "BEARER " {
+// 		return tok[7:]
+// 	}
+// 	return tok
+// }
+func stripBearerPrefixFromTokenString(tok string) (string, error) {
+	// Should be a bearer token
 	if len(tok) > 5 && strings.ToUpper(tok[0:7]) == "BEARER " {
-		return tok[7:]
+		return tok[7:], nil
 	}
-	return tok
+	return tok, nil
+}
+
+//activar el login o no
+func AuthMiddleware(auto401 bool) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		UpdateContextUser(c, 0)
+		token, err := request.ParseFromRequest(c.Request, MyAuth2Extractor, func(token *jwt.Token) (interface{}, error) {
+			b := ([]byte(common.NBSecretPassword))
+			return b, nil
+		})
+		if err != nil {
+			if auto401 {
+				c.AbortWithError(http.StatusUnauthorized, err)
+			}
+			return
+		}
+		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+			my_user_id := uint(claims["id"].(float64))
+			//fmt.Println(my_user_id,claims["id"])
+			UpdateContextUser(c, my_user_id)
+		}
+	}
 }

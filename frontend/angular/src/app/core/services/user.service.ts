@@ -153,4 +153,29 @@ export class UserService {
   getprofile(username){
     return this.apiService.get('/profile/' + username,'users');
   }
+
+  follow(username){
+    console.log("lalala");
+    return this.apiService.post('/profile/' + username + '/follow','users');
+  }
+
+  unfollow(username){
+    console.log("lololo");
+
+    return this.apiService.delete('/profile/' + username + '/follow','users');
+  }
+
+
+
+  GetUserByID(id): Observable<User> {
+    return this.apiService.get('/users/'+id,'users')
+      .pipe(map(
+        data => {
+          // console.log("++++++++++++++++++++++++++++++++++++++++++++++");
+          console.log(data);
+          return data
+        },
+        err => console.log(err)
+      ));
+  }
 }

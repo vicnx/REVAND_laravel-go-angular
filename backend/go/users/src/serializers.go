@@ -2,7 +2,7 @@ package users
 
 import (
 	"github.com/gin-gonic/gin"
-
+	"fmt"
 	"goApp/common"
 )
 
@@ -38,6 +38,7 @@ type UserSerializer struct {
 }
 
 type UserResponse struct {
+	ID        uint    `json:"id"`
 	Username string  `json:"username"`
 	Email    string  `json:"email"`
 	Bio      string  `json:"bio"`
@@ -50,6 +51,7 @@ type UserResponse struct {
 func (self *UserSerializer) Response() UserResponse {
 	myUser := self.c.MustGet("my_user_model").(User)
 	user := UserResponse{
+		ID: myUser.ID,
 		Username: myUser.Username,
 		Email:    myUser.Email,
 		Bio:      myUser.Bio,
@@ -58,5 +60,7 @@ func (self *UserSerializer) Response() UserResponse {
 		Type:	  myUser.Type,
 		Token:    common.GenToken(myUser.ID),
 	}
+	fmt.Println("wadawdwadwadwadawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+	fmt.Println(user);
 	return user
 }

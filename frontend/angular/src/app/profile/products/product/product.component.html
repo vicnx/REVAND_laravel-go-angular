@@ -3,10 +3,10 @@
         <header class="product_details__header">
             <section class="product_details__header__user">
                 <div class="product_details__header__user__img">
-                    <img src="https://media-exp1.licdn.com/dms/image/C4D03AQHgTg56kGYcZQ/profile-displayphoto-shrink_200_200/0?e=1610582400&v=beta&t=OkBkkLXoUVsnTfft3y5k8qfdToOiJId4QImrinAwsQ4" alt="Joel">
+                    <img src="{{Author.user.image}}" alt="Joel">
                 </div>
                 <div class="product_details__header__user__info">
-                    <span class="product_details__header__user__name">Joel Rev.</span>
+                    <span class="product_details__header__user__name">{{Author.user.username}}</span>
                     <span class="product_details__header__user__products">4 products</span>
                 </div>
             </section>
@@ -22,6 +22,11 @@
                 <div class="product_details__actions__item product_details__actions__msg">
                     <div class="product_details__actions__msg__canvas">
                         <i class="far fa-comment-dots"></i>
+                    </div>
+                </div>
+                <div class="product_details__actions__item product_details__actions__msg" *ngIf="[canModify]=='true'" (click)="delete()">
+                    <div class="product_details__actions__msg__canvas">
+                        DELETE
                     </div>
                 </div>
             </section>

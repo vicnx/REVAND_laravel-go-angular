@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Product, ProductService, } from '../../../core';
+
+import { User, UserService, Product, ProductService, UserList, } from '../../../core';
 
 @Component({
   selector: 'app-product-details',
@@ -11,15 +12,16 @@ import { Product, ProductService, } from '../../../core';
 })
 export class ProductComponent implements OnInit {
   product: Product;
-  // currentUser: User;
-  // canModify: boolean;
+  currentUser: User;
+  canModify: boolean;
   isDeleting = false;
+  Author: User;
 
   constructor(
     private route: ActivatedRoute,
     private productsService: ProductService,
     private router: Router,
-    // private userService: UserService,
+    private userService: UserService,
   ) { }
 
   images: Array<object>  = [
@@ -50,33 +52,46 @@ export class ProductComponent implements OnInit {
   ];
 
   ngOnInit() {
-
-    console.log("DENTRO DE COMPONENT DETAILS PRODUCT =======");
+    console.log("DENTRO DE COMPONENT DETAILS PRODUCT ======="),
 
     // Retreive the prefetched article
     this.route.data.subscribe(
       (data: { product: Product }) => {
         console.log(data.product);
         this.product = data.product;
+        this.userService.GetUserByID(this.product.AuthorID).subscribe(
+          (Author: User) => {
+            this.Author = Author;
+            console.log(this.Author);
+          });
       }
     );
 
     // Load the current user's data
-    // this.userService.currentUser.subscribe(
-    //   (userData: User) => {
-    //     this.currentUser = userData;
-
-    //     this.canModify = (this.currentUser.username === this.article.author.username);
-    //   }
-    // );
+    this.userService.currentUser.subscribe(
+      (userData: User) => {
+        this.currentUser = userData;
+        console.log(this.currentUser)
+        this.canModify = (this.currentUser.id === this.product.AuthorID);
+      }
+    );
   }
 
-  // deleteProduct() {
-  //   this.isDeleting = true;
-  //   this.productsService.destroy(this.product.id).subscribe(success => {
-  //       this.router.navigateByUrl('/');
-  //       console.log(this.product.id);
-  //   });
-  // }
+  getAuthor(){
+      this.userService.GetUserByID(this.product.AuthorID).subscribe(
+        (userData: User) => {
+          this.Author = userData;
+          console.log(this.Author);
+        });
+
+  }
+
+  delete() {
+    this.isDeleting = true;
+    this.productsService.destroy(this.product.Slug).subscribe(success => {
+        this.router.navigateByUrl('/');
+        console.log(this.product.Slug);
+    });
+  }
 
 }

@@ -137,8 +137,16 @@ func UpdateProduct(slug string, product Products) (bool,error) {
 // }
 
 //delete product
-func DeleteProduct(data, id interface{}) error {
-	db := common.GetDB()
-	err := db.Where("id = ?", id).Delete(data).Error
-	return err
+func DeleteProduct(slug string) error {
+	// result := Products{}
+	client, err := common.GetMongoClient()
+	collection := client.Database(common.DBmongo).Collection(common.PRODUCTS)
+	
+	// filter := bson.D{primitive.E{Key: "slug", Value: slug}}	
+	deleteResult, _ := collection.DeleteOne(context.TODO(), bson.M{"slug": slug})
+	fmt.Println(deleteResult);
+	// err = collection.Remove(bson.M{"slug": slug})
+	if err != nil { return err }
+
+	return nil
 }

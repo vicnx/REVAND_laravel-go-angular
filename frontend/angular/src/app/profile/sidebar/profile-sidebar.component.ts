@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User, UserService } from '../../core';
+import { User, UserService, Profile } from '../../core';
 import { ProfileResolver } from './../profile-resolver.service';
 
 
@@ -18,6 +18,7 @@ export class SidebarProfileComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
   ) { }
+  // profile_user: Profile;
   currentUser: User;
   checkCurrentUser: boolean;
   ngOnInit() {
@@ -25,6 +26,7 @@ export class SidebarProfileComponent implements OnInit {
     this.userService.currentUser.subscribe(
       (userData) => {
         this.currentUser = userData;
+        console.log(this.profile);
         if (this.currentUser.username == this.profile.username) {
           this.checkCurrentUser = true;
         }
@@ -40,7 +42,15 @@ export class SidebarProfileComponent implements OnInit {
     }
   }
 
+  followUser(event){
+    this.userService.follow(this.profile.username)
+    this.profile.following = true
+  }
 
+  unfollowUser(event){
+    this.userService.unfollow(this.profile.username)
+    this.profile.following = false
+  }
 
   logout() {
     this.userService.purgeAuth();
