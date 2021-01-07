@@ -51,6 +51,7 @@ export class ApiService {
   post(path: string,api: string, body: Object = {}): Observable<any> {
     let x = "api_go_"+api;
     environment[x]; //environment.api_go_users (example)
+    console.log(`${environment[x]}${path}`);
     return this.http.post(
       `${environment[x]}${path}`,
       JSON.stringify(body)

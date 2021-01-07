@@ -44,6 +44,7 @@ func ProfileRetrieve(c *gin.Context) {
 }
 
 func ProfileFollow(c *gin.Context) {
+	fmt.Println("HOLAAAAAA");
 	username := c.Param("username")
 	userModel, err := FindOneUser(&User{Username: username})
 	if err != nil {
@@ -51,6 +52,7 @@ func ProfileFollow(c *gin.Context) {
 		return
 	}
 	myUser := c.MustGet("my_user_model").(User)
+	fmt.Println(myUser);
 	err = myUser.following(userModel)
 	if err != nil {
 		c.JSON(http.StatusUnprocessableEntity, common.NewError("database", err))
@@ -195,8 +197,8 @@ func UserAuthorRetrieve(c *gin.Context){
 	}else{ //si esta instanciada hace el update
 		// fmt.Println(c.BindJSON(&award))
 		// c.BindJSON(&user) // recoge los nuevos datos del cliente y los guarda en &user
-		serializer := UserSerializer{c}
-		c.JSON(http.StatusOK, gin.H{"user": serializer.Response()})
+		serializer := ProfileSerializer{c,user}
+		c.JSON(http.StatusOK, serializer.Response())
 		return
 	}
 }

@@ -37,10 +37,14 @@ func (self *UserValidator) Bind(c *gin.Context) error {
 	self.userModel.Type = "client"
 
 
+
 	if self.User.Password != common.NBRandomPassword {
 		self.userModel.setPassword(self.User.Password)
 	}
 	if self.User.Image != "" {
+		self.userModel.Image = &self.User.Image
+	}else{
+		self.User.Image = "https://raw.githubusercontent.com/vicnx/REVAND_laravel-go-angular/master/media/revand.png"
 		self.userModel.Image = &self.User.Image
 	}
 	if self.User.Bio == "" {

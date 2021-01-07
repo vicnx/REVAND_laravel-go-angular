@@ -52,7 +52,7 @@ export class LoginModalComponent implements OnInit {
     console.log(this.loginForm.value)
     this.userService.attemptAuth('login', user_data).subscribe(
       data => {
-        // location.reload();
+        location.reload();
       },
       err => {
         console.log(this.loginForm.controls.email.errors);

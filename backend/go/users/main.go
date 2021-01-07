@@ -30,13 +30,14 @@ func main() {
 	// awards.AwardsAuthed(v1.Group("/awards"))
 	v1.Use(users.AuthMiddleware(false))
 	users.UsersRegister(v1.Group("/users"))
-	users.ProfileRegister(v1.Group("/profile"))
+	
 	
 	
 
     // SI TOKEN
 	v1.Use(users.AuthMiddleware(true))
 	users.UserRegister(v1.Group("/user"))
+	users.ProfileRegister(v1.Group("/profile"))
 	// users.ProfileRegister(v1.Group("/profile"))
 
 	fmt.Printf("0.0.0.0:8080")

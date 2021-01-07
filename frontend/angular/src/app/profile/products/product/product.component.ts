@@ -15,7 +15,7 @@ export class ProductComponent implements OnInit {
   currentUser: User;
   canModify: boolean;
   isDeleting = false;
-  Author: User;
+  // Author: User;
 
   constructor(
     private route: ActivatedRoute,
@@ -55,17 +55,7 @@ export class ProductComponent implements OnInit {
     console.log("DENTRO DE COMPONENT DETAILS PRODUCT ======="),
 
     // Retreive the prefetched article
-    this.route.data.subscribe(
-      (data: { product: Product }) => {
-        console.log(data.product);
-        this.product = data.product;
-        this.userService.GetUserByID(this.product.AuthorID).subscribe(
-          (Author: User) => {
-            this.Author = Author;
-            console.log(this.Author);
-          });
-      }
-    );
+    this.route.data.subscribe((data: { product: Product }) => this.product = data.product);
 
     // Load the current user's data
     this.userService.currentUser.subscribe(
@@ -75,15 +65,6 @@ export class ProductComponent implements OnInit {
         this.canModify = (this.currentUser.id === this.product.AuthorID);
       }
     );
-  }
-
-  getAuthor(){
-      this.userService.GetUserByID(this.product.AuthorID).subscribe(
-        (userData: User) => {
-          this.Author = userData;
-          console.log(this.Author);
-        });
-
   }
 
   delete() {

@@ -43,12 +43,12 @@ export class SidebarProfileComponent implements OnInit {
   }
 
   followUser(event){
-    this.userService.follow(this.profile.username)
+    this.userService.follow(this.profile.username).subscribe()
     this.profile.following = true
   }
 
   unfollowUser(event){
-    this.userService.unfollow(this.profile.username)
+    this.userService.unfollow(this.profile.username).subscribe()
     this.profile.following = false
   }
 

@@ -7,7 +7,7 @@ import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 import { RedisService } from './redis.service';
 
-import { User } from '../models';
+import { User,Profile } from '../models';
 import { map, distinctUntilChanged } from 'rxjs/operators';
 
 
@@ -154,20 +154,17 @@ export class UserService {
     return this.apiService.get('/profile/' + username,'users');
   }
 
-  follow(username){
-    console.log("lalala");
+  follow(username): Observable<User>{
     return this.apiService.post('/profile/' + username + '/follow','users');
   }
 
-  unfollow(username){
-    console.log("lololo");
-
+  unfollow(username): Observable<User>{
     return this.apiService.delete('/profile/' + username + '/follow','users');
   }
 
 
 
-  GetUserByID(id): Observable<User> {
+  GetUserByID(id): Observable<Profile> {
     return this.apiService.get('/users/'+id,'users')
       .pipe(map(
         data => {

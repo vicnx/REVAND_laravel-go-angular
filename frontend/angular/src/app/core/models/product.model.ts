@@ -1,4 +1,5 @@
 import { Identifiers } from '@angular/compiler';
+import { Profile } from './profile.model';
 
 export interface Product {
     _id: Identifiers;
@@ -8,4 +9,5 @@ export interface Product {
     Images: String;
     Price: String;
     AuthorID: String;
+    Author: Profile;
 }

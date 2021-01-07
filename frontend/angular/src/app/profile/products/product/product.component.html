@@ -3,10 +3,10 @@
         <header class="product_details__header">
             <section class="product_details__header__user">
                 <div class="product_details__header__user__img">
-                    <img src="{{Author.user.image}}" alt="Joel">
+                    <img src="{{product.Author?.image}}" alt="Joel">
                 </div>
                 <div class="product_details__header__user__info">
-                    <span class="product_details__header__user__name">{{Author.user.username}}</span>
+                    <span class="product_details__header__user__name">{{product.Author?.username}}</span>
                     <span class="product_details__header__user__products">4 products</span>
                 </div>
             </section>
