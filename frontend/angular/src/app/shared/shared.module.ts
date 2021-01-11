@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { AwardListComponent,AwardPreviewComponent,AwardEditorComponent } from './award-helpers';
 import { SubscriptionListComponent,SubscriptionPreviewComponent,SubscriptionEditorComponent } from './subscription-helpers';
+import { SubscriptionsClientListComponent,SubscriptionsClientPreviewComponent,SubscriptionsClientEditorComponent } from './subscriptions-client-helpers';
 import { UserListComponent,UserPreviewComponent,UserEditorComponent } from './user-helpers';
 import { ProductListComponent, ProductPreviewComponent } from './product-helpers';
 
@@ -32,6 +33,9 @@ import { ShowAuthedDirective } from './show-authed.directive';
     SubscriptionListComponent,
     SubscriptionPreviewComponent,
     SubscriptionEditorComponent,
+    SubscriptionsClientListComponent,
+    SubscriptionsClientPreviewComponent,
+    SubscriptionsClientEditorComponent,
     UserListComponent,
     UserPreviewComponent,
     UserEditorComponent,
@@ -46,6 +50,9 @@ import { ShowAuthedDirective } from './show-authed.directive';
     SubscriptionListComponent,
     SubscriptionPreviewComponent,
     SubscriptionEditorComponent,
+    SubscriptionsClientListComponent,
+    SubscriptionsClientPreviewComponent,
+    SubscriptionsClientEditorComponent,
     UserListComponent,
     UserPreviewComponent,
     UserEditorComponent,

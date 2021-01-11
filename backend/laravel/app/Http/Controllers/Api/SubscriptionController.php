@@ -23,7 +23,7 @@ class SubscriptionController extends ApiController
         $this->transformer = $transformer;
         
         
-        $this->middleware('auth.api');
+        $this->middleware('auth.api')->only(['store', 'update','destroy']);
         // $this->middleware('auth.api:optional')->only(['index', 'show']);
         
     }
@@ -53,9 +53,9 @@ class SubscriptionController extends ApiController
     //SHOW ALL SUBS
     public function index(): JsonResponse
     {        
-        $user = JWTAuth::parseToken()->authenticate();
-        $userId = $user->id;
-        error_log($user->token);
+        // $user = JWTAuth::parseToken()->authenticate();
+        // $userId = $user->id;
+        // error_log($user->token);
         // echo response()->json(auth()->user());
 
         /* get all subscriptions ordered by published date */

@@ -1,0 +1,3 @@
+<div class="subscription__list">
+    <app-subscriptionsclient-preview *ngFor="let sub of allSubscriptions" [subscription]="sub" (refresh_list)="runQuery()"></app-subscriptionsclient-preview>
+</div>

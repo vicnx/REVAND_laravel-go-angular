@@ -34,6 +34,10 @@ const routes: Routes = [
         loadChildren: () => import(`./settings/settings.module`).then(m => m.SettingsModule), pathMatch: 'full',
       },
       {
+        path: 'buy',
+        loadChildren: () => import(`./subscriptions/subscriptions.module`).then(m => m.SubscriptionsModule), pathMatch: 'full',
+      },
+      {
         path: 'products',
         children: [
           {

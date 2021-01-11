@@ -1,0 +1,32 @@
+<!-- <div class="subscription">
+    <div class="subscription__left">
+        <img src="{{subscription.image}}" alt="{{subscription.name}}" onerror='this.src="https://cdn2.iconfinder.com/data/icons/documents-and-files-v-2/100/doc-03-512.png";'/>
+        <span>{{subscription.id}}</span>&nbsp;&nbsp;&nbsp;
+        <span>{{subscription.name}}</span>&nbsp;&nbsp;&nbsp;
+        <span class="subscription__left__text--price">{{subscription.price}}</span>&nbsp;&nbsp;&nbsp;
+    </div>
+    <div class="subscription__right">
+        <div class="subscription__right__options">
+            <button class="subscription-option--edit" [ngClass]="{disabled: isDeleting}" (click)="modify($event)">
+                <i class="ion-trash-a"></i> Edit Sub
+            </button>
+            <button class="subscription-option--delete" [ngClass]="{disabled: isDeleting}" (click)="deleteSub()">
+                <i class="ion-trash-a"></i> Delete Sub
+            </button>
+        </div>
+    </div>
+</div> -->
+
+<div class="subscription-client">
+    <div class="subscription-client-image">
+        <img src="https://avatars3.githubusercontent.com/u/57725324?s=460&u=c38f9c842121747ef6e45194a9086f94710780aa&v=4" alt="">
+    </div>
+    <div class="subscription-client-content">
+        <span>{{subscription.name}}</span>
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta necessitatibus quibusdam</span>
+        <span>{{subscription.price}}</span>
+        <button>BUY</button>
+    </div>
+
+</div>
+<!-- <app-editor-subscription [item]="subscription" style="display: none; transition: 0.5s;"></app-editor-subscription> -->

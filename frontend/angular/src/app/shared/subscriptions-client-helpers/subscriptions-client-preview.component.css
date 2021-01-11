@@ -1,0 +1,13 @@
+.subscription-client{
+    /* EL MAX WIDHT ESTE NO HACE UNA MIERDA A LAS COSAS DE DENTRO */
+    max-width: 300px;
+    max-height: 150px;
+    background-color: black;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+/* PASA DE MI EL PUTO DIV DE MIERDA NO SE HACE PEQUEÑO JOEL AYUDA */
+.subscription-client-image{
+    width: 50px;
+}

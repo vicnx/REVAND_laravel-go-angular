@@ -1,0 +1,19 @@
+<form [formGroup]="subscriptionForm">
+    <div class="subscription subscription--edit">
+        <div class="subscription__left">
+            <div class="subscription__editor__field">
+                <label for="name_subscription">Name:</label>
+                <input type="text" name="name" formControlName="name" id="name_subscription">
+            </div>
+            <div class="subscription__editor__field">
+                <label for="price_subscription">Price:</label>
+                <input type="text" name="price" formControlName="price" id="price_subscription">
+            </div>
+        </div>
+        <div class="subscription__right">
+            <button class="subscription-option--{{type}}" (click)="submitForm($event)">
+                <i class="ion-trash-a"></i> {{type}} subscription
+            </button>
+        </div>
+    </div>
+</form>
