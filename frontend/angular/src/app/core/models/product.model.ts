@@ -11,3 +11,12 @@ export interface Product {
     AuthorID: String;
     Author: Profile;
 }
+
+export interface ProductListConfig {
+    type: string,
+    filters: {
+        authorid?: string,
+        limit?: number,
+        offset?: number
+    };
+}

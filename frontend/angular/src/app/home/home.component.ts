@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AwardsService } from '../core/';
-import { Award } from '../core/' 
+import { Award,ProductListConfig } from '../core/' 
 import { User, UserService } from '../core';
 
 
@@ -16,7 +16,10 @@ export class HomeComponent implements OnInit {
     private userService: UserService,
     private router: Router,
   ) {}
-  test = "all";
+  config : ProductListConfig = {
+    type:'all',
+    filters:{}
+  };
   currentUser: User;
 
   ngOnInit() {

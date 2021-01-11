@@ -20,16 +20,20 @@ import (
 
 
 func CreateProduct(data interface{}) error {
+	// Get field name
 	field := reflect.ValueOf(data).Elem().FieldByName("Name").Interface()
 	str := fmt.Sprintf("%v", field)
+	// Crear slug a partir del nombre del producto y un numero rand (bici-electrica-8741)
 	text := slug.Make(str+strconv.Itoa(rand.Intn(9999 - 0) + 0))
 
+	// Aplicar el nuevo slug
 	reflect.ValueOf(data).Elem().FieldByName("Slug").SetString(text)
 
 	client, err := common.GetMongoClient()
 	if err != nil {
 		return err
 	}
+	// Insertar producto a bbdd 
 	collection := client.Database(common.DBmongo).Collection(common.PRODUCTS)
 	_, err = collection.InsertOne(context.TODO(), data)
 	if err != nil {
@@ -45,10 +49,25 @@ func GetAllProducts(key string,value string) ([]Products,error) {
 	collection := client.Database(common.DBmongo).Collection(common.PRODUCTS)
 
 	filter := bson.D{{}} 
+
+	fmt.Println("======================================");
+	fmt.Println(value);
 	
+	fmt.Println(key);
+ 
 	if key != ""{
-		filter = bson.D{primitive.E{Key: key, Value: value}}	
+		var authId uint64
+		if key == "authorid" {
+			authId2, _ := strconv.ParseUint(value, 10, 32)
+			authId = authId2;
+		}
+		
+
+		filter = bson.D{primitive.E{Key: key, Value: authId}}	
+		fmt.Println(filter);
 	}
+
+	
 
 	cur, err := collection.Find(context.TODO(), filter)
 	if err != nil { log.Fatal(err) }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User, UserService, Profile } from '../../core';
+import { User, UserService, Profile,ProductService,ProductListConfig } from '../../core';
 import { ProfileResolver } from './../profile-resolver.service';
 
 
@@ -15,12 +15,14 @@ export class SidebarProfileComponent implements OnInit {
   @Input() profile: User;
   constructor(
     private userService: UserService,
+    private productsService: ProductService,
     private router: Router,
     private route: ActivatedRoute,
   ) { }
   // profile_user: Profile;
   currentUser: User;
   checkCurrentUser: boolean;
+  // config: ProductListConfig;
   ngOnInit() {
     this.checkCurrentUser = false; //True if the current user is the same that the obtained by bbdd
     this.userService.currentUser.subscribe(

@@ -1,5 +1,5 @@
 import { Component,OnInit, Input } from '@angular/core';
-import { Product, ProductService } from '../../core';
+import { Product, ProductService,User,ProductListConfig } from '../../core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
@@ -17,21 +17,33 @@ export class ProductListComponent{
         private productService: ProductService,
         private router: Router,
     ) {}
-
+    
     @Input()
-    set config(config: String) {
-        if (config=="all") {
-          this.runQuery();
+    set author(author: User) {
+        console.log(author);
+        
+    }
+    
+    @Input()
+    set config(config: ProductListConfig) {
+        if(config.type=="all"){
+            this.runQuery();
+        }else{
+            console.log(config);
+            // console.log(this.config.filters.author);
+            this.runQuery(config);
         }
     }
-    runQuery(){
+    runQuery(config?){
+        console.log(config);
         this.allProducts = [];
-        this.productService.query().subscribe((products) => {
-            // console.log(products);
+        this.productService.query(config).subscribe((products) => {
+            console.log(products);
             this.allProducts = products;
-            // console.log(this.allProducts);
         });
     }
+
+
     refresh(){
         this.runQuery()
     }

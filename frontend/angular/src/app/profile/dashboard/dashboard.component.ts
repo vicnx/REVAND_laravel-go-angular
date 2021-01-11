@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User, UserService } from '../../core';
+import { User, UserService,ProductListConfig } from '../../core';
 
 
 @Component({
@@ -18,13 +18,20 @@ export class DashboardComponent implements OnInit {
 
 
   ) {}
-  test = "all";
+  config : ProductListConfig = {
+    type:'notall',
+    filters:{}
+  };
+
   profile: User;
   currentUser: User;
   ngOnInit() {
     //recuperamos aqui tambien del resolve (de la url el user)
     this.route.data.subscribe(
-      (data: { user: User }) => this.profile = data.user
+      (data: { user: User }) => {
+        this.profile = data.user
+        this.config.filters.authorid = this.profile.id;
+      }
     );
     this.userService.currentUser.subscribe(
       (userData)=> {

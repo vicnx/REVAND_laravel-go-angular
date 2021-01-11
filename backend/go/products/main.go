@@ -43,18 +43,18 @@ func main() {
 
 	// test:=VerifyToken(r);
 	// fmt.Println(test)
-	v1.Use(products.AuthMiddleware(true))
-	products.ProductsRoutes(v1.Group("/products"))
-
-	
-
-	// // NO TOKEN
-	// v1.Use(users.AuthMiddleware(false))
-	// products.ProductsNoAuthed(v1.Group("/product"))
-	
-    // // SI TOKEN
-	// v1.Use(users.AuthMiddleware(true))
+	// v1.Use(products.AuthMiddleware(true))
 	// products.ProductsAuthed(v1.Group("/products"))
+
+	
+
+	// NO TOKEN
+	v1.Use(products.AuthMiddleware(false))
+	products.ProductsNoAuthed(v1.Group("/products"))
+	
+    // SI TOKEN
+	v1.Use(products.AuthMiddleware(true))
+	products.ProductsAuthed(v1.Group("/products"))
 
 	// http.Handle("/metrics", promhttp.Handler())
 	// http.ListenAndServe(":2112", nil)

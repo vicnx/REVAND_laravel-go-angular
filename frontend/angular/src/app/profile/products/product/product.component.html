@@ -1,9 +1,9 @@
 <div class="product_details_container">
     <div class="product_details">
         <header class="product_details__header">
-            <section class="product_details__header__user">
+            <section class="product_details__header__user" [routerLink]="['/profile',product.Author?.username]">
                 <div class="product_details__header__user__img">
-                    <img src="{{product.Author?.image}}" alt="Joel">
+                    <img src="{{product.Author?.image}}" alt="Joel" >
                 </div>
                 <div class="product_details__header__user__info">
                     <span class="product_details__header__user__name">{{product.Author?.username}}</span>
@@ -24,9 +24,9 @@
                         <i class="far fa-comment-dots"></i>
                     </div>
                 </div>
-                <div class="product_details__actions__item product_details__actions__msg" *ngIf="[canModify]=='true'" (click)="delete()">
+                <div class="product_details__actions__item product_details__actions__delete" *ngIf="[canModify]=='true'" (click)="delete()">
                     <div class="product_details__actions__msg__canvas">
-                        DELETE
+                        <i class="far fa-trash-alt"></i>
                     </div>
                 </div>
             </section>

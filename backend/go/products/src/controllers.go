@@ -13,12 +13,36 @@ type Filter struct {
 	value	string 	
 }
 
+// func Keys(m map[int]interface{}) []int {
+//     keys := make([]int, len(m))
+//     i := 0
+//     for k := range m {
+//         keys[i] = k
+//         i++
+//     }
+//     return keys
+// }
+
 func ProductList(c *gin.Context) {
 	
 	// GET QUERY PARAMS (KEY AND VALUE)
+	// var key string
+	// var value []string
+
+	fmt.Println(c.Request.URL.Query())
+	// if val, err := c.Request.URL.Query()["authorid"]; err {
+	// 	key = "authorid";
+	// 	value = c.Request.URL.Query()["authorid"];
+	// }else{
+	// 	key = c.Request.URL.Query().Get("key")
+	// 	value = c.Query("value")
+	// }
+	
 	key := c.Request.URL.Query().Get("key")
 	value := c.Query("value")
 
+	fmt.Println("KEEEEEEEY")
+	fmt.Println(key)
 	//send key anb value and save on results
 	results,err := GetAllProducts(key,value)
 
@@ -72,7 +96,7 @@ func ProductCreate(c *gin.Context) {
 
 	var product Products
 	c.BindJSON(&product);
-	fmt.Println(c.MustGet("my_user_id"))
+	//se obtiene el id del usuario actualmente logeado en GO (se logea por el middleware)
 	userid := c.MustGet("my_user_id").(uint)
 	product.AuthorID = userid;
 

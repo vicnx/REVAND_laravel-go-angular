@@ -168,7 +168,6 @@ export class UserService {
     return this.apiService.get('/users/'+id,'users')
       .pipe(map(
         data => {
-          // console.log("++++++++++++++++++++++++++++++++++++++++++++++");
           console.log(data);
           return data
         },

@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
     // console.log("profile component");
     this.route.data.subscribe(
       (data: { user: User }) => {
+        console.log(data.user);
         //guardamos en profile el usuario de la url (para enviarlo al sidebar)
         this.profile = data.user;
       }
