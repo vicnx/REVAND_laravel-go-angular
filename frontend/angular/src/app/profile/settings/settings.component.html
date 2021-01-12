@@ -1,1 +1,17 @@
-<section class="settings-profile"></section>
+<section class="settings-profile">
+    <form [formGroup]="settingsForm">
+        <fieldset [disabled]="isSubmitting">
+            <input type="text" placeholder="Username" formControlName="username"><br>
+            <input type="text" placeholder="Bio" formControlName="bio"><br>
+            <input type="text" placeholder="Image" formControlName="image"><br>
+            <!-- <input type="number" placeholder="Price" formControlName="Price"><br> -->
+
+            <button class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submitForm()">
+                Update Profile
+            </button>
+        </fieldset>
+
+    </form>
+
+
+</section>
