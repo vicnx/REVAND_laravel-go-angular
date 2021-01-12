@@ -7,7 +7,7 @@ import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 import { RedisService } from './redis.service';
 
-import { User,Profile } from '../models';
+import { User, Profile } from '../models';
 import { map, distinctUntilChanged } from 'rxjs/operators';
 
 
@@ -32,17 +32,17 @@ export class UserService {
   populate() {
     // console.log("POPULATE");
     // console.log(location.pathname.split('/',5)[1]);
-    
-    
+
+
     // If JWT detected, attempt to get & store user's info
     if (this.jwtService.getToken()) {
-      if (location.pathname.split('/',5)[1] == 'admin-panel'){
+      if (location.pathname.split('/', 5)[1] == 'admin-panel') {
         this.apiService.getlaravel('/user/').subscribe(
           data => { this.setAuth(data.user) },
           err => this.purgeAuth()
         );
-      }else{
-        this.apiService.get('/user/','users').subscribe(
+      } else {
+        this.apiService.get('/user/', 'users').subscribe(
           data => { this.setAuth(data.user) },
           err => this.purgeAuth()
         );
@@ -76,7 +76,7 @@ export class UserService {
 
   attemptAuth(type, credentials): Observable<User> {
     const route = (type === 'login') ? 'login' : '';
-    return this.apiService.post('/users/' + route,'users', { user: credentials })
+    return this.apiService.post('/users/' + route, 'users', { user: credentials })
       .pipe(map(
         data => {
           this.setAuth(data.user);
@@ -92,7 +92,7 @@ export class UserService {
   // Update the user on the server (email, pass, etc)
   update(user): Observable<User> {
     return this.apiService
-      .put('/user/','users', { user })
+      .put('/user/', 'users', { user })
       .pipe(map(data => {
         // Update the currentUser observable
         this.currentUserSubject.next(data.user);
@@ -122,7 +122,7 @@ export class UserService {
   }
 
   GetAllUsers(): Observable<User> {
-    return this.apiService.get('/users/','users')
+    return this.apiService.get('/users/', 'users')
       .pipe(map(
         data => {
           // console.log("++++++++++++++++++++++++++++++++++++++++++++++");
@@ -135,37 +135,33 @@ export class UserService {
 
 
   save(user): Observable<User> {
-    // console.log("DENTRO DE SAVE SERVICE");
-    // user= {user}
-    // console.log(user);
-    if (user.ID) {
-        // console.log(user);
-        return this.apiService.put('/users/' + user.ID,'users', user )
-            .pipe(map(data => data.user));
+    if (user.ID || user.id) {
+      return this.apiService.put('/users/' + (user.ID ? user.ID : user.id), 'users', user)
+        .pipe(map(data => data.user));
     }
   }
 
   destroy(userid) {
     // console.log(userid);
-    return this.apiService.delete('/users/' + userid,'users');
+    return this.apiService.delete('/users/' + userid, 'users');
   }
 
-  getprofile(username){
-    return this.apiService.get('/profile/' + username,'users');
+  getprofile(username) {
+    return this.apiService.get('/profile/' + username, 'users');
   }
 
-  follow(username): Observable<User>{
-    return this.apiService.post('/profile/' + username + '/follow','users');
+  follow(username): Observable<User> {
+    return this.apiService.post('/profile/' + username + '/follow', 'users');
   }
 
-  unfollow(username): Observable<User>{
-    return this.apiService.delete('/profile/' + username + '/follow','users');
+  unfollow(username): Observable<User> {
+    return this.apiService.delete('/profile/' + username + '/follow', 'users');
   }
 
 
 
   GetUserByID(id): Observable<Profile> {
-    return this.apiService.get('/users/'+id,'users')
+    return this.apiService.get('/users/' + id, 'users')
       .pipe(map(
         data => {
           console.log(data);

@@ -60,20 +60,15 @@ export class SettingsComponent implements OnInit {
   }
 
   submitForm() {
+    console.log(this.currentUser)
     this.isSubmitting = true;
     this.getDataProfile(this.settingsForm.value);
 
     if (!this.currentUser.image) this.currentUser.image = 'null';
+
     this.userService.save(this.currentUser).subscribe(
-      user =>{
-        this.notification.showSuccess("actiualizado con exito", "Success")
-        //volvemos a llamar a ngoninit para que actualize los datos del update o del create
-        this.ngOnInit();
-      },
-      err => {
-        this.notification.showError("Actualziar ha fallado", "Error")
-        // this.errors = err;
-        this.isSubmitting = false;
+      (user) =>{
+        this.notification.showSuccess(" con exito", "Success")
       }
     );
 
