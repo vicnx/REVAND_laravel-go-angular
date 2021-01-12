@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Award, AwardsService } from '../../core';
+import { Award, AwardsService , NotificationService} from '../../core';
 
 @Component({
   selector: 'app-editor-award',
@@ -23,6 +23,7 @@ export class AwardEditorComponent implements OnInit {
   constructor(
     private awardsService: AwardsService,
     private route: ActivatedRoute,
+    private notification: NotificationService,
     private router: Router,
     private fb: FormBuilder
   ) {
@@ -34,7 +35,6 @@ export class AwardEditorComponent implements OnInit {
   }
 
   ngOnInit() {
-
     if (this.item){
       this.awardForm = this.fb.group({
         name: this.item.name,
@@ -76,6 +76,7 @@ export class AwardEditorComponent implements OnInit {
     }
     this.awardsService.save(this.award).subscribe(
       award =>{
+        this.notification.showSuccess(this.type+" con exito", "Success")
         //si se ha áñadido con exito envia un refresh al padre (para que actualize la lista)
         this.refresh_list.next(),
         
@@ -84,6 +85,7 @@ export class AwardEditorComponent implements OnInit {
 
       },
       err => {
+        this.notification.showError(this.type+" ha fallado", "Error")
         this.errors = err;
         this.isSubmitting = false;
       }

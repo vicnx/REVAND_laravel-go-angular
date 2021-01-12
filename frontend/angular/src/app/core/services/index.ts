@@ -7,3 +7,4 @@ export * from './no-auth-guard.service';
 export * from './user.service';
 export * from './redis.service';
 export * from './product.service';
+export * from './notification.service'

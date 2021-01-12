@@ -15,6 +15,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductResolver } from './profile/products/product/product-resolver.service';
 import { NgImageSliderModule } from 'ng-image-slider';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 
 // import { ProductListComponent } from './shared/product-helpers';
 
@@ -30,7 +33,9 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
     HomeModule,
     AppRoutingModule,
     NgImageSliderModule,
-    IvyCarouselModule
+    IvyCarouselModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     RedisService,

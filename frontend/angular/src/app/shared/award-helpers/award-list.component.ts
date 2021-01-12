@@ -1,5 +1,5 @@
 import { Component,OnInit, Input } from '@angular/core';
-import { Award, AwardsService } from '../../core';
+import { Award, AwardsService,NotificationService } from '../../core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
@@ -16,6 +16,8 @@ export class AwardListComponent{
     constructor (
         private awardsService: AwardsService,
         private router: Router,
+        private notification: NotificationService,
+
     ) {}
 
     @Input()
@@ -25,6 +27,7 @@ export class AwardListComponent{
         }
     }
     runQuery(){
+        this.notification.showWarning("Todos los cambios realizados aqui podrian afectar a la app","Cuidado")
         this.allAwards = [];
         this.awardsService.query().subscribe((awards) => {
 

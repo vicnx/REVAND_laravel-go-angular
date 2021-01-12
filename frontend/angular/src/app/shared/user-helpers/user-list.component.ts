@@ -1,5 +1,5 @@
 import { Component,OnInit, Input } from '@angular/core';
-import { UserList, UserService } from '../../core';
+import { UserList, UserService, NotificationService } from '../../core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
@@ -16,6 +16,8 @@ export class UserListComponent{
     constructor (
         private usersService: UserService,
         private router: Router,
+        private notification: NotificationService,
+
     ) {}
 
     @Input()
@@ -25,6 +27,8 @@ export class UserListComponent{
         }
     }
     runQuery(){
+        this.notification.showWarning("Todos los cambios realizados aqui podrian afectar a la app","Cuidado")
+
         this.allUsers = [];
         this.usersService.GetAllUsers().subscribe((users) => {
             console.log(users);

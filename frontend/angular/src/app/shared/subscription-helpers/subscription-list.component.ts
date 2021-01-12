@@ -1,5 +1,5 @@
 import { Component,OnInit, Input } from '@angular/core';
-import { Subscription, SubscriptionService } from '../../core';
+import { Subscription, SubscriptionService, NotificationService } from '../../core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
@@ -16,6 +16,8 @@ export class SubscriptionListComponent{
     constructor (
         private subscriptionService: SubscriptionService,
         private router: Router,
+        private notification: NotificationService,
+
     ) {}
 
     @Input()
@@ -25,6 +27,7 @@ export class SubscriptionListComponent{
         }
     }
     runQuery(){
+        this.notification.showWarning("Todos los cambios realizados aqui podrian afectar a la app","Cuidado")
         this.allSubscriptions = [];
         this.subscriptionService.query().subscribe((subscriptions) => {
             console.log(subscriptions);

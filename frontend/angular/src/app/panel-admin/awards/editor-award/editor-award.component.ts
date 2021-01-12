@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Award, AwardsService } from '../../../core';
+import { Award, AwardsService,NotificationService } from '../../../core';
 
 @Component({
   selector: 'app-editor-award-page',
@@ -17,6 +17,7 @@ export class EditorAwardComponent implements OnInit {
 
   constructor(
     private awardsService: AwardsService,
+    private notification: NotificationService,
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder
@@ -29,7 +30,8 @@ export class EditorAwardComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("Editor");
+    console.log("hola");
+    this.notification.showWarning("Cuidado cualquier modificación aqui puede alterar el comportamiento de la app", "Warning")
     this.route.data.subscribe((data: { award: Award }) => {
       if (data.award) {
         this.award = data.award;
@@ -40,13 +42,18 @@ export class EditorAwardComponent implements OnInit {
 
 
   submitForm() {
+    console.log("WDHIAODBAWKDAWBDIUANWIKDBAWIDBBAWDDAWDAWDAWD");
     this.isSubmitting = true;
     console.log("Submit");
     this.getDataAward(this.awardForm.value);
     console.log(this.award);
 
     this.awardsService.save(this.award).subscribe(
-      award => this.router.navigateByUrl('admin-panel/awards'),
+      award => {
+        console.log("WDHIAODBAWKDAWBDIUANWIKDBAWIDBBAWDDAWDAWDAWD");
+        this.notification.showSuccess("Creado con exito", "Success")
+        this.router.navigateByUrl('admin-panel/awards')
+      },
       err => {
         this.errors = err;
         this.isSubmitting = false;

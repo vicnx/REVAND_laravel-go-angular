@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Subscription, SubscriptionService } from '../../core';
+import { Subscription, SubscriptionService, NotificationService } from '../../core';
 
 @Component({
   selector: 'app-editor-subscription',
@@ -23,7 +23,9 @@ export class SubscriptionEditorComponent implements OnInit {
     private subscriptionService: SubscriptionService,
     private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private notification: NotificationService,
+
   ) {
     this.subscriptionForm = this.fb.group({
       name: '',
@@ -78,12 +80,14 @@ export class SubscriptionEditorComponent implements OnInit {
     }
     this.subscriptionService.save(this.subscription).subscribe(
       subscription =>{
+        this.notification.showSuccess(this.type+" con exito", "Success")
         //si se ha áñadido con exito envia un refresh al padre (para que actualize la lista)
         this.refresh_list.next(),
         //para limpiar los campos al añadir
         this.ngOnInit();
       }, 
       err => {
+        this.notification.showError(this.type+" ha fallado", "Error")
         this.errors = err;
         this.isSubmitting = false;
       }

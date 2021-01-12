@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { UserList, UserService } from '../../core';
+import { UserList, UserService, NotificationService } from '../../core';
 
 @Component({
   selector: 'app-editor-user',
@@ -24,7 +24,9 @@ export class UserEditorComponent implements OnInit {
     private usersService: UserService,
     private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private notification: NotificationService,
+
   ) {
     this.userForm = this.fb.group({
       Username: '',
@@ -83,6 +85,8 @@ export class UserEditorComponent implements OnInit {
     console.log(this.user);
     this.usersService.save(this.user).subscribe(
       user =>{
+        this.notification.showSuccess(this.type+" con exito", "Success")
+
         //si se ha áñadido con exito envia un refresh al padre (para que actualize la lista)
         this.refresh_list.next(),
         
@@ -91,6 +95,8 @@ export class UserEditorComponent implements OnInit {
 
       },
       err => {
+        this.notification.showError(this.type+" ha fallado", "Error")
+
         this.errors = err;
         this.isSubmitting = false;
       }
