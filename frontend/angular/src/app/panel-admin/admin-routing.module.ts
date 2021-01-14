@@ -76,6 +76,20 @@ const routes: Routes = [
           // },
         ]
       },
+      {
+        path: 'dashboard',
+        children: [
+          // {
+          //   path:'editor',
+          //   loadChildren: () => import('./awards/editor-award/editor-award.module').then(m => m.EditorAwardModule)
+          // }, 
+          {
+            path: '', loadChildren: () => import(`./dashboard/dashboard.module`).then(m => m.DashboardModule), pathMatch: 'full'
+          },
+          //   // loadChildren: './award/award.module#AwardModule'
+          // },
+        ]
+      },
       // {
       //   path: '', redirectTo: 'awards', pathMatch: 'full'
       // },
