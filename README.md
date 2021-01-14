@@ -69,23 +69,23 @@ sudo ./init.sh
 
 
 ### Built with 🛠️
-* [Angular](https://angularjs.org/)
-* [Laravel](https://nodejs.org/es/)
-* [Go](https://expressjs.com/es/)
-* [Traefik](https://graphql.org/)
-* [MySql](https://mongoosejs.com/)
+* [Angular](https://angular.io/)
+* [Laravel](https://laravel.com/)
+* [Go](https://golang.org/)
+* [Traefik](https://traefik.io/)
+* [MySql](https://www.mysql.com/)
 * [MongoDB](https://www.mongodb.com/)
+* [Redis](https://redis.io/)
 
 
 ## Other technologies
-* [Apollo - Client](https://www.npmjs.com/package/apollo-client)
-* [Apollo - Server](https://www.npmjs.com/package/apollo-server)
-* [Gulp](https://www.npmjs.com/package/gulp)
-* [Babel](https://www.npmjs.com/package/@babel/core)
-* [Browserify](https://www.npmjs.com/package/browserify)
 * [Docker](https://www.docker.com)
-* [Axios](https://www.npmjs.com/package/axios)
-* [Fetch](https://www.npmjs.com/package/node-fetch)
-* [Passport](https://www.npmjs.com/package/passport)
-* [Faker](https://www.npmjs.com/package/faker)
-* [Toastr](https://www.npmjs.com/package/toastr)
+* [JWT](https://jwt.io/)
+* [Toastr](https://www.npmjs.com/package/ngx-toastr)
+* [Grafana](https://grafana.com/)
+* [Prometheus](https://prometheus.io/)
+* [Gorm](https://gorm.io/index.html)
+* [Mongo-Driver](https://github.com/mongodb/mongo-go-driver)
+* [Mysql-Driver](https://github.com/go-sql-driver/mysql)
+
+
