@@ -27,6 +27,7 @@ type Products struct {
 	Images		[]string 		`bson:"images, omitempty"`
 	Price 		int 			`bson:"price, omitempty"`
 	AuthorID    uint 			`bson:"authorid, omitempty"`
+	Visits		int 			`bson:"visits, omitempty"`
 }
 
 type User struct {

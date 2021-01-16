@@ -12,7 +12,13 @@ import { UserComponent } from './users/user/user.component';
 
 const routes: Routes = [
   {
-    path: '', component: AdminComponent, children: [
+    path: '', 
+    component: AdminComponent, 
+    children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+      },
       {
         path: 'awards',
         // loadChildren: () => import(`./awards/awards.module`).then(m => m.AwardsModule),
@@ -79,15 +85,9 @@ const routes: Routes = [
       {
         path: 'dashboard',
         children: [
-          // {
-          //   path:'editor',
-          //   loadChildren: () => import('./awards/editor-award/editor-award.module').then(m => m.EditorAwardModule)
-          // }, 
           {
             path: '', loadChildren: () => import(`./dashboard/dashboard.module`).then(m => m.DashboardModule), pathMatch: 'full'
           },
-          //   // loadChildren: './award/award.module#AwardModule'
-          // },
         ]
       },
       // {

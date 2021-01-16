@@ -10,6 +10,7 @@ import { SidebarAdminComponent } from './sidebar/sidebar.component';
 import { AwardResolver } from './awards/award/award-resolver.service';
 import { SubscriptionResolver } from './subscriptions/subscription/subscription-resolver.service';
 
+
 @NgModule({
   declarations: [AdminComponent,SidebarAdminComponent],
   imports: [

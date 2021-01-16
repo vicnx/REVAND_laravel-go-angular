@@ -15,6 +15,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~10.2.0",
+    "@angular/cdk": "^11.0.4",
     "@angular/common": "~10.2.0",
     "@angular/compiler": "~10.2.0",
     "@angular/core": "~10.2.0",
@@ -24,6 +25,7 @@
     "@angular/router": "~10.2.0",
     "@fortawesome/angular-fontawesome": "^0.8.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@swimlane/ngx-charts": "^16.0.0",
     "angular-responsive-carousel": "^2.0.2",
     "core-js": "^2.4.1",
     "marked": "^0.3.9",

@@ -17,7 +17,10 @@ func UsersRegister(router *gin.RouterGroup) {
 	router.DELETE("/:userid",UserDeleteAdmin)
 }
 
-
+func UsersStats(router *gin.RouterGroup)  {
+	router.GET("/", UsersCount)
+	
+}
 
 func UserRegister(router *gin.RouterGroup) {
 	router.GET("/", UserRetrieve)
@@ -201,4 +204,12 @@ func UserAuthorRetrieve(c *gin.Context){
 		c.JSON(http.StatusOK, serializer.Response())
 		return
 	}
+}
+
+func UsersCount(c *gin.Context) {
+	var user []User
+	admins := CountAdmins(&user)
+	clients := CountClients(&user)
+	c.JSON(http.StatusOK, gin.H{"admins":admins,"clients":clients})
+	return
 }

@@ -18,7 +18,6 @@ import (
 	_ "strconv"
 )
 
-
 func CreateProduct(data interface{}) error {
 	// Get field name
 	field := reflect.ValueOf(data).Elem().FieldByName("Name").Interface()
@@ -165,6 +164,39 @@ func DeleteProduct(slug string) error {
 	deleteResult, _ := collection.DeleteOne(context.TODO(), bson.M{"slug": slug})
 	fmt.Println(deleteResult);
 	// err = collection.Remove(bson.M{"slug": slug})
+	if err != nil { return err }
+
+	return nil
+}
+
+
+// Statistics functions
+
+func CountProducts() (int64,error) {
+
+	client, err := common.GetMongoClient()
+
+	collection := client.Database(common.DBmongo).Collection(common.PRODUCTS)
+
+	res, err := collection.CountDocuments(context.TODO(), bson.D{{}}, )	
+	
+	if err != nil { return res,err }
+
+	return res,err
+}
+
+func IncrementProductVisit(slug string) error {
+	// result := Products{}
+	client, err := common.GetMongoClient()
+	collection := client.Database(common.DBmongo).Collection(common.PRODUCTS)
+	
+	res , err := collection.UpdateOne(context.TODO(), bson.D{
+		primitive.E{Key: "slug", Value: slug}}, 
+		bson.D{
+			{"$inc", bson.D{{"visits", 1}}},
+		})
+	fmt.Println(res)
+
 	if err != nil { return err }
 
 	return nil

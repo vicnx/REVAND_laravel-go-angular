@@ -28,6 +28,7 @@ export class AdminComponent implements OnInit {
           console.log("Access denied");
           this.router.navigateByUrl('/');
         }else{
+          // this.router.navigateByUrl('/dashboard');
           console.log("OKAYS Eres un mango");
         }
       }

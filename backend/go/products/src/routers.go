@@ -17,10 +17,6 @@ func ProductsAuthed(router *gin.RouterGroup) {
 	router.DELETE("/:slug", ProductDelete)
 }
 
-// func ProductsRoutes(router *gin.RouterGroup) {
-// 	router.GET("/", ProductList)
-// 	router.GET("/:slug", ProductBySlug)
-// 	router.POST("/", ProductCreate)
-// 	router.PUT("/:slug", ProductUpdate)
-// 	router.DELETE("/:slug", ProductDelete)
-// }
+func ProductsStats(router *gin.RouterGroup){
+	router.GET("/", ProductCount)
+}

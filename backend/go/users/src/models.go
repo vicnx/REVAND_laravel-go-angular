@@ -5,6 +5,7 @@ import (
 	"github.com/jinzhu/gorm"
 	"goApp/common"
 	"golang.org/x/crypto/bcrypt"
+	_"fmt"
 )
 
 
@@ -156,4 +157,18 @@ func DeleteUserAdmin(data, id interface{}) error {
 	db := common.GetDB()
 	err := db.Where("id = ?", id).Delete(data).Error
 	return err
+}
+
+func CountAdmins(data interface{}) int {
+	count := 0
+	db := common.GetDB()
+	db.Model(&User{}).Where("type = ?", "admin").Count(&count)
+	return count
+}
+
+func CountClients(data interface{}) int {
+	count := 0
+	db := common.GetDB()
+	db.Model(&User{}).Where("type = ?", "client").Count(&count)
+	return count
 }

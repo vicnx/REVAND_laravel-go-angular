@@ -8,10 +8,11 @@ import { DashboardComponent } from './dashboard.component';
 import { SharedModule } from '../../shared';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 // import { SubscriptionResolver } from './subscription/subscription-resolver.service';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
-  imports: [SharedModule, DashboardRoutingModule],
+  imports: [SharedModule, DashboardRoutingModule, NgxChartsModule],
   declarations: [DashboardComponent],
   providers: [DashboardRoutingModule]
 })

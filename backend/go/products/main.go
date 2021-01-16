@@ -40,21 +40,25 @@ func main() {
 
 	MakeRoutes(r)
 	v1 := r.Group("/api")
+	// stats := r.Group("/stats")
 
 	// test:=VerifyToken(r);
 	// fmt.Println(test)
 	// v1.Use(products.AuthMiddleware(true))
 	// products.ProductsAuthed(v1.Group("/products"))
 
-	
+
 
 	// NO TOKEN
 	v1.Use(products.AuthMiddleware(false))
 	products.ProductsNoAuthed(v1.Group("/products"))
+	products.ProductsStats(v1.Group("/stats"))
+	
 	
     // SI TOKEN
 	v1.Use(products.AuthMiddleware(true))
 	products.ProductsAuthed(v1.Group("/products"))
+	
 
 	// http.Handle("/metrics", promhttp.Handler())
 	// http.ListenAndServe(":2112", nil)

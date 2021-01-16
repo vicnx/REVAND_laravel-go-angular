@@ -13,36 +13,13 @@ type Filter struct {
 	value	string 	
 }
 
-// func Keys(m map[int]interface{}) []int {
-//     keys := make([]int, len(m))
-//     i := 0
-//     for k := range m {
-//         keys[i] = k
-//         i++
-//     }
-//     return keys
-// }
-
 func ProductList(c *gin.Context) {
 	
-	// GET QUERY PARAMS (KEY AND VALUE)
-	// var key string
-	// var value []string
-
 	fmt.Println(c.Request.URL.Query())
-	// if val, err := c.Request.URL.Query()["authorid"]; err {
-	// 	key = "authorid";
-	// 	value = c.Request.URL.Query()["authorid"];
-	// }else{
-	// 	key = c.Request.URL.Query().Get("key")
-	// 	value = c.Query("value")
-	// }
 	
 	key := c.Request.URL.Query().Get("key")
 	value := c.Query("value")
 
-	fmt.Println("KEEEEEEEY")
-	fmt.Println(key)
 	//send key anb value and save on results
 	results,err := GetAllProducts(key,value)
 
@@ -60,6 +37,8 @@ func ProductList(c *gin.Context) {
 func ProductBySlug(c *gin.Context) {
 	slug := c.Param("slug")
 
+	err := IncrementProductVisit(slug)
+
 	result,err := GetProductBySlug(slug)
 	if err != nil {
 		c.JSON(http.StatusOK, "Not found")
@@ -69,28 +48,6 @@ func ProductBySlug(c *gin.Context) {
 		return
 	}
 }
-
-// func ProductUpdate(c *gin.Context) {
-// 	var product Products
-// 	id := c.Params.ByName("id")
-// 	err := GetProductByID(&product, id) //te llena &product (si lo encuentra pone err a nil (la instancia))
-// 	if err != nil { //si no esta instanciada
-// 		fmt.Println("err no es nil")
-// 		c.JSON(http.StatusNotFound, "NOT FOUND") // envia al cliente un JSON
-// 	}else{ //si esta instanciada hace el update
-// 		c.BindJSON(&product) // recoge los nuevos datos del cliente y los guarda en &product
-// 		fmt.Println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-// 		fmt.Println(product)
-// 		err = UpdateProduct(&product) // guardamos los nuevos datos
-// 		if err != nil {
-// 			c.JSON(http.StatusOK, "Not found")
-// 			c.AbortWithStatus(http.StatusNotFound)
-// 		} else {
-// 			c.JSON(http.StatusOK, gin.H{"product": product})
-// 			return
-// 		}
-// 	}
-// }
 
 func ProductCreate(c *gin.Context) {
 
@@ -138,3 +95,15 @@ func ProductDelete(c *gin.Context) {
 }
 
 
+// Statistics products
+
+func ProductCount(c *gin.Context) {
+		result,err := CountProducts()
+
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, result)
+	}
+	return
+}

@@ -13,6 +13,18 @@ export const environment = {
   
 };
 
+export const environment_stats = {
+  production: false,
+  // api_url_laravel: 'http://localhost:8000/api', //Laravel Backend
+  // api_url_redis: "redis:6379/api/redis", //Laravel Backend
+  
+  // api_go_users: 'http://go_users.docker.localhost/api', //Microservicio Users GO
+  // api_go_redis: 'http://go_redis.docker.localhost/api', //Microservicio REDIS GO
+  stats_go_products: 'http://go_products.docker.localhost/stats/',
+  stats_go_users: 'http://go_users.docker.localhost/stats/', //Microservicio Products GO
+  
+};
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

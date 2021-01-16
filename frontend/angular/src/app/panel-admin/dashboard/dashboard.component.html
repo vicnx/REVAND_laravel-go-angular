@@ -1,9 +1,22 @@
-
 <section class="subscription">
-    DASHBOARD HTML
-    <!-- <h1>AWARDS</h1> -->
-    <!-- <app-subscription-list [config]="test"></app-subscription-list> -->
-    <!-- <app-product-list [config]="test"></app-product-list> -->
-    <!-- <router-outlet></router-outlet> -->
-</section>
+    <div class="stats_row">
+        <div>
+            <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
+                [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
+                (select)="onSelect($event)">
+            </ngx-charts-bar-vertical>
+        </div>
+        <div class="stats_row">
+            <ngx-charts-number-card [view]="viewCard" [scheme]="colorScheme" [results]="productsResult"
+                [cardColor]="cardColor" (select)="onSelect($event)">
+            </ngx-charts-number-card>
 
+            <ngx-charts-number-card [view]="viewCard" [scheme]="colorScheme" [results]="totalUsersResult" [cardColor]="cardColor"
+                (select)="onSelect($event)">
+            </ngx-charts-number-card>
+        </div>
+
+    </div>
+
+</section>

@@ -25,11 +25,15 @@ func main() {
 	r := gin.Default()
 	MakeRoutes(r)
 	v1 := r.Group("/api")
+	// stats := r.Group("/stats")
+
+	
 
 	// NO TOKEN
 	// awards.AwardsAuthed(v1.Group("/awards"))
 	v1.Use(users.AuthMiddleware(false))
 	users.UsersRegister(v1.Group("/users"))
+	users.UsersStats(v1.Group("/stats"))
 	
 	
 	

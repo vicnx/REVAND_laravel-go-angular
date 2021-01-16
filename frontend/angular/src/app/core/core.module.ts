@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpTokenInterceptor } from './interceptors/http.token.interceptor';
 
-import {ApiService,JwtService,AwardsService, SubscriptionService, UserService, RedisService, ProductService} from './services';
+import {ApiService,JwtService,AwardsService, SubscriptionService, UserService, RedisService, ProductService, StatsService} from './services';
 
 @NgModule({
   imports: [
@@ -12,11 +12,13 @@ import {ApiService,JwtService,AwardsService, SubscriptionService, UserService, R
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
     ApiService,
+    StatsService,
     JwtService,
     AwardsService,
     SubscriptionService,
     UserService,
-    ProductService
+    ProductService,
+    
   ],
   declarations: []
 })
