@@ -9,22 +9,19 @@ This application simulates the operation of Wallapop. The main purpose is that u
 ## Preview 📷
 All the images shown below are provisional and will not be the final aspect of the web application:
 ### Homepage
-![Preview home](https://github.com/Jooui/app_Nodejs_Express_Angular1.5/blob/master/github_media/home.png)
-### Merchandising
-![Preview merch](https://github.com/Jooui/app_Nodejs_Express_Angular1.5/blob/master/github_media/merch_list.png)
-### Merchandising - Details
-![Preview merch details](https://github.com/Jooui/app_Nodejs_Express_Angular1.5/blob/master/github_media/details_merch.png)
-### Tweet
-![Preview tweet](https://github.com/Jooui/app_Nodejs_Express_Angular1.5/blob/master/github_media/details_tweet.png)
-### Releases
-![Preview releases](https://github.com/Jooui/app_Nodejs_Express_Angular1.5/blob/master/github_media/releases_list.png)
-### Releases - Details
-![Preview releases details](https://github.com/Jooui/app_Nodejs_Express_Angular1.5/blob/master/github_media/details_releases.png)
-### Login/Register
-![Preview login](https://github.com/Jooui/app_Nodejs_Express_Angular1.5/blob/master/github_media/login1.png)
-### Profile
-![Preview profile](https://github.com/Jooui/app_Nodejs_Express_Angular1.5/blob/master/github_media/profile.png)
-
+![Preview home](media/homepage.png)
+### Auth
+![Preview auth](media/auth.gif)
+### Register
+![Preview register](media/registerloginprofile.gif)
+### Product details - Create - Delete
+![Preview details profile create](media/product_create.gif)
+### Settings profile
+![Preview settings](media/settings_profile.gif)
+### Admin Panel
+![Preview admin](media/panel_admin.gif)
+### Stats
+![Preview stats](media/stats.gif)
 
 ## Getting Started
 
