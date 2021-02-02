@@ -35,6 +35,7 @@ export class ProductListComponent{
         }
     }
     runQuery(config?){
+        console.log("PRODUCT LIST COMPONENT");
         console.log(config);
         this.allProducts = [];
         this.productService.query(config).subscribe((products) => {

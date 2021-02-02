@@ -150,6 +150,16 @@ export class UserService {
     return this.apiService.get('/profile/' + username, 'users');
   }
 
+  getprofile2(username): Observable<Profile> {
+    return this.apiService.get('/profile/' + username, 'users').pipe(map(
+      data => {
+        console.log(data);
+        return data
+      },
+      err => console.log(err)
+    ));
+  }
+
   follow(username): Observable<User> {
     return this.apiService.post('/profile/' + username + '/follow', 'users');
   }

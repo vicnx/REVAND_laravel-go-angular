@@ -25,27 +25,27 @@ export class ProductComponent implements OnInit {
   ) { }
 
   images: Array<object>  = [
-      {path: 'https://image.api.playstation.com/cdn/EP0001/CUSA05847_00/6SOISQ9M0FkHf52a4iHcO5OLDKMtjzhj.png'},
-      {path: 'https://image.api.playstation.com/cdn/EP0001/CUSA05847_00/6SOISQ9M0FkHf52a4iHcO5OLDKMtjzhj.png'},
-      {path: 'https://image.api.playstation.com/cdn/EP0001/CUSA05847_00/6SOISQ9M0FkHf52a4iHcO5OLDKMtjzhj.png'},
+      {path: `https://picsum.photos/id/${Math.round(Math.random() * 1000)}/535/535.jpg`},
+      {path: `https://picsum.photos/id/${Math.round(Math.random() * 1000)}/535/535.jpg`},
+      {path: `https://picsum.photos/id/${Math.round(Math.random() * 1000)}/535/535.jpg`},
   ]
 
   imageObject: Array<object> = [
     {
-      image: 'https://image.api.playstation.com/cdn/EP0001/CUSA05847_00/6SOISQ9M0FkHf52a4iHcO5OLDKMtjzhj.png',
-      thumbImage: 'https://image.api.playstation.com/cdn/EP0001/CUSA05847_00/6SOISQ9M0FkHf52a4iHcO5OLDKMtjzhj.png',
+      image: `https://picsum.photos/id/${Math.round(Math.random() * 1000)}/535/535.jpg`,
+      thumbImage: `https://picsum.photos/id/${Math.round(Math.random() * 1000)}/535/535.jpg`,
       alt: 'alt of image',
       title: 'title of image'
     },
     {
-      image: 'https://image.api.playstation.com/cdn/EP0001/CUSA05847_00/6SOISQ9M0FkHf52a4iHcO5OLDKMtjzhj.png',
-      thumbImage: 'https://image.api.playstation.com/cdn/EP0001/CUSA05847_00/6SOISQ9M0FkHf52a4iHcO5OLDKMtjzhj.png',
+      image: `https://picsum.photos/id/${Math.round(Math.random() * 1000)}/535/535.jpg`,
+      thumbImage: `https://picsum.photos/id/${Math.round(Math.random() * 1000)}/535/535.jpg`,
       alt: 'alt of image',
       title: 'title of image'
     },
     {
-      image: 'https://image.api.playstation.com/cdn/EP0001/CUSA05847_00/6SOISQ9M0FkHf52a4iHcO5OLDKMtjzhj.png',
-      thumbImage: 'https://image.api.playstation.com/cdn/EP0001/CUSA05847_00/6SOISQ9M0FkHf52a4iHcO5OLDKMtjzhj.png',
+      image: `https://picsum.photos/id/${Math.round(Math.random() * 1000)}/535/535.jpg`,
+      thumbImage: `https://picsum.photos/id/${Math.round(Math.random() * 1000)}/535/535.jpg`,
       alt: 'alt of image',
       title: 'title of image'
     }

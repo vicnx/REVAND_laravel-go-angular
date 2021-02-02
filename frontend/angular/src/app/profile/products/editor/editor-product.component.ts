@@ -7,7 +7,8 @@ import {Product,ProductService} from '../../../core';
 
 @Component({
   selector: 'app-editor-product-details',
-  templateUrl: './editor-product.component.html'
+  templateUrl: './editor-product.component.html',
+  styleUrls: ['./editor-product.component.css'],
 })
 export class EditorProductComponent implements OnInit {
   product: Product = {} as Product;
@@ -53,6 +54,7 @@ export class EditorProductComponent implements OnInit {
     this.productService.save(this.product).subscribe(
       product => this.router.navigateByUrl('/products/'+this.product.Slug),
       err => {
+        this.router.navigateByUrl('/')
         this.errors = err;
         this.isSubmitting = false;
       }

@@ -47,7 +47,7 @@ export class SettingsComponent implements OnInit {
             image: this.currentUser.image
           });
         }else{
-          this.notification.showError("No estas autorizado","ERROR")
+          // this.notification.showError("No estas autorizado","ERROR")
           this.router.navigateByUrl('/');
         }
       })

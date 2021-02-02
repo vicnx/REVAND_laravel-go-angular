@@ -1,13 +1,17 @@
 <div class="product">
-    EDITOR
-    <form [formGroup]="productForm">
-        <fieldset [disabled]="isSubmitting">
-            <input type="text" placeholder="Name" formControlName="Name"><br>
-            <input type="text" placeholder="Description" formControlName="Description"><br>
-            <input type="text" placeholder="Images: [aa,aa]" formControlName="Images"><br>
-            <input type="number" placeholder="Price" formControlName="Price"><br>
+    <form [formGroup]="productForm" class="form__own">
+        <fieldset [disabled]="isSubmitting" class="form__fieldset">
+            <h3 class="form__title">New Product</h3>
+            <span class="input__title">Name:</span>
+            <input type="text" placeholder="Name" class="input__form" formControlName="Name"><br>
+            <span class="input__title">Description:</span>
+            <input type="text" placeholder="Description" class="input__form" formControlName="Description"><br>
+            <span class="input__title">Images:</span>
+            <input type="text" placeholder="Images: [aa,aa]" class="input__form" formControlName="Images"><br>
+            <span class="input__title">Price:</span>
+            <input type="number" placeholder="Price" class="input__form" formControlName="Price"><br>
 
-            <button class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submitForm()">
+            <button class="btn btn-lg pull-xs-right btn-primary" class="btn__form" type="button" (click)="submitForm()">
                 New Product
             </button>
         </fieldset>

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserList, User,UserService,ProductListConfig } from '../../core';
+import { catchError } from 'rxjs/operators';
+
 
 
 @Component({
@@ -9,12 +12,25 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './products.component.html'
 })
 export class ProductsComponent implements OnInit {
-  constructor() {
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {
+    
     // console.log("products COMPONENT");
   }
-  test = "all";
+
+  user: User;
+  config : ProductListConfig = {
+    type:'all',
+    filters:{}
+  };
+  profile_username: any;
+  profile: any;
+  currentUser: User;
 
   ngOnInit() {
-    console.log("Productssssssss Component");
+
   }
 }

@@ -1,17 +1,40 @@
 <section class="settings-profile">
-    <form [formGroup]="settingsForm">
-        <fieldset [disabled]="isSubmitting">
-            <input type="text" placeholder="Username" formControlName="username"><br>
-            <input type="text" placeholder="Bio" formControlName="bio"><br>
-            <input type="text" placeholder="Image" formControlName="image"><br>
-            <!-- <input type="number" placeholder="Price" formControlName="Price"><br> -->
+    
+  <form [formGroup]="settingsForm" class="form__own">
+    <fieldset [disabled]="isSubmitting" class="form__fieldset">
+    <h3 class="form__title">Edit Profile</h3>
+        <span class="input__title">Username:</span>
+      <input
+        type="text"
+        class="input__form"
+        placeholder="Username"
+        formControlName="username"
+      /><br />
 
-            <button class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submitForm()">
-                Update Profile
-            </button>
-        </fieldset>
+        <span class="input__title">Bio:</span>
+        <input
+        type="text"
+        class="input__form"
+        placeholder="Bio"
+        formControlName="bio"
+      /><br />
+        <span class="input__title">Profile Image:</span>
+        <input
+        type="text"
+        class="input__form"
+        placeholder="Image"
+        formControlName="image"
+      /><br />
+      <!-- <input type="number" placeholder="Price" formControlName="Price"><br> -->
 
-    </form>
-
-
+      <button
+        class="btn btn-lg pull-xs-right btn-primary"
+        class="btn__form"
+        type="button"
+        (click)="submitForm()"
+      >
+        Update Profile
+      </button>
+    </fieldset>
+  </form>
 </section>
