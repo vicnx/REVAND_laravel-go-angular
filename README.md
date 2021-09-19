@@ -2,6 +2,29 @@ docker-compose version: 1.27
 
 run ./init.sh
 
+Modify a user to be an administrator: 
+
+For this we have to enter the mysql container and do the following:
+
+```
+mysql -u vicnx -p
+```
+
+PASSWORD: 12345678
+
+Next select the database:
+
+```
+USE revand
+```
+
+And now we update the user type
+
+```
+UPDATE users SET type="admin" WHERE id=1
+```
+
+
 # Revand - Laravel_Angular_Go-Microservices
 
 This application simulates the operation of Wallapop. The main purpose is that users can offer their products and customers themselves can get in touch to buy them.
